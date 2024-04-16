@@ -43,7 +43,7 @@ $> ./raytracer <SCENE_FILE>
     │
     │─ .github/workflows/       Workflows
     │
-    │─ cmake/modules/           cmake modules 
+    │─ cmake/modules/           cmake modules
     │
     │─ doc/                     Documentation
     │
@@ -69,3 +69,5 @@ $> ./raytracer <SCENE_FILE>
 ## Contributors
 - [Elliot Masina](https://github.com/bobis33)
 - [Jules Sourbets](https://github.com/wwLeji)
+- [Paul Ragueneau](https://github.com/Periicles)
+- [Tristan Le Du](https://github.com/ShrimpPR)
