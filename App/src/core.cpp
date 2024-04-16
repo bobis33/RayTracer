@@ -5,12 +5,15 @@
 ** Core.cpp
 */
 
-#include "RayTracer/Core.hpp"
-#include "RayTracer/Constants.hpp"
+#include <dlfcn.h>
 
-int RayTracer::Core::runRayTracer(const Scene &scene)
+#include "RayTracer/Core.hpp"
+#include "RayTracer/Factory/RendererFactory.hpp"
+
+void RayTracer::Core::runRayTracer(const Scene &scene)
 {
-    (void) scene;
     std::cout << "RayTracer is running" << '\n';
-    return SUCCESS;
+
+    m_renderer = RendererFactory::createRenderer("./plugins/raytracer_ppm_renderer.so");
+    m_renderer->render(scene);
 }

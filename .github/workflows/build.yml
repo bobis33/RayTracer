@@ -10,7 +10,7 @@ on:
 
 env:
   EXECUTABLE: "raytracer"
-  LIBRARY: "raytracer_renderer.so"
+  LIBRARY: "raytracer_sfml_renderer.so,raytracer_ppm_renderer.so"
 
 jobs:
   build:

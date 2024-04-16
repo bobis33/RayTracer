@@ -8,6 +8,7 @@
 #include "RayTracer/Core.hpp"
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Constants.hpp"
+#include "RayTracer/PluginLoader.hpp"
 
 static constexpr char const * USAGE_MSG = "USAGE\n"
                                           "\t./raytracer <SCENE_FILE>\n"
@@ -25,15 +26,18 @@ int main(int argc, const char * argv[])
             return SUCCESS;
         }
         Scene scene = Parser::parseFile(argv[1]);
-        Core::runRayTracer(scene);
+        Core().runRayTracer(scene);
     } catch (const Parser::ParserException &e) {
-        std::cerr << "Parser exception: "<< e.what() << '\n';
+        std::cerr <<"Parser exception: "<< e.what() << '\n';
         return EPITECH_ERROR;
     } catch (const Core::CoreException &e) {
-        std::cerr << "Core exception: "<< e.what() << '\n';
+        std::cerr <<"Core exception: " << e.what() << '\n';
         return EPITECH_ERROR;
-    } catch (const std::exception &e) {
-        std::cerr << e.what() << '\n';
+    } catch (const RunTimeException &e) {
+        std::cerr << "Runtime exception: " << e.what() << '\n';
+        return EPITECH_ERROR;
+    } catch (...) {
+        std::cerr <<"Unknow error"<< '\n';
         return EPITECH_ERROR;
     }
 }

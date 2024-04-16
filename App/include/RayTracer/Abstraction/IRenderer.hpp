@@ -5,8 +5,10 @@
 ** IRenderer.cpp
 */
 
-#ifndef RAYTRACER_ILIGHTS_HPP
-#define RAYTRACER_ILIGHTS_HPP
+#ifndef RAYTRACER_IRENDERER_HPP
+#define RAYTRACER_IRENDERER_HPP
+
+#include "RayTracer/Parser.hpp"
 
 namespace RayTracer {
 
@@ -14,6 +16,8 @@ namespace RayTracer {
 
         public:
             virtual ~IRenderer() = default;
+
+            virtual void render(const Scene &scene) = 0;
 
     }; // IRenderer
 
