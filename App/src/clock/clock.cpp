@@ -9,18 +9,21 @@
 
 void Arcade::Clock::pause()
 {
-    if (!m_paused) {
-        m_pause = std::chrono::high_resolution_clock::now();
-        m_paused = true;
+    if (m_paused) {
+        return;
     }
+    m_pause = std::chrono::high_resolution_clock::now();
+    m_paused = true;
 }
 
 void Arcade::Clock::resume()
 {
-    if (m_paused) {
-        m_start += std::chrono::high_resolution_clock::now() - m_pause;
-        m_paused = false;
+    if (!m_paused) {
+        return;
     }
+
+    m_start += std::chrono::high_resolution_clock::now() - m_pause;
+    m_paused = false;
 }
 
 Arcade::Time Arcade::Clock::getElapsedTime() const
