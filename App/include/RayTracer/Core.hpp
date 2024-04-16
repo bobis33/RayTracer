@@ -9,7 +9,6 @@
 #define RAYTRACER_CORE_HPP
 
 #include <memory>
-#include <utility>
 
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Abstraction/IRenderer.hpp"
@@ -39,7 +38,7 @@ namespace RayTracer {
             private:
                 std::string m_msg{0};
 
-        }; // CoreException
+            }; // CoreException
 
         private:
             std::unique_ptr<IRenderer> m_renderer{nullptr};
