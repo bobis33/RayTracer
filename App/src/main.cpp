@@ -25,7 +25,7 @@ int main(int argc, const char * argv[])
             return SUCCESS;
         }
         Scene scene = Parser::parseFile(argv[1]);
-        Core::runRayTracer(scene);
+        Core().runRayTracer(scene);
     } catch (const Parser::ParserException &e) {
         std::cerr << "Parser exception: "<< e.what() << '\n';
         return EPITECH_ERROR;

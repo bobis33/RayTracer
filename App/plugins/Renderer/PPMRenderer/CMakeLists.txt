@@ -7,8 +7,8 @@ set(SRC_DIR src)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE})
 
-target_sources(${PROJECT_NAME}
-        PRIVATE
+target_sources(${PROJECT_NAME} PRIVATE
+        ${SRC_DIR}/entryPoint.cpp
         ${SRC_DIR}/ppmRenderer.cpp
 )
 

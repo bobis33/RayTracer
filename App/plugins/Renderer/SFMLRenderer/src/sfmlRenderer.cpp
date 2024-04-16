@@ -6,3 +6,9 @@
 */
 
 #include "RayTracer/SfmlRenderer.hpp"
+
+void RayTracer::SfmlRenderer::render(const Scene &scene)
+{
+    (void) scene;
+    std::cout << "SFML Renderer is rendering" << '\n';
+}

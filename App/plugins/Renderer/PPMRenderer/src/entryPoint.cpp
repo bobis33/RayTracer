@@ -13,6 +13,6 @@ extern "C"
 {
     std::unique_ptr<RayTracer::IRenderer> entryPoint()
     {
-        return std::make_unique<RayTracer::ppmRenderer>();
+        return std::make_unique<RayTracer::PpmRenderer>();
     }
 }

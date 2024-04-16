@@ -6,3 +6,10 @@
 */
 
 #include "RayTracer/PpmRenderer.hpp"
+
+
+void RayTracer::PpmRenderer::render(const Scene &scene)
+{
+    (void) scene;
+    std::cout << "PPM Renderer is rendering" << '\n';
+}

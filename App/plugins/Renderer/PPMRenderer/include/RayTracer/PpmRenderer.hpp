@@ -9,13 +9,16 @@
 #define RAYTRACER_PPM_RENDERER_HPP
 
 #include "RayTracer/Abstraction/IRenderer.hpp"
+#include "RayTracer/Parser.hpp"
 
 namespace RayTracer {
 
-    class PpmRenderer : IRenderer {
+    class PpmRenderer : public IRenderer {
 
         public:
             ~PpmRenderer() override = default;
+
+            void render(const Scene &scene) override;
 
     }; // PpmRenderer
 
