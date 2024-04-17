@@ -9,46 +9,10 @@
 #define RAYTRACER_PARSER_HPP
 
 #include <iostream>
-#include <vector>
-#include <tuple>
-#include "Scene.hpp"
+
+#include "RayTracer/Scene/Scene.hpp"
 
 namespace RayTracer {
-
-    struct Material_t {
-        std::string name;
-        std::tuple<u_int8_t, u_int8_t, u_int8_t> color{0, 0, 0};
-    };
-
-    struct Light_t {
-        std::tuple<u_int16_t, u_int16_t, u_int16_t> position{0, 0, 0};
-        u_int8_t intensity{0};
-    };
-
-    struct Plane_t {
-        std::string material;
-        std::tuple<u_int16_t, u_int16_t, u_int16_t> position{0, 0, 0};
-    };
-
-    struct Sphere_t {
-        std::string material;
-        std::tuple<u_int16_t, u_int16_t, u_int16_t> position{0, 0, 0};
-        u_int16_t radius{0};
-    };
-
-    struct Cylinder_t {
-        std::string material;
-        std::tuple<u_int16_t, u_int16_t, u_int16_t> position{0, 0, 0};
-        u_int8_t radius{0};
-        u_int16_t height;
-    };
-
-    struct Cone_t {
-        std::string material;
-        std::tuple<u_int16_t, u_int16_t, u_int16_t> position{0, 0, 0};
-        u_int8_t radius{0};
-        u_int16_t height;
-    };
 
     class Parser {
 
@@ -73,9 +37,9 @@ namespace RayTracer {
                 private:
                     std::string m_msg{0};
 
-        }; // ParserException
+        }; // class ParserException
 
-    }; // Parser
+    }; // class Parser
 
 } // namespace RayTracer
 

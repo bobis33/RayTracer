@@ -21,6 +21,7 @@ namespace RayTracer {
         PLANE,
         CYLINDER,
         CONE,
+        NONE
     };
 
     class AShapes : public IShapes {
@@ -29,16 +30,16 @@ namespace RayTracer {
             ~AShapes() override = default;
 
             void setType(const ShapeType& type) { m_type = type; };
-            void setMaterial(const std::string& material) { m_material = material; };
+            void setColor(const std::tuple<uint8_t, uint8_t, uint8_t>& color) { m_color = color; };
             void setPosition(const std::tuple<uint16_t, uint16_t, uint16_t>& position) { m_position = position; };
 
-            ShapeType getType() const { return m_type; };
-            std::string getMaterial() const { return m_material; };
-            std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const { return m_position; };
+            [[nodiscard]] ShapeType getType() const { return m_type; };
+            [[nodiscard]] std::tuple<uint8_t, uint8_t, uint8_t> getColor() const { return m_color; };
+            [[nodiscard]] std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const { return m_position; };
 
         private:
-            ShapeType m_type;
-            std::string m_material;
+            ShapeType m_type{ShapeType::NONE};
+            std::tuple<uint8_t, uint8_t, uint8_t> m_color{0, 0, 0};
             std::tuple<uint16_t, uint16_t, uint16_t> m_position{0, 0, 0};
 
     }; // class AShapes
