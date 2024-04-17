@@ -15,7 +15,6 @@
 RayTracer::Scene RayTracer::Parser::parseFile(const std::string &filePath)
 {
     libconfig::Config config;
-    Scene scene;
 
     try {
         config.readFile(filePath.c_str());
@@ -25,7 +24,7 @@ RayTracer::Scene RayTracer::Parser::parseFile(const std::string &filePath)
         throw ParserException{e.getError()};
     }
 
-    return scene;
+    return {}; // TODO(bobi): return Scene object after parse
 }
 
 int RayTracer::Parser::parseArgs(const std::string &filePath)
