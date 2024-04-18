@@ -17,7 +17,7 @@ namespace RayTracer {
         public:
             static std::unique_ptr<IRenderer> createRenderer(const std::string &libraryPath)
             {
-                return PluginLoader().loadPlugin<IRenderer>(libraryPath);
+                return PluginLoader::loadPlugin<IRenderer>(libraryPath);
             };
 
     }; // class RendererFactory

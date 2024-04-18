@@ -19,7 +19,7 @@ namespace RayTracer {
     class PluginLoader {
         public:
         template<typename T>
-        std::unique_ptr<T> loadPlugin(const std::string &libraryPath)
+        static std::unique_ptr<T> loadPlugin(const std::string &libraryPath)
         {
             {
                 void *handle = dlopen(libraryPath.c_str(), RTLD_LAZY);
