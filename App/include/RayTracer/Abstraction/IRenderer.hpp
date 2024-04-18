@@ -8,7 +8,7 @@
 #ifndef RAYTRACER_IRENDERER_HPP
 #define RAYTRACER_IRENDERER_HPP
 
-#include "RayTracer/Parser.hpp"
+#include "RayTracer/Scene/Scene.hpp"
 
 namespace RayTracer {
 

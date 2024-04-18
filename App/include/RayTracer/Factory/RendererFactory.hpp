@@ -8,16 +8,28 @@
 #ifndef RAYTRACER_RENDERER_FACTORY_HPP
 #define RAYTRACER_RENDERER_FACTORY_HPP
 
-#include "RayTracer/Abstraction/IRenderer.hpp"
+#include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/PluginLoader.hpp"
 
 namespace RayTracer {
 
     class RendererFactory {
         public:
-            static std::unique_ptr<IRenderer> createRenderer(const std::string &libraryPath)
+            static std::unique_ptr<ARenderer> createRenderer(const RendererType &type)
             {
-                return PluginLoader::loadPlugin<IRenderer>(libraryPath);
+                std::unique_ptr<ARenderer> renderer;
+                switch (type) {
+                    case RendererType::PPM:
+                        renderer = PluginLoader::loadPlugin<ARenderer>("./plugins/raytracer_ppm_renderer.so");
+                        break;
+                    case RendererType::SFML:
+                        renderer = PluginLoader::loadPlugin<ARenderer>("./plugins/raytracer_sfml_renderer.so");
+                        break;
+                    default:
+                        throw RunTimeException("Renderer type not found");
+                }
+                renderer->setType(type);
+                return renderer;
             };
 
     }; // class RendererFactory

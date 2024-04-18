@@ -8,12 +8,11 @@
 #ifndef RAYTRACER_SFML_RENDERER_HPP
 #define RAYTRACER_SFML_RENDERER_HPP
 
-#include "RayTracer/Abstraction/IRenderer.hpp"
-#include "RayTracer/Parser.hpp"
+#include "RayTracer/Abstraction/ARenderer.hpp"
 
 namespace RayTracer {
 
-    class SfmlRenderer : public IRenderer {
+    class SfmlRenderer : public ARenderer {
 
         public:
             ~SfmlRenderer() override = default;

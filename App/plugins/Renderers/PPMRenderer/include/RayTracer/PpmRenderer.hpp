@@ -8,12 +8,11 @@
 #ifndef RAYTRACER_PPM_RENDERER_HPP
 #define RAYTRACER_PPM_RENDERER_HPP
 
-#include "RayTracer/Abstraction/IRenderer.hpp"
-#include "RayTracer/Parser.hpp"
+#include "RayTracer/Abstraction/ARenderer.hpp"
 
 namespace RayTracer {
 
-    class PpmRenderer : public IRenderer {
+    class PpmRenderer : public ARenderer {
 
         public:
             ~PpmRenderer() override = default;

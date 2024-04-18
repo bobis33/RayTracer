@@ -5,6 +5,8 @@
 ** renderer.cpp
 */
 
+#include <iostream>
+
 #include "RayTracer/SfmlRenderer.hpp"
 
 void RayTracer::SfmlRenderer::render(const Scene &scene)

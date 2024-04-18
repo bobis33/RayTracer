@@ -5,8 +5,9 @@
 ** renderer.cpp
 */
 
-#include "RayTracer/PpmRenderer.hpp"
+#include <iostream>
 
+#include "RayTracer/PpmRenderer.hpp"
 
 void RayTracer::PpmRenderer::render(const Scene &scene)
 {
