@@ -12,12 +12,6 @@
 
 namespace RayTracer {
 
-    enum class RendererType {
-        PPM,
-        SFML,
-        NONE
-    };
-
     class ARenderer : public IRenderer {
 
         public:

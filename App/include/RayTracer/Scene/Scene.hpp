@@ -15,8 +15,8 @@
 
 #include "RayTracer/Scene/Camera.hpp"
 
-#include "RayTracer/Abstraction/ILights.hpp"
-#include "RayTracer/Abstraction/IShapes.hpp"
+#include "RayTracer/Abstraction/ALights.hpp"
+#include "RayTracer/Abstraction/AShapes.hpp"
 
 namespace RayTracer {
 
@@ -29,8 +29,8 @@ namespace RayTracer {
             void setResolution(uint16_t x, uint16_t y) { m_resolution = {x, y}; };
             void setCamera(const Camera &camera) { m_camera = camera; };
 
-            void addShape(const std::shared_ptr<IShapes>& shape) { m_shapes.push_back(shape); };
-            void addLight(const std::shared_ptr<ILights>& light) { m_lights.push_back(light); };
+            void addShape(const std::shared_ptr<AShapes>& shape) { m_shapes.push_back(shape); };
+            void addLight(const std::shared_ptr<ALights>& light) { m_lights.push_back(light); };
 
             [[nodiscard]] std::string getName() const { return m_name; };
             [[nodiscard]] std::pair<uint16_t, uint16_t> getResolution() const { return m_resolution; };
@@ -39,7 +39,7 @@ namespace RayTracer {
             [[nodiscard]] std::vector<std::shared_ptr<ILights>> getLights() const { return m_lights; };
 
         private:
-            std::string m_name{"Scene"};
+            std::string m_name{"Default Scene Name"};
             std::pair<uint16_t, uint16_t> m_resolution{DEFAULT_WIDTH, DEFAULT_HEIGHT};
             Camera m_camera;
 

@@ -10,6 +10,12 @@
 
 namespace RayTracer {
 
+    enum class LightType : uint8_t {
+        AMBIENT,
+        DIRECTIONAL,
+        NONE
+    };
+
     class ILights {
 
         public:
