@@ -11,8 +11,6 @@
 
 void RayTracer::Core::runRayTracer(const Scene &scene)
 {
-    std::cout << "RayTracer is running" << '\n';
-
     m_renderer = RendererFactory::createRenderer(RendererType::PPM);
     m_renderer->render(scene);
 
