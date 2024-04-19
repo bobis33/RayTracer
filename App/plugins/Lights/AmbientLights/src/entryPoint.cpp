@@ -11,7 +11,7 @@
 
 extern "C"
 {
-    std::unique_ptr<RayTracer::ILights> entryPoint()
+    std::unique_ptr<RayTracer::ALights> entryPoint()
     {
         return std::make_unique<RayTracer::AmbientLights>();
     }

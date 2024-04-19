@@ -16,7 +16,7 @@ namespace RayTracer {
             ~Camera() = default;
 
             void setFov(uint16_t fov) { m_fov = fov; };
-            void setPosition(uint16_t x, uint16_t y, uint16_t z) { m_position = {x, y, z}; };
+            void setPosition(std::tuple<uint16_t, uint16_t, uint16_t> position) { m_position = position; };
 
             [[nodiscard]] uint16_t getFov() const { return m_fov; };
             [[nodiscard]] std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const { return m_position; };

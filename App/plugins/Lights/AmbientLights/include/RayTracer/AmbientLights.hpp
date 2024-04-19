@@ -8,11 +8,11 @@
 #ifndef RAYTRACER_AMBIENT_LIGHTS_HPP
 #define RAYTRACER_AMBIENT_LIGHTS_HPP
 
-#include "RayTracer/Abstraction/ILights.hpp"
+#include "RayTracer/Abstraction/ALights.hpp"
 
 namespace RayTracer {
 
-    class AmbientLights : public ILights {
+    class AmbientLights : public ALights {
 
         public:
             ~AmbientLights() override = default;

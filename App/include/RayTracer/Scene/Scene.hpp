@@ -26,7 +26,7 @@ namespace RayTracer {
             ~Scene() = default;
 
             void setName(const std::string &name) { m_name = name; };
-            void setResolution(uint16_t x, uint16_t y) { m_resolution = {x, y}; };
+            void setResolution(std::pair<uint16_t, uint16_t> resolution) { m_resolution = resolution; };
             void setCamera(const Camera &camera) { m_camera = camera; };
 
             void addShape(const std::shared_ptr<AShapes>& shape) { m_shapes.push_back(shape); };
