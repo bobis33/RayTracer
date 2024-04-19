@@ -10,10 +10,22 @@
 
 namespace RayTracer {
 
+    enum class LightType {
+        AMBIENT,
+        DIRECTIONAL,
+        NONE
+    };
+
     class ILights {
 
         public:
             virtual ~ILights() = default;
+
+            virtual void setType(const LightType &type) = 0;
+            virtual void setPosition(const std::tuple<uint16_t, uint16_t, uint16_t> &position) = 0;
+
+            [[nodiscard]] virtual LightType getType() const = 0;
+            [[nodiscard]] virtual std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const = 0;
 
     }; // ILights
 

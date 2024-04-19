@@ -4,7 +4,7 @@
 *.o
 *.obj
 
-# Compiled Dynamic libraries
+# Libraries
 *.so
 *.dylib
 *.dll
@@ -29,3 +29,4 @@ build/*
 .idea/*
 .git/*
 .doxygen/*
+*.ppm
