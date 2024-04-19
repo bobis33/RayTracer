@@ -4,13 +4,10 @@ on:
   push:
     branches:
       - "**"
-  pull_request:
-    branches:
-      - "**"
 
 env:
   EXECUTABLE: "raytracer"
-  LIBRARY: "raytracer_sfml_renderer.so,raytracer_ppm_renderer.so"
+  LIBRARY: "raytracer_sfml_renderer.so,raytracer_ppm_renderer.so,raytracer_ambient_lights.so,raytracer_directional_lights.so,raytracer_point_lights.so,raytracer_cone_shape.so,raytracer_cylinder_shape.so,raytracer_plane_shape.so,raytracer_sphere_shape.so"
 
 jobs:
   build:
