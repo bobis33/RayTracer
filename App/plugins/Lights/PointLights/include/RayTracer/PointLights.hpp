@@ -8,11 +8,11 @@
 #ifndef RAYTRACER_POINT_LIGHTS_HPP
 #define RAYTRACER_POINT_LIGHTS_HPP
 
-#include "RayTracer/Abstraction/ALights.hpp"
+#include "RayTracer/Abstraction/ALight.hpp"
 
 namespace RayTracer {
 
-    class PointLights : public ALights {
+    class PointLights : public ALight {
 
         public:
             ~PointLights() override = default;

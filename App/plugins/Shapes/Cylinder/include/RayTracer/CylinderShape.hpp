@@ -8,11 +8,11 @@
 #ifndef RAYTRACER_CYLINDER_SHAPE_HPP
 #define RAYTRACER_CYLINDER_SHAPE_HPP
 
-#include "RayTracer/Abstraction/AShapes.hpp"
+#include "RayTracer/Abstraction/AShape.hpp"
 
 namespace RayTracer {
 
-    class CylinderShape : public AShapes {
+    class CylinderShape : public AShape {
 
         public:
             ~CylinderShape() override = default;

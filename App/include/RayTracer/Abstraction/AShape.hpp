@@ -2,24 +2,24 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer
 ** File description:
-** AShapes.cpp
+** AShape.cpp
 */
 
-#ifndef RAYTRACER_ASHAPES_HPP
-#define RAYTRACER_ASHAPES_HPP
+#ifndef RAYTRACER_ASHAPE_HPP
+#define RAYTRACER_ASHAPE_HPP
 
 #include <cstdint>
 #include <string>
 #include <tuple>
 
-#include "RayTracer/Abstraction/IShapes.hpp"
+#include "RayTracer/Abstraction/IShape.hpp"
 
 namespace RayTracer {
 
-    class AShapes : public IShapes {
+    class AShape : public IShape {
 
         public:
-            ~AShapes() override = default;
+            ~AShape() override = default;
 
             void setType(const ShapeType& type) override { m_type = type; };
             void setColor(const std::tuple<uint8_t, uint8_t, uint8_t>& color) override { m_color = color; };
@@ -37,8 +37,8 @@ namespace RayTracer {
             std::tuple<uint16_t, uint16_t, uint16_t> m_position{0, 0, 0};
             float m_radius{0};
 
-    }; // class AShapes
+    }; // class AShape
 
 } // namespace RayTracer
 
-#endif //RAYTRACER_ASHAPES_HPP
+#endif //RAYTRACER_ASHAPE_HPP

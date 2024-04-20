@@ -2,22 +2,22 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer | Lights
 ** File description:
-** AmbientLights.hpp
+** Color.hpp
 */
 
 #ifndef RAYTRACER_AMBIENT_LIGHTS_HPP
 #define RAYTRACER_AMBIENT_LIGHTS_HPP
 
-#include "RayTracer/Abstraction/ALights.hpp"
+#include "RayTracer/Abstraction/ALight.hpp"
 
 namespace RayTracer {
 
-    class AmbientLights : public ALights {
+    class AmbientLights : public ALight {
 
         public:
             ~AmbientLights() override = default;
 
-    }; // class AmbientLights
+    }; // class Color
 
 } // namespace RayTracer
 

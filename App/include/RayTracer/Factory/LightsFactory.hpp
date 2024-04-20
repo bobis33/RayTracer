@@ -8,7 +8,7 @@
 #ifndef RAYTRACER_LIGHTS_FACTORY_HPP
 #define RAYTRACER_LIGHTS_FACTORY_HPP
 
-#include "RayTracer/Abstraction/ALights.hpp"
+#include "RayTracer/Abstraction/ALight.hpp"
 #include "RayTracer/PluginLoader.hpp"
 
 namespace RayTracer {

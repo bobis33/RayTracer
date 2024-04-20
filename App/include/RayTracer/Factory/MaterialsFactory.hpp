@@ -8,25 +8,25 @@
 #ifndef RAYTRACER_MATERIALSFACTORY_HPP
 #define RAYTRACER_MATERIALSFACTORY_HPP
 
-#include "RayTracer/Abstraction/AMaterials.hpp"
+#include "RayTracer/Abstraction/AMaterial.hpp"
 #include "RayTracer/PluginLoader.hpp"
 
 namespace RayTracer {
 
     class MaterialsFactory {
         public:
-            static std::unique_ptr<AMaterials> createMaterials(const MaterialType &type)
+            static std::unique_ptr<AMaterial> createMaterials(const MaterialType &type)
             {
-                std::unique_ptr<AMaterials> materials;
+                std::unique_ptr<AMaterial> material;
                 switch (type) {
                     case MaterialType::COLOR:
-                        materials = PluginLoader::loadPlugin<AMaterials>("./plugins/raytracer_color_material.so");
+                        material = PluginLoader::loadPlugin<AMaterial>("./plugins/raytracer_color_material.so");
                         break;
                     default:
                         throw RunTimeException("Materials type not found");
                 }
-                materials->setType(type);
-                return materials;
+                material->setType(type);
+                return material;
             };
 
 

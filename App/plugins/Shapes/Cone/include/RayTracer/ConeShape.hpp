@@ -8,11 +8,11 @@
 #ifndef RAYTRACER_CONE_SHAPE_HPP
 #define RAYTRACER_CONE_SHAPE_HPP
 
-#include "RayTracer/Abstraction/AShapes.hpp"
+#include "RayTracer/Abstraction/AShape.hpp"
 
 namespace RayTracer {
 
-    class ConeShape : public AShapes {
+    class ConeShape : public AShape {
 
         public:
             ~ConeShape() override = default;

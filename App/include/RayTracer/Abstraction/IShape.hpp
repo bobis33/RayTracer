@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer
 ** File description:
-** IShapes.cpp
+** IShape.cpp
 */
 
-#ifndef RAYTRACER_ISHAPES_HPP
-#define RAYTRACER_ISHAPES_HPP
+#ifndef RAYTRACER_ISHAPE_HPP
+#define RAYTRACER_ISHAPE_HPP
 
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
 
-    class IShapes {
+    class IShape {
 
         public:
-            virtual ~IShapes() = default;
+            virtual ~IShape() = default;
 
             virtual void setType(const ShapeType& type) = 0;
             virtual void setColor(const std::tuple<uint8_t, uint8_t, uint8_t>& color) = 0;
@@ -27,8 +27,8 @@ namespace RayTracer {
             [[nodiscard]] virtual std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const = 0;
             [[nodiscard]] virtual float getRadius() const = 0;
 
-    }; // IShapes
+    }; // IShape
 
 } // namespace RayTracer
 
-#endif //RAYTRACER_ISHAPES_HPP
+#endif //RAYTRACER_ISHAPE_HPP

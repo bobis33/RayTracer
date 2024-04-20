@@ -2,23 +2,23 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer
 ** File description:
-** ALights.cpp
+** ALight.cpp
 */
 
-#ifndef RAYTRACER_ALIGHTS_HPP
-#define RAYTRACER_ALIGHTS_HPP
+#ifndef RAYTRACER_ALIGHT_HPP
+#define RAYTRACER_ALIGHT_HPP
 
 #include <tuple>
 #include <cstdint>
 
-#include "RayTracer/Abstraction/ILights.hpp"
+#include "RayTracer/Abstraction/ILight.hpp"
 
 namespace RayTracer {
 
-    class ALights : public ILights {
+    class ALight : public ILight {
 
         public:
-            ~ALights() override = default;
+            ~ALight() override = default;
 
             void setType(const LightType &type) override { m_type = type; };
             void setPosition(const std::tuple<uint16_t, uint16_t, uint16_t> &position) override { m_position = position; };
@@ -30,8 +30,8 @@ namespace RayTracer {
             LightType m_type{LightType::NONE};
             std::tuple<uint16_t, uint16_t, uint16_t> m_position{0, 0, 0};
 
-    }; // ALights
+    }; // ALight
 
 } // namespace RayTracer
 
-#endif //RAYTRACER_ALIGHTS_HPP
+#endif //RAYTRACER_ALIGHT_HPP

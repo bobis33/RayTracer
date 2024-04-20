@@ -8,12 +8,12 @@
 #ifndef RAYTRACER_PLANE_SHAPE_HPP
 #define RAYTRACER_PLANE_SHAPE_HPP
 
-#include "RayTracer/Abstraction/AShapes.hpp"
+#include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Exceptions/RuntimeException.hpp"
 
 namespace RayTracer {
 
-    class PlaneShape : public AShapes {
+    class PlaneShape : public AShape {
 
         public:
             ~PlaneShape() override = default;

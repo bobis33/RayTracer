@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer
 ** File description:
-** ILights.cpp
+** ILight.cpp
 */
 
-#ifndef RAYTRACER_ILIGHTS_HPP
-#define RAYTRACER_ILIGHTS_HPP
+#ifndef RAYTRACER_ILIGHT_HPP
+#define RAYTRACER_ILIGHT_HPP
 
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
 
-    class ILights {
+    class ILight {
 
         public:
-            virtual ~ILights() = default;
+            virtual ~ILight() = default;
 
             virtual void setType(const LightType &type) = 0;
             virtual void setPosition(const std::tuple<uint16_t, uint16_t, uint16_t> &position) = 0;
@@ -23,8 +23,8 @@ namespace RayTracer {
             [[nodiscard]] virtual LightType getType() const = 0;
             [[nodiscard]] virtual std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const = 0;
 
-    }; // ILights
+    }; // ILight
 
 } // namespace RayTracer
 
-#endif //RAYTRACER_ILIGHTS_HPP
+#endif //RAYTRACER_ILIGHT_HPP

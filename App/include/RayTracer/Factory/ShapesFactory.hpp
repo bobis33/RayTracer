@@ -8,7 +8,7 @@
 #ifndef RAYTRACER_SHAPES_FACTORY_HPP
 #define RAYTRACER_SHAPES_FACTORY_HPP
 
-#include "RayTracer/Abstraction/AShapes.hpp"
+#include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/PluginLoader.hpp"
 
 namespace RayTracer {
