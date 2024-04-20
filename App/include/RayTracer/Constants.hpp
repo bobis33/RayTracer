@@ -37,6 +37,11 @@ namespace RayTracer {
         NONE
     };
 
+    enum class MaterialType {
+        COLOR,
+        NONE
+    };
+
 }
 
 #endif //RAYTRACER_CONSTANTS_HPP
