@@ -19,8 +19,14 @@ namespace RayTracer {
             virtual ~IMaterials() = default;
 
             virtual void setType(const MaterialType &type) = 0;
+            virtual void setColor(const Color_t &color) = 0;
+            virtual void setReflectivity(const uint8_t &reflectivity) = 0;
+            virtual void setTransparency(const uint8_t &transparency) = 0;
 
             virtual MaterialType getType() const = 0;
+            virtual Color_t getColor() const = 0;
+            virtual uint8_t getReflectivity() const = 0;
+            virtual uint8_t getTransparency() const = 0;
 
     }; // class IMaterials
 
