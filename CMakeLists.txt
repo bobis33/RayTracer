@@ -28,6 +28,9 @@ add_library(raytracer_interface INTERFACE)
 # Local plugins
 add_subdirectory(App/plugins)
 
+# Static library
+add_subdirectory(lib)
+
 # Main executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
@@ -35,11 +38,10 @@ target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/main.cpp
         ${SRC_DIR}/parser.cpp
         ${SRC_DIR}/core.cpp
-        ${SRC_DIR}/clock/clock.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} PRIVATE raytracer_interface config++)
+target_link_libraries(${PROJECT_NAME} PRIVATE raytracer_interface my_lib config++)
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 target_compile_options(${PROJECT_NAME} PRIVATE ${WARNING_FLAGS})

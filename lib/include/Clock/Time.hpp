@@ -1,16 +1,14 @@
 /*
 ** EPITECH PROJECT, 2024
-** Arcade
+** lib
 ** File description:
 ** time.hpp
 */
 
-#ifndef ARCADE_TIME_HPP
-#define ARCADE_TIME_HPP
+#ifndef LIB_TIME_HPP
+#define LIB_TIME_HPP
 
-namespace Arcade
-{
-    class Time
+class Time
     {
         public:
             /**
@@ -38,6 +36,5 @@ namespace Arcade
 
     }; // Time
 
-} // namespace Arcade
 
-#endif // ARCADE_TIME_HPP
+#endif // LIB_TIME_HPP

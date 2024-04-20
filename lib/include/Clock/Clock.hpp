@@ -1,21 +1,26 @@
 /*
 ** EPITECH PROJECT, 2024
-** Arcade
+** lib
 ** File description:
 ** Clock.hpp
 */
 
-#ifndef ARCADE_CLOCK_HPP
-#define ARCADE_CLOCK_HPP
+#ifndef LIB_CLOCK_HPP
+#define LIB_CLOCK_HPP
 
 #include <chrono>
 
-#include "RayTracer/Clock/Time.hpp"
+#include "Clock/Time.hpp"
 
-namespace Arcade
-{
-    class Clock
+/**
+ * @brief TimePoint is a type alias for a time point which is a very long and complicated type in the standard library
+ */
+using TimePoint = std::chrono::time_point<std::chrono::high_resolution_clock>;
+
+
+class Clock
     {
+
         public:
             /**
              * @brief Construct a new Clock object
@@ -46,18 +51,12 @@ namespace Arcade
              */
             [[nodiscard]] Time getElapsedTime() const;
 
-            /**
-             * @brief TimePoint is a type alias for a time point which is a very long and complicated type in the standard library
-             */
-            using TimePoint = std::chrono::time_point<std::chrono::high_resolution_clock>;
-        
         private:
-            TimePoint m_start{};
-            TimePoint m_pause{};
+            TimePoint m_start;
+            TimePoint m_pause;
             bool m_paused{false};
 
     }; // Clock
 
-} // namespace Arcade
 
-#endif // ARCADE_CLOCK_HPP
+#endif // LIB_CLOCK_HPP

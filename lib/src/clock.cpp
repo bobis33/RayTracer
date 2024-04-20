@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** Arcade
+** lib
 ** File description:
-** Clock.cpp
+** clock.cpp
 */
 
-#include "RayTracer/Clock/Clock.hpp"
+#include "Clock/Clock.hpp"
 
-void Arcade::Clock::pause()
+void Clock::pause()
 {
     if (m_paused) {
         return;
@@ -16,7 +16,7 @@ void Arcade::Clock::pause()
     m_paused = true;
 }
 
-void Arcade::Clock::resume()
+void Clock::resume()
 {
     if (!m_paused) {
         return;
@@ -26,7 +26,7 @@ void Arcade::Clock::resume()
     m_paused = false;
 }
 
-Arcade::Time Arcade::Clock::getElapsedTime() const
+Time Clock::getElapsedTime() const
 {
     TimePoint now = std::chrono::high_resolution_clock::now();
     std::chrono::duration<float> elapsed_time{};
