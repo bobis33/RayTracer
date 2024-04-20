@@ -17,7 +17,7 @@ namespace RayTracer {
         public:
             ~PpmRenderer() override = default;
 
-            void render(const Scene &scene) override;
+            void render() override;
 
     }; // class PpmRenderer
 

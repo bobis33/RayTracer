@@ -10,10 +10,10 @@
 
 #include "RayTracer/SfmlRenderer.hpp"
 
-void RayTracer::SfmlRenderer::render(const Scene &scene)
+void RayTracer::SfmlRenderer::render()
 {
 
-    sf::RenderWindow window(sf::VideoMode(scene.getResolution().first, scene.getResolution().second), scene.getName());
+    sf::RenderWindow window(sf::VideoMode(getResolution().first, getResolution().second), getName());
 
     while (window.isOpen()) {
         sf::Event event{};

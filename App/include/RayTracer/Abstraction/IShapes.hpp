@@ -8,15 +8,9 @@
 #ifndef RAYTRACER_ISHAPES_HPP
 #define RAYTRACER_ISHAPES_HPP
 
-namespace RayTracer {
+#include "RayTracer/Constants.hpp"
 
-    enum class ShapeType {
-        SPHERE,
-        PLANE,
-        CYLINDER,
-        CONE,
-        NONE
-    };
+namespace RayTracer {
 
     class IShapes {
 

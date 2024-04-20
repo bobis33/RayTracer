@@ -10,14 +10,14 @@
 
 #include "RayTracer/PpmRenderer.hpp"
 
-void RayTracer::PpmRenderer::render(const Scene &scene)
+void RayTracer::PpmRenderer::render()
 {
-    std::ofstream file(scene.getName() + ".ppm");
+    std::ofstream file(getName() + ".ppm");
 
-    file << "P3\n" << scene.getResolution().first << " " << scene.getResolution().second << "\n255\n";
+    file << "P3\n" << getResolution().first << " " << getResolution().second << "\n255\n";
 
-    for (int i = 0; i < scene.getResolution().second; i++) {
-        for (int j = 0; j < scene.getResolution().first; j++) {
+    for (int i = 0; i < getResolution().second; i++) {
+        for (int j = 0; j < getResolution().first; j++) {
             file << "0 0 0 ";
         }
         file << "\n";

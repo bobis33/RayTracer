@@ -13,9 +13,9 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
 {
     const std::string &rendererType = renderer["type"];
     if (rendererType == "sfml") {
-        scene.setRendererType(RendererType::SFML);
+        scene.setRenderer(RendererType::SFML);
     } else if (rendererType == "ppm") {
-        scene.setRendererType(RendererType::PPM);
+        scene.setRenderer(RendererType::PPM);
     } else {
         throw ParserException{"Invalid renderer type"};
     }
@@ -25,14 +25,14 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     scene.setResolution({static_cast<uint16_t>(width), static_cast<uint16_t>(height)});
 }
 
-RayTracer::Scene RayTracer::Parser::parseFile(const std::string &filePath)
+std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)
 {
     libconfig::Config cfg;
-    Scene scene;
+    std::unique_ptr<Scene> scene = std::make_unique<Scene>();
     try {
         cfg.readFile(filePath.c_str());
         libconfig::Setting& root = cfg.getRoot();
-        parseRenderer(root["renderer"], scene);
+        parseRenderer(root["renderer"], *scene);
     } catch (const libconfig::FileIOException &e) {
         throw ParserException{"Error while reading file"};
     } catch (const libconfig::ParseException &e) {

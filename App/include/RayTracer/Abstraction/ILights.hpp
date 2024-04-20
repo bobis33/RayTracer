@@ -8,13 +8,9 @@
 #ifndef RAYTRACER_ILIGHTS_HPP
 #define RAYTRACER_ILIGHTS_HPP
 
-namespace RayTracer {
+#include "RayTracer/Constants.hpp"
 
-    enum class LightType {
-        AMBIENT,
-        DIRECTIONAL,
-        NONE
-    };
+namespace RayTracer {
 
     class ILights {
 

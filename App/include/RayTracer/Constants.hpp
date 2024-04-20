@@ -17,9 +17,23 @@ static constexpr int DEFAULT_HEIGHT = 1080;
 
 namespace RayTracer {
 
-    enum class RendererType : uint8_t {
+    enum class RendererType {
         PPM,
         SFML,
+        NONE
+    };
+
+    enum class ShapeType {
+        SPHERE,
+        PLANE,
+        CYLINDER,
+        CONE,
+        NONE
+    };
+
+    enum class LightType {
+        AMBIENT,
+        DIRECTIONAL,
         NONE
     };
 

@@ -20,7 +20,7 @@ namespace RayTracer {
         public:
 
             static int parseArgs(const std::string &filePath);
-            static Scene parseFile(const std::string &filePath);
+            static std::unique_ptr<RayTracer::Scene> parseFile(const std::string &filePath);
 
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
 

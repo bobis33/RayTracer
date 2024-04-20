@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "RayTracer/Abstraction/ARenderer.hpp"
+#include "RayTracer/Scene/Scene.hpp"
 
 namespace RayTracer {
 
@@ -19,7 +20,7 @@ namespace RayTracer {
             Core() = default;
             ~Core() = default;
 
-            void runRayTracer(const Scene &scene);
+            static void runRayTracer(Scene &scene);
 
             class CoreException : public std::exception
             {
