@@ -6,25 +6,40 @@
 */
 
 #include <filesystem>
-#include <libconfig.h++>
 
 #include "RayTracer/Parser.hpp"
-#include "RayTracer/Constants.hpp"
 
+void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
+{
+    const std::string &rendererType = renderer["type"];
+    if (rendererType == "sfml") {
+        scene.setRendererType(RendererType::SFML);
+    } else if (rendererType == "ppm") {
+        scene.setRendererType(RendererType::PPM);
+    } else {
+        throw ParserException{"Invalid renderer type"};
+    }
+    scene.setName(renderer["fileName"]);
+    int width = renderer["width"];
+    int height = renderer["height"];
+    scene.setResolution({static_cast<uint16_t>(width), static_cast<uint16_t>(height)});
+}
 
 RayTracer::Scene RayTracer::Parser::parseFile(const std::string &filePath)
 {
-    libconfig::Config config;
-
+    libconfig::Config cfg;
+    Scene scene;
     try {
-        config.readFile(filePath.c_str());
+        cfg.readFile(filePath.c_str());
+        libconfig::Setting& root = cfg.getRoot();
+        parseRenderer(root["renderer"], scene);
     } catch (const libconfig::FileIOException &e) {
         throw ParserException{"Error while reading file"};
     } catch (const libconfig::ParseException &e) {
         throw ParserException{e.getError()};
     }
 
-    return {}; // TODO(bobi): return Scene object after parse
+    return scene;
 }
 
 int RayTracer::Parser::parseArgs(const std::string &filePath)

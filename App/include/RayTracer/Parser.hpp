@@ -9,6 +9,7 @@
 #define RAYTRACER_PARSER_HPP
 
 #include <iostream>
+#include <libconfig.h++>
 
 #include "RayTracer/Scene/Scene.hpp"
 
@@ -20,6 +21,8 @@ namespace RayTracer {
 
             static int parseArgs(const std::string &filePath);
             static Scene parseFile(const std::string &filePath);
+
+            static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
 
             class ParserException : public std::exception
             {
