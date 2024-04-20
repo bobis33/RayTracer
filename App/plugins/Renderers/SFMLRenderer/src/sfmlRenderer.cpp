@@ -5,7 +5,6 @@
 ** renderer.cpp
 */
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -13,10 +12,8 @@
 
 void RayTracer::SfmlRenderer::render(const Scene &scene)
 {
-    setName(scene.getName());
-    setResolution(scene.getResolution());
 
-    sf::RenderWindow window(sf::VideoMode(getResolution().first, getResolution().second), getName());
+    sf::RenderWindow window(sf::VideoMode(scene.getResolution().first, scene.getResolution().second), scene.getName());
 
     while (window.isOpen()) {
         sf::Event event{};

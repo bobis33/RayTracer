@@ -10,8 +10,7 @@
 
 #include <memory>
 
-#include "RayTracer/Parser.hpp"
-#include "RayTracer/Abstraction/IRenderer.hpp"
+#include "RayTracer/Abstraction/ARenderer.hpp"
 
 namespace RayTracer {
 
@@ -41,7 +40,7 @@ namespace RayTracer {
             }; // CoreException
 
         private:
-            std::unique_ptr<IRenderer> m_renderer{nullptr};
+            std::unique_ptr<ARenderer> m_renderer{nullptr};
 
     }; // Core
 

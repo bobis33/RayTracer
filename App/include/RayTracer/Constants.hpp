@@ -15,4 +15,14 @@ static constexpr int ERROR = 1;
 static constexpr int DEFAULT_WIDTH = 1920;
 static constexpr int DEFAULT_HEIGHT = 1080;
 
+namespace RayTracer {
+
+    enum class RendererType : uint8_t {
+        PPM,
+        SFML,
+        NONE
+    };
+
+}
+
 #endif //RAYTRACER_CONSTANTS_HPP
