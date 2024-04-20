@@ -20,7 +20,7 @@ namespace RayTracer {
                 std::unique_ptr<AMaterial> material;
                 switch (type) {
                     case MaterialType::COLOR:
-                        material = PluginLoader::loadPlugin<AMaterial>("./plugins/raytracer_color_material.so");
+                        material = PluginLoader::loadPlugin<AMaterial>("./plugins/material_color.so");
                         break;
                     default:
                         throw RunTimeException("Materials type not found");

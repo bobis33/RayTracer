@@ -1,4 +1,4 @@
-project(raytracer_sphere_shape
+project(shape_sphere
         DESCRIPTION "Raytracer Sphere Shape plugin"
         LANGUAGES CXX
 )

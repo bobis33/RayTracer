@@ -1,4 +1,4 @@
-project(raytracer_directional_lights
+project(light_directional
         DESCRIPTION "Raytracer Point Lights plugin"
         LANGUAGES CXX
 )

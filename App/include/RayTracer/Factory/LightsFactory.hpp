@@ -15,16 +15,16 @@ namespace RayTracer {
 
     class RendererFactory {
         public:
-            static std::unique_ptr<ALights> createLights(const LightType &type,
+            static std::unique_ptr<ALight> createLights(const LightType &type,
                                                          const std::tuple<uint16_t, uint16_t, uint16_t> &position)
             {
-                std::unique_ptr<ALights> lights;
+                std::unique_ptr<ALight> lights;
                 switch (type) {
                     case LightType::AMBIENT:
-                        lights = PluginLoader::loadPlugin<ALights>("./plugins/raytracer_ambient_light.so");
+                        lights = PluginLoader::loadPlugin<ALight>("./plugins/light_ambient.so");
                         break;
                     case LightType::DIRECTIONAL:
-                        lights = PluginLoader::loadPlugin<ALights>("./plugins/raytracer_directional_light.so");
+                        lights = PluginLoader::loadPlugin<ALight>("./plugins/light_directional.so");
                         break;
                     default:
                         throw RunTimeException("Lights type not found");

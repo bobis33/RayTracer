@@ -1,4 +1,4 @@
-project(raytracer_ppm_renderer
+project(renderer_ppm
         DESCRIPTION "Raytracer PPM Renderer plugin"
         LANGUAGES CXX
 )

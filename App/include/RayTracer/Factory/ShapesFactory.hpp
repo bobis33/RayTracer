@@ -15,15 +15,15 @@ namespace RayTracer {
 
     class ShapesFactory {
         public:
-            static std::unique_ptr<AShapes> createShape(const ShapeType &type,
+            static std::unique_ptr<AShape> createShape(const ShapeType &type,
                                                         const std::tuple<uint16_t, uint16_t, uint16_t> &position,
                                                         const std::tuple<uint8_t, uint8_t, uint8_t> &color)
             {
-                std::unique_ptr<AShapes> shape;
+                std::unique_ptr<AShape> shape;
 
                 switch (type) {
                 case ShapeType::PLANE:
-                    shape = PluginLoader::loadPlugin<AShapes>("./plugins/raytracer_cone_shape.so");
+                    shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_cone.so");
                     break;
                 default:
                     throw RunTimeException("Invalid shape type");
@@ -35,22 +35,22 @@ namespace RayTracer {
                 return shape;
             };
 
-            static std::unique_ptr<AShapes> createShape(const ShapeType &type,
+            static std::unique_ptr<AShape> createShape(const ShapeType &type,
                                                         const std::tuple<uint16_t, uint16_t, uint16_t> &position,
                                                         const std::tuple<uint8_t, uint8_t, uint8_t> &color,
                                                         float radius)
             {
-                std::unique_ptr<AShapes> shape;
+                std::unique_ptr<AShape> shape;
 
                 switch (type) {
                     case ShapeType::SPHERE:
-                        shape = PluginLoader::loadPlugin<AShapes>("./plugins/raytracer_sphere_shape.so");
+                        shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_sphere.so");
                         break;
                     case ShapeType::CYLINDER:
-                        shape = PluginLoader::loadPlugin<AShapes>("./plugins/raytracer_cylinder_shape.so");
+                        shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_cylinder.so");
                         break;
                     case ShapeType::CONE:
-                        shape = PluginLoader::loadPlugin<AShapes>("./plugins/raytracer_sphere_shape.so");
+                        shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_sphere.so");
                         break;
                     default:
                         throw RunTimeException("Invalid shape type");

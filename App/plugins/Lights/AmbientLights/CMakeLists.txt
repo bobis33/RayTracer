@@ -1,4 +1,4 @@
-project(raytracer_ambient_lights
+project(light_ambient
         DESCRIPTION "Raytracer Ambient Lights plugin"
         LANGUAGES CXX
 )

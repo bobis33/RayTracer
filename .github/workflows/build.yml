@@ -7,7 +7,10 @@ on:
 
 env:
   EXECUTABLE: "raytracer"
-  LIBRARY: "raytracer_sfml_renderer.so,raytracer_ppm_renderer.so,raytracer_ambient_lights.so,raytracer_directional_lights.so,raytracer_point_lights.so,raytracer_cone_shape.so,raytracer_cylinder_shape.so,raytracer_plane_shape.so,raytracer_sphere_shape.so"
+  LIGHT_LIBRARY: "light_ambient.so,light_directional.so,light_point.so"
+  MATERIAL_LIBRARY: "material_color.so"
+  RENDERER_LIBRARY: "renderer_sfml.so,renderer_ppm.so"
+  SHAPE_LIBRARY: "shape_cone.so,shape_cylinder.so,shape_plane.so,shape_sphere.so"
 
 jobs:
   build:
@@ -32,9 +35,39 @@ jobs:
           exit 1
           fi
 
-      - name: Check shared libraries
+      - name: Check light libraries
         run: |
-          IFS=',' read -ra ADDR <<< $LIBRARY
+          IFS=',' read -ra ADDR <<< $LIGHT_LIBRARY
+          for lib in "${ADDR[@]}"; do
+            if [[ ! -e "./plugins/${lib}" ]]; then
+              echo "Error: Library $lib not found."
+              exit 1
+            fi
+          done
+
+      - name: Check material libraries
+        run: |
+          IFS=',' read -ra ADDR <<< $MATERIAL_LIBRARY
+          for lib in "${ADDR[@]}"; do
+            if [[ ! -e "./plugins/${lib}" ]]; then
+              echo "Error: Library $lib not found."
+              exit 1
+            fi
+          done
+
+      - name: Check renderer libraries
+        run: |
+          IFS=',' read -ra ADDR <<< $RENDERER_LIBRARY
+          for lib in "${ADDR[@]}"; do
+            if [[ ! -e "./plugins/${lib}" ]]; then
+              echo "Error: Library $lib not found."
+              exit 1
+            fi
+          done
+
+      - name: Check shape libraries
+        run: |
+          IFS=',' read -ra ADDR <<< $SHAPE_LIBRARY
           for lib in "${ADDR[@]}"; do
             if [[ ! -e "./plugins/${lib}" ]]; then
               echo "Error: Library $lib not found."

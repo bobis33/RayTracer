@@ -1,4 +1,4 @@
-project(raytracer_point_lights
+project(light_point
         DESCRIPTION "Raytracer Point Lights plugin"
         LANGUAGES CXX
 )

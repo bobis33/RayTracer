@@ -1,4 +1,4 @@
-project(raytracer_plane_shape
+project(shape_plane
         DESCRIPTION "Raytracer Plane Shape plugin"
         LANGUAGES CXX
 )

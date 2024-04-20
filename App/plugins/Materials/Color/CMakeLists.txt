@@ -1,4 +1,4 @@
-project(raytracer_color_material
+project(material_color
         DESCRIPTION "Raytracer Color Material plugin"
         LANGUAGES CXX
 )

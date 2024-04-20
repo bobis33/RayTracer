@@ -1,4 +1,4 @@
-project(raytracer_sfml_renderer
+project(renderer_sfml
         DESCRIPTION "Raytracer SFML Renderer plugin"
         LANGUAGES CXX
 )

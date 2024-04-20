@@ -1,4 +1,4 @@
-project(raytracer_cylinder_shape
+project(shape_cylinder
         DESCRIPTION "Raytracer Cylinder Shape plugin"
         LANGUAGES CXX
 )

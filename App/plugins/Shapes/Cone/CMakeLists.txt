@@ -1,4 +1,4 @@
-project(raytracer_cone_shape
+project(shape_cone
         DESCRIPTION "Raytracer Cone Shape plugin"
         LANGUAGES CXX
 )
