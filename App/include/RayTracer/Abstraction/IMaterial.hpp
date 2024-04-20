@@ -2,21 +2,21 @@
 ** EPITECH PROJECT, 2024
 ** raytracer
 ** File description:
-** IMaterials
+** IMaterial
 */
 
-#ifndef RAYTRACER_IMATERIALS_HPP
-#define RAYTRACER_IMATERIALS_HPP
+#ifndef RAYTRACER_IMATERIAL_HPP
+#define RAYTRACER_IMATERIAL_HPP
 
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
 
-    class IMaterials {
+    class IMaterial {
 
         public:
 
-            virtual ~IMaterials() = default;
+            virtual ~IMaterial() = default;
 
             virtual void setType(const MaterialType &type) = 0;
             virtual void setColor(const Color_t &color) = 0;
@@ -28,8 +28,8 @@ namespace RayTracer {
             virtual uint8_t getReflectivity() const = 0;
             virtual uint8_t getTransparency() const = 0;
 
-    }; // class IMaterials
+    }; // class IMaterial
 
 }; // namespace RayTracer
 
-#endif //RAYTRACER_IMATERIALS_HPP
+#endif //RAYTRACER_IMATERIAL_HPP

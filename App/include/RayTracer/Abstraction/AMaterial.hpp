@@ -2,21 +2,21 @@
 ** EPITECH PROJECT, 2024
 ** raytracer
 ** File description:
-** AMaterials
+** AMaterial
 */
 
-#ifndef RAYTRACER_AMATERIALS_HPP
-#define RAYTRACER_AMATERIALS_HPP
+#ifndef RAYTRACER_AMATERIAL_HPP
+#define RAYTRACER_AMATERIAL_HPP
 
-#include "RayTracer/Abstraction/IMaterials.hpp"
+#include "RayTracer/Abstraction/IMaterial.hpp"
 
 namespace RayTracer {
 
-    class AMaterials : public IMaterials {
+    class AMaterial : public IMaterial {
 
         public:
 
-            ~AMaterials() override = default;
+            ~AMaterial() override = default;
 
             void setType(const MaterialType &type) override { m_type = type; };
             void setColor(const Color_t &color) override { m_color = color; };
@@ -35,8 +35,8 @@ namespace RayTracer {
             uint8_t m_transparency{0};
 
 
-    }; // class AMaterials
+    }; // class AMaterial
 
 }; // namespace 
 
-#endif //RAYTRACER_AMATERIALS_HPP
+#endif //RAYTRACER_AMATERIAL_HPP
