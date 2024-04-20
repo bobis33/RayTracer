@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer | Lights
 ** File description:
-** Color.hpp
+** FlatColor.hpp
 */
 
 #ifndef RAYTRACER_AMBIENT_LIGHTS_HPP
@@ -17,7 +17,7 @@ namespace RayTracer {
         public:
             ~AmbientLights() override = default;
 
-    }; // class Color
+    }; // class FlatColor
 
 } // namespace RayTracer
 
