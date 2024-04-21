@@ -12,9 +12,6 @@ static constexpr int EPITECH_ERROR = 84;
 static constexpr int SUCCESS = 0;
 static constexpr int ERROR = 1;
 
-static constexpr int DEFAULT_WIDTH = 1920;
-static constexpr int DEFAULT_HEIGHT = 1080;
-
 namespace RayTracer {
 
     enum class RendererType {

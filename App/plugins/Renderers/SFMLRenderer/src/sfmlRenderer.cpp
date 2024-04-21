@@ -13,7 +13,7 @@
 void RayTracer::SfmlRenderer::render()
 {
 
-    sf::RenderWindow window(sf::VideoMode(getResolution().width, getResolution().height), getName());
+    sf::RenderWindow window(sf::VideoMode(getResolution().getWidth(), getResolution().getWidth()), getName());
 
     while (window.isOpen()) {
         sf::Event event{};

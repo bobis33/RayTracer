@@ -18,16 +18,15 @@ namespace RayTracer {
             ~ARenderer() override = default;
 
             void setType(const RendererType &rendererType) override { m_type = rendererType; };
-            void setResolution(const Resolution_t &resolution) override { m_resolution = resolution; };
             void setName(const std::string &name) override { m_name = name; };
 
             [[nodiscard]] RendererType getType() const override { return m_type; };
-            [[nodiscard]] Resolution_t getResolution() const override { return m_resolution; };
+            [[nodiscard]] Resolution getResolution() const override { return m_resolution; };
             [[nodiscard]] std::string getName() const override { return m_name; };
 
         private:
             RendererType m_type{RendererType::NONE};
-            Resolution_t m_resolution{DEFAULT_WIDTH, DEFAULT_HEIGHT};
+            Resolution m_resolution{{1920, 1080}};
             std::string m_name{"Default Renderer Name"};
 
     }; // class ARenderer

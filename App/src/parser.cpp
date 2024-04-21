@@ -22,7 +22,7 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     scene.getRenderer()->setName(renderer["fileName"]);
     int width = renderer["width"];
     int height = renderer["height"];
-    scene.getRenderer()->setResolution({static_cast<uint16_t>(width), static_cast<uint16_t>(height)});
+    scene.getRenderer()->getResolution().setResolution({static_cast<uint16_t>(width), static_cast<uint16_t>(height)});
 }
 
 std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)

@@ -10,14 +10,10 @@
 
 #include <cstdint>
 
+#include "RayTracer/Resolution.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
-
-    using Resolution_t = struct Resolution_s {
-        uint16_t width;
-        uint16_t height;
-    };
 
     class IRenderer {
 
@@ -27,11 +23,10 @@ namespace RayTracer {
             virtual void render() = 0;
 
             virtual void setType(const RendererType &rendererType) = 0;
-            virtual void setResolution(const Resolution_t &resolution) = 0;
             virtual void setName(const std::string &name) = 0;
 
             [[nodiscard]] virtual RendererType getType() const = 0;
-            [[nodiscard]] virtual Resolution_t getResolution() const = 0;
+            [[nodiscard]] virtual Resolution getResolution() const = 0;
             [[nodiscard]] virtual std::string getName() const = 0;
 
     }; // IRenderer

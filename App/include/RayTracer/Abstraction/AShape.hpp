@@ -19,15 +19,16 @@ namespace RayTracer {
 
             void setType(const ShapeType &type) override { m_type = type; };
             void setRadius(float radius) override { m_radius = radius; };
+            void setMaterial(AMaterial *material) override { m_material = material; };
 
             [[nodiscard]] ShapeType getType() const override { return m_type; };
-            [[nodiscard]] RGBColor getColor() const override { return m_color; };
+            [[nodiscard]] AMaterial getMaterial() const override { return *m_material; };
             [[nodiscard]] Position getPosition() const override { return m_position; };
             [[nodiscard]] float getRadius() const override { return m_radius; };
 
         private:
             ShapeType m_type{ShapeType::NONE};
-            RGBColor m_color{0, 0, 0};
+            AMaterial *m_material;
             Position m_position{0, 0, 0};
             float m_radius{0};
 

@@ -27,13 +27,14 @@ namespace RayTracer {
 
             RGBColor() : m_color({0, 0, 0}) {};
             RGBColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) : m_color(r, g, b) {};
+            explicit RGBColor(const Color_t &color) : m_color(color) {};
             ~RGBColor() = default;
 
             void setColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) { m_color = {r, g, b}; };
             void setColor(const Color_t &color) { m_color = color; };
             [[nodiscard]] Color_t getColor() const { return m_color; };
 
-            static Color_t customColor(uint8_t r, uint8_t g, uint8_t b) { return Color_t{r, g, b}; };
+            static Color_t customColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) { return Color_t{r, g, b}; };
 
             static Color_t getRed() { return Color_t{RGB_MAX, 0, 0}; };
             static Color_t getGreen() { return Color_t{0, RGB_MAX, 0}; };
