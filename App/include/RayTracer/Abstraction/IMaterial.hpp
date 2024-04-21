@@ -8,7 +8,7 @@
 #ifndef RAYTRACER_IMATERIAL_HPP
 #define RAYTRACER_IMATERIAL_HPP
 
-#include "myLib/RGBColor.hpp"
+#include "RayTracer/RGBColor.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
@@ -24,10 +24,10 @@ namespace RayTracer {
             virtual void setReflectivity(const uint8_t &reflectivity) = 0;
             virtual void setTransparency(const uint8_t &transparency) = 0;
 
-            virtual MaterialType getType() const = 0;
-            virtual Color_t getColor() const = 0;
-            virtual uint8_t getReflectivity() const = 0;
-            virtual uint8_t getTransparency() const = 0;
+            [[nodiscard]] virtual MaterialType getType() const = 0;
+            [[nodiscard]] virtual Color_t getColor() const = 0;
+            [[nodiscard]] virtual float getReflectivity() const = 0;
+            [[nodiscard]] virtual float getTransparency() const = 0;
 
     }; // class IMaterial
 

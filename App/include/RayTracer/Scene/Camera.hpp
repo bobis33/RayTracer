@@ -17,7 +17,7 @@ namespace RayTracer {
             Camera() = default;
             ~Camera() = default;
 
-            void setFov(uint16_t fov) { m_fov = fov; };
+            void setFov(const uint16_t &fov) { m_fov = fov; };
 
             [[nodiscard]] uint16_t getFov() const { return m_fov; };
             [[nodiscard]] Position getPosition() const { return m_position; };

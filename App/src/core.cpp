@@ -7,8 +7,6 @@
 
 #include "RayTracer/Core.hpp"
 
-#include "RayTracer/Factory/RendererFactory.hpp"
-
 void RayTracer::Core::runRayTracer(const Scene &scene)
 {
     scene.getRenderer()->render();

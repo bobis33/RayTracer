@@ -8,10 +8,6 @@
 #ifndef RAYTRACER_ASHAPE_HPP
 #define RAYTRACER_ASHAPE_HPP
 
-#include <cstdint>
-#include <string>
-#include <tuple>
-
 #include "RayTracer/Abstraction/IShape.hpp"
 
 namespace RayTracer {
@@ -21,7 +17,7 @@ namespace RayTracer {
         public:
             ~AShape() override = default;
 
-            void setType(const ShapeType& type) override { m_type = type; };
+            void setType(const ShapeType &type) override { m_type = type; };
             void setRadius(float radius) override { m_radius = radius; };
 
             [[nodiscard]] ShapeType getType() const override { return m_type; };

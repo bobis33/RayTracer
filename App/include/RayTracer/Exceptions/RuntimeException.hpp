@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** Raytracer | RunTimeException
+** Raytracer
 ** File description:
 ** RunTimeException.hpp
 */
@@ -28,7 +28,8 @@ namespace RayTracer {
         private:
             std::string m_msg{0};
 
-    }; // RendererException
+    }; // class RunTimeException
+
 } // namespace RayTracer
 
-#endif //RAYTRACER_RUNTIME_EXCEPTION_HPP
+#endif // RAYTRACER_RUNTIME_EXCEPTION_HPP

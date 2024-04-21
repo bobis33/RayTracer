@@ -8,11 +8,7 @@
 #ifndef RAYTRACER_ALIGHT_HPP
 #define RAYTRACER_ALIGHT_HPP
 
-#include <tuple>
-#include <cstdint>
-
 #include "RayTracer/Abstraction/ILight.hpp"
-#include "RayTracer/Position.hpp"
 
 namespace RayTracer {
 
@@ -32,7 +28,7 @@ namespace RayTracer {
             Position m_position{0, 0, 0};
             RGBColor m_color{0, 0, 0};
 
-    }; // ALight
+    }; // class ALight
 
 } // namespace RayTracer
 

@@ -40,9 +40,6 @@ namespace RayTracer {
 
             }; // CoreException
 
-        private:
-            std::unique_ptr<ARenderer> m_renderer{nullptr};
-
     }; // Core
 
 } // namespace RayTracer

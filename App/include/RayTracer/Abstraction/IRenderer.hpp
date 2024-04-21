@@ -14,6 +14,11 @@
 
 namespace RayTracer {
 
+    using Resolution_t = struct Resolution_s {
+        uint16_t width;
+        uint16_t height;
+    };
+
     class IRenderer {
 
         public:
@@ -22,11 +27,11 @@ namespace RayTracer {
             virtual void render() = 0;
 
             virtual void setType(const RendererType &rendererType) = 0;
-            virtual void setResolution(const std::pair<uint16_t, uint16_t> &resolution) = 0;
+            virtual void setResolution(const Resolution_t &resolution) = 0;
             virtual void setName(const std::string &name) = 0;
 
             [[nodiscard]] virtual RendererType getType() const = 0;
-            [[nodiscard]] virtual std::pair<uint16_t, uint16_t> getResolution() const = 0;
+            [[nodiscard]] virtual Resolution_t getResolution() const = 0;
             [[nodiscard]] virtual std::string getName() const = 0;
 
     }; // IRenderer

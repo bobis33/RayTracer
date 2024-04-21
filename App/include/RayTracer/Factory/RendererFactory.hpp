@@ -28,6 +28,7 @@ namespace RayTracer {
                     default:
                         throw RunTimeException("Renderer type not found");
                 }
+                renderer->setType(type);
                 return renderer;
             };
 

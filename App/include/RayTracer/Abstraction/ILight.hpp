@@ -10,7 +10,7 @@
 
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Position.hpp"
-#include "myLib/RGBColor.hpp"
+#include "RayTracer/RGBColor.hpp"
 
 namespace RayTracer {
 
@@ -25,7 +25,7 @@ namespace RayTracer {
             [[nodiscard]] virtual Position getPosition() const = 0;
             [[nodiscard]] virtual RGBColor getColor() const = 0;
 
-    }; // ILight
+    }; // class ILight
 
 } // namespace RayTracer
 
