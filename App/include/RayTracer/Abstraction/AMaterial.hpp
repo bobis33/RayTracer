@@ -30,7 +30,7 @@ namespace RayTracer {
 
         private:
             MaterialType m_type{MaterialType::NONE};
-            Color_t m_color{Color::getBlack()};
+            Color_t m_color{RGBColor::getBlack()};
             uint8_t m_reflectivity{0};
             uint8_t m_transparency{0};
 

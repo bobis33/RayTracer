@@ -14,17 +14,7 @@ int Random::randomInt(int min, int max)
     return dis(gen);
 }
 
-int Random::randomInt()
-{
-    return randomInt(0, 1000);
-}
-
 float Random::randomFloat(float min, float max)
 {
-    return min + static_cast<float>(randomInt(0, 1000)) / 1000.0f * (max - min);
-}
-
-float Random::randomFloat()
-{
-    return randomFloat(0.0f, 1.0f);
+    return min + static_cast<float>(randomInt(-1000, 1000)) / 1000.0f * (max - min);
 }

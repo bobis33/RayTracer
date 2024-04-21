@@ -9,7 +9,6 @@ add_library(my_lib STATIC ${LIB_SOURCES})
 
 target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/clock.cpp
-        ${SRC_DIR}/color.cpp
         ${SRC_DIR}/random.cpp
 )
 

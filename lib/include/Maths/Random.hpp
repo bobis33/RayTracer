@@ -14,10 +14,10 @@ class Random {
     public:
 
     static int randomInt(int min, int max);
-    static int randomInt();
+    static int randomInt() { return randomInt(-1000, 1000); };
 
     static float randomFloat(float min, float max);
-    static float randomFloat();
+    static float randomFloat() { return randomFloat(-1.0f, 1.0f); };
 
 }; // class Random
 

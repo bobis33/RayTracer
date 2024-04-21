@@ -9,7 +9,7 @@
 
 #include "RayTracer/Factory/RendererFactory.hpp"
 
-void RayTracer::Core::runRayTracer(Scene &scene)
+void RayTracer::Core::runRayTracer(const Scene &scene)
 {
     scene.getRenderer()->render();
 }
