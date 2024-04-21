@@ -12,6 +12,7 @@
 #include <cstdint>
 
 #include "RayTracer/Abstraction/ILight.hpp"
+#include "RayTracer/Position.hpp"
 
 namespace RayTracer {
 
@@ -21,14 +22,15 @@ namespace RayTracer {
             ~ALight() override = default;
 
             void setType(const LightType &type) override { m_type = type; };
-            void setPosition(const std::tuple<uint16_t, uint16_t, uint16_t> &position) override { m_position = position; };
 
             [[nodiscard]] LightType getType() const override { return m_type; };
-            [[nodiscard]] std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const override { return m_position; };
+            [[nodiscard]] Position getPosition() const override { return m_position; };
+            [[nodiscard]] RGBColor getColor() const override { return m_color; }
 
         private:
             LightType m_type{LightType::NONE};
-            std::tuple<uint16_t, uint16_t, uint16_t> m_position{0, 0, 0};
+            Position m_position{0, 0, 0};
+            RGBColor m_color{0, 0, 0};
 
     }; // ALight
 

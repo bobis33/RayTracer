@@ -8,6 +8,8 @@
 #ifndef RAYTRACER_CAMERA_HPP
 #define RAYTRACER_CAMERA_HPP
 
+#include "RayTracer/Position.hpp"
+
 namespace RayTracer {
 
     class Camera {
@@ -16,14 +18,13 @@ namespace RayTracer {
             ~Camera() = default;
 
             void setFov(uint16_t fov) { m_fov = fov; };
-            void setPosition(std::tuple<uint16_t, uint16_t, uint16_t> position) { m_position = position; };
 
             [[nodiscard]] uint16_t getFov() const { return m_fov; };
-            [[nodiscard]] std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const { return m_position; };
+            [[nodiscard]] Position getPosition() const { return m_position; };
 
         private:
             uint16_t m_fov{0};
-            std::tuple<uint16_t, uint16_t, uint16_t> m_position{0, 0, 0};
+            Position m_position{0, 0, 0};
 
     }; // class Camera
 

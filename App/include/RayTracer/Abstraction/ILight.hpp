@@ -9,6 +9,8 @@
 #define RAYTRACER_ILIGHT_HPP
 
 #include "RayTracer/Constants.hpp"
+#include "RayTracer/Position.hpp"
+#include "Color/RGBColor.hpp"
 
 namespace RayTracer {
 
@@ -18,10 +20,10 @@ namespace RayTracer {
             virtual ~ILight() = default;
 
             virtual void setType(const LightType &type) = 0;
-            virtual void setPosition(const std::tuple<uint16_t, uint16_t, uint16_t> &position) = 0;
 
             [[nodiscard]] virtual LightType getType() const = 0;
-            [[nodiscard]] virtual std::tuple<uint16_t, uint16_t, uint16_t> getPosition() const = 0;
+            [[nodiscard]] virtual Position getPosition() const = 0;
+            [[nodiscard]] virtual RGBColor getColor() const = 0;
 
     }; // ILight
 

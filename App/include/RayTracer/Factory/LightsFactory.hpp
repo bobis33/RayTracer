@@ -16,7 +16,7 @@ namespace RayTracer {
     class RendererFactory {
         public:
             static std::unique_ptr<ALight> createLights(const LightType &type,
-                                                         const std::tuple<uint16_t, uint16_t, uint16_t> &position)
+                                                         const Position_t &position)
             {
                 std::unique_ptr<ALight> lights;
                 switch (type) {
@@ -30,7 +30,7 @@ namespace RayTracer {
                         throw RunTimeException("Lights type not found");
                 }
                 lights->setType(type);
-                lights->setPosition(position);
+                lights->getPosition().setPosition(position);
                 return lights;
             };
 

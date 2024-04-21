@@ -22,6 +22,14 @@ using Color_t = struct Color_s {
 class RGBColor {
 
     public:
+        RGBColor() : m_color({0, 0, 0}) {};
+        RGBColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) : m_color(r, g, b) {};
+        ~RGBColor() = default;
+
+        void setColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) { m_color = {r, g, b}; };
+        void setColor(const Color_t &color) { m_color = color; };
+        [[nodiscard]] Color_t getColor() const { return m_color; };
+
 
         static Color_t customColor(uint8_t r, uint8_t g, uint8_t b) { return Color_t{r, g, b}; };
 
@@ -48,6 +56,9 @@ class RGBColor {
         static Color_t getDarkGreen() { return Color_t{0, 100, 0}; };
         static Color_t getDarkBlue() { return Color_t{0, 0, 139}; };
         static Color_t getDarkYellow() { return Color_t{139, 139, 0}; };
+
+    private:
+        Color_t m_color{0, 0, 0};
 
 }; // class RGBColor
 
