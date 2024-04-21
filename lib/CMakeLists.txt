@@ -5,7 +5,12 @@ project(my_lib
 
 set(SRC_DIR src)
 
+set(LIB_OUTPUT_DIR ${CMAKE_BINARY_DIR}/lib)
+
 add_library(my_lib STATIC ${LIB_SOURCES})
+
+set_target_properties(my_lib PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY ${LIB_OUTPUT_DIR})
 
 target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/clock.cpp
