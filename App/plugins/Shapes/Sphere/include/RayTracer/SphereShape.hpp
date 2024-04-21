@@ -8,11 +8,11 @@
 #ifndef RAYTRACER_SPHERE_SHAPE_HPP
 #define RAYTRACER_SPHERE_SHAPE_HPP
 
-#include "RayTracer/Abstraction/AShapes.hpp"
+#include "RayTracer/Abstraction/AShape.hpp"
 
 namespace RayTracer {
 
-    class SphereShape : public AShapes {
+    class SphereShape : public AShape {
 
         public:
             ~SphereShape() override = default;

@@ -11,6 +11,7 @@ set(SRC_DIR
 
 SET(INCLUDE_DIR
         ${CMAKE_SOURCE_DIR}/App/include/
+        ${CMAKE_SOURCE_DIR}/lib/include/
 )
 
 set(WARNING_FLAGS
