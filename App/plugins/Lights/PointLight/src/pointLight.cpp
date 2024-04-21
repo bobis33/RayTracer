@@ -2,8 +2,8 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer | Lights
 ** File description:
-** pointLights.cpp
+** pointLight.cpp
 */
 
-#include "RayTracer/PointLights.hpp"
+#include "RayTracer/PointLight.hpp"
 

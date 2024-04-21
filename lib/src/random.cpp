@@ -5,7 +5,7 @@
 ** random.cpp
 */
 
-#include "Maths/Random.hpp"
+#include "myLib/Random.hpp"
 
 int Random::randomInt(int min, int max)
 {

@@ -1,5 +1,5 @@
-project(light_ambient
-        DESCRIPTION "Raytracer Ambient Lights plugin"
+project(light_directional
+        DESCRIPTION "Raytracer Point Lights plugin"
         LANGUAGES CXX
 )
 
@@ -9,7 +9,7 @@ add_library(${PROJECT_NAME} SHARED ${SOURCE})
 
 target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/entryPoint.cpp
-        ${SRC_DIR}/ambientLights.cpp
+        ${SRC_DIR}/directionalLight.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR} include)

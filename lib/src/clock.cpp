@@ -5,7 +5,7 @@
 ** clock.cpp
 */
 
-#include "Clock/Clock.hpp"
+#include "myLib/Clock/Clock.hpp"
 
 void Clock::pause()
 {

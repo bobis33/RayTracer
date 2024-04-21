@@ -8,7 +8,7 @@
 #ifndef RAYTRACER_IMATERIAL_HPP
 #define RAYTRACER_IMATERIAL_HPP
 
-#include "Color/RGBColor.hpp"
+#include "myLib/RGBColor.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {

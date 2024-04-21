@@ -10,7 +10,7 @@
 
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Position.hpp"
-#include "Color/RGBColor.hpp"
+#include "myLib/RGBColor.hpp"
 
 namespace RayTracer {
 

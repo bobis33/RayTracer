@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer | Lights
 ** File description:
-** FlatColor.cpp
+** ambientLight.cpp
 */
 
-#include "RayTracer/AmbientLights.hpp"
+#include "RayTracer/AmbientLight.hpp"

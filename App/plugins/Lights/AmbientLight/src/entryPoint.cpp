@@ -7,12 +7,12 @@
 
 #include <memory>
 
-#include "RayTracer/DirectionalLights.hpp"
+#include "RayTracer/AmbientLight.hpp"
 
 extern "C"
 {
     std::unique_ptr<RayTracer::ALight> entryPoint()
     {
-        return std::make_unique<RayTracer::DirectionalLights>();
+        return std::make_unique<RayTracer::AmbientLight>();
     }
 }

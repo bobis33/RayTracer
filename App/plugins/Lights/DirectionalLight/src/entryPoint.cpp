@@ -1,18 +1,18 @@
 /*
 ** EPITECH PROJECT, 2024
-** RayTracer | Lights
+** Raytracer | Lights
 ** File description:
 ** entryPoint.cpp
 */
 
 #include <memory>
 
-#include "RayTracer/PointLights.hpp"
+#include "RayTracer/DirectionalLight.hpp"
 
 extern "C"
 {
     std::unique_ptr<RayTracer::ALight> entryPoint()
     {
-        return std::make_unique<RayTracer::PointLights>();
+        return std::make_unique<RayTracer::DirectionalLight>();
     }
 }

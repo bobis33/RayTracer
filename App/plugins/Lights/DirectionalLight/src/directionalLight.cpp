@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer | Lights
 ** File description:
-** directionalLights.cpp
+** directionalLight.cpp
 */
 
-#include "RayTracer/DirectionalLights.hpp"
+#include "RayTracer/DirectionalLight.hpp"
