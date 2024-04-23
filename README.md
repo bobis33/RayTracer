@@ -38,6 +38,8 @@ $> ./raytracer <SCENE_FILE>
 [...]
 ```
 
+ - Note: You can find some `<SCENE_FILE>` configuration files in the `scenes/` directory.
+
 
 ## Architecture
 
@@ -46,9 +48,13 @@ $> ./raytracer <SCENE_FILE>
     │
     │─ .github/workflows/       Workflows
     │
+    │─ App/                     Application
+    │
     │─ cmake/modules/           cmake modules
     │
     │─ doc/                     Documentation
+    │
+    │─ scenes/                  Scenes configuration files
     │
     └─
 ```
