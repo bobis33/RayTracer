@@ -9,7 +9,7 @@
 #define RAYTRACER_RENDERER_FACTORY_HPP
 
 #include "RayTracer/Abstraction/ARenderer.hpp"
-#include "RayTracer/PluginLoader.hpp"
+#include "RayTracer/Loader/PluginLoader.hpp"
 
 namespace RayTracer {
 
@@ -17,7 +17,7 @@ namespace RayTracer {
         public:
             static std::unique_ptr<ARenderer> createRenderer(const RendererType &type,
                                                              const std::string &name,
-                                                             const Resolution_t &resolution)
+                                                             const resolution_t &resolution)
             {
                 std::unique_ptr<ARenderer> renderer;
                 switch (type) {

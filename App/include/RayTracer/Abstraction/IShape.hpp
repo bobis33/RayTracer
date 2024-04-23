@@ -12,7 +12,7 @@
 
 #include "RayTracer/Abstraction/AMaterial.hpp"
 #include "RayTracer/Constants.hpp"
-#include "RayTracer/Position.hpp"
+#include "RayTracer/Utils/Vector.hpp"
 
 namespace RayTracer {
 
@@ -27,7 +27,7 @@ namespace RayTracer {
 
             [[nodiscard]] virtual ShapeType getType() const = 0;
             [[nodiscard]] virtual AMaterial* getMaterial() const = 0;
-            [[nodiscard]] virtual Position& getPosition() = 0;
+            [[nodiscard]] virtual Vector& getPosition() = 0;
             [[nodiscard]] virtual float getRadius() const = 0;
 
     }; // IShape

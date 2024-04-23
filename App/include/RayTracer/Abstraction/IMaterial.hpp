@@ -10,7 +10,7 @@
 
 #include <string>
 
-#include "RayTracer/RGBColor.hpp"
+#include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
@@ -27,7 +27,7 @@ namespace RayTracer {
             virtual void setTransparency(const uint8_t &transparency) = 0;
 
             [[nodiscard]] virtual MaterialType getType() const = 0;
-            [[nodiscard]] virtual RGBColor& getColor() = 0;
+            [[nodiscard]] virtual Color& getColor() = 0;
             [[nodiscard]] virtual std::string getName() const = 0;
             [[nodiscard]] virtual float getReflectivity() const = 0;
             [[nodiscard]] virtual float getTransparency() const = 0;

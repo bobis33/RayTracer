@@ -10,7 +10,7 @@
 
 #include <cstdint>
 
-#include "RayTracer/Resolution.hpp"
+#include "RayTracer/Utils/Resolution.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {

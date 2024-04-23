@@ -9,14 +9,14 @@
 #define RAYTRACER_SHAPES_FACTORY_HPP
 
 #include "RayTracer/Abstraction/AShape.hpp"
-#include "RayTracer/PluginLoader.hpp"
+#include "RayTracer/Loader/PluginLoader.hpp"
 
 namespace RayTracer {
 
     class ShapesFactory {
         public:
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
-                                                       const Position_t &position)
+                                                       const vector_t &position)
             {
                 std::unique_ptr<AShape> shape;
 
@@ -34,7 +34,7 @@ namespace RayTracer {
             };
 
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
-                                                       const Position_t &position,
+                                                       const vector_t &position,
                                                        float radius)
             {
                 std::unique_ptr<AShape> shape;

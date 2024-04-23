@@ -9,14 +9,15 @@
 #define RAYTRACER_LIGHTS_FACTORY_HPP
 
 #include "RayTracer/Abstraction/ALight.hpp"
-#include "RayTracer/PluginLoader.hpp"
+#include "RayTracer/Loader/PluginLoader.hpp"
 
 namespace RayTracer {
 
     class RendererFactory {
         public:
             static std::unique_ptr<ALight> createLights(const LightType &type,
-                                                        const Position_t &position)
+                                                         const vector_t &position,
+                                                         const color_t &color)
             {
                 std::unique_ptr<ALight> lights;
                 switch (type) {
@@ -31,6 +32,7 @@ namespace RayTracer {
                 }
                 lights->setType(type);
                 lights->getPosition().setPosition(position);
+                lights->getColor().setColor(color);
                 return lights;
             };
 

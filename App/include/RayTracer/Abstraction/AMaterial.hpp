@@ -24,7 +24,7 @@ namespace RayTracer {
             void setTransparency(const uint8_t &transparency) override { m_transparency = transparency; };
 
             [[nodiscard]] MaterialType getType() const override { return m_type; };
-            [[nodiscard]] RGBColor& getColor() override { return m_color; };
+            [[nodiscard]] Color& getColor() override { return m_color; };
             [[nodiscard]] std::string getName() const override { return m_name; };
             [[nodiscard]] float getReflectivity() const override { return m_reflectivity; };
             [[nodiscard]] float getTransparency() const override { return m_transparency; };
@@ -32,7 +32,7 @@ namespace RayTracer {
         private:
             MaterialType m_type{MaterialType::NONE};
             std::string m_name{"Default Material Name"};
-            RGBColor m_color{RGBColor::getBlack()};
+            Color m_color{Color::getBlack()};
             float m_reflectivity{0.0F};
             float m_transparency{0.0F};
 

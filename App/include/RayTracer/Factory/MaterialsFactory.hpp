@@ -9,14 +9,14 @@
 #define RAYTRACER_MATERIALSFACTORY_HPP
 
 #include "RayTracer/Abstraction/AMaterial.hpp"
-#include "RayTracer/PluginLoader.hpp"
+#include "RayTracer/Loader/PluginLoader.hpp"
 
 namespace RayTracer {
 
     class MaterialsFactory {
         public:
             static std::unique_ptr<AMaterial> createMaterials(const MaterialType &type,
-                                                              const Color_t &color,
+                                                              const color_t &color,
                                                               const std::string &name)
             {
                 std::unique_ptr<AMaterial> material;
