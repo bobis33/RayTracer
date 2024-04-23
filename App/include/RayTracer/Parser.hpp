@@ -23,6 +23,7 @@ namespace RayTracer {
             static std::unique_ptr<RayTracer::Scene> parseFile(const std::string &filePath);
 
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
+            static void parseShapes(const libconfig::Setting &shapesSetting, Scene &scene);
 
             class ParserException : public std::exception
             {

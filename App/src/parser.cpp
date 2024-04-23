@@ -8,6 +8,7 @@
 #include <filesystem>
 
 #include "RayTracer/Parser.hpp"
+#include "../plugins/Shapes/Plane/include/RayTracer/PlaneShape.hpp"
 
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
@@ -27,6 +28,30 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
 }
 
+
+void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
+{
+    for (int i = 0; i < shapesSetting.getLength(); ++i) {
+        const libconfig::Setting &shapeSetting = shapesSetting[i];
+        std::string type = shapeSetting["type"];
+        if (type == "plane") {
+            libconfig::Setting &positionSetting = shapeSetting["position"];
+            libconfig::Setting &normalSetting = shapeSetting["normal"];
+            libconfig::Setting &distanceSetting = shapeSetting["distance"];
+            libconfig::Setting &materialSetting = shapeSetting["material"];
+
+            Vector3D position(positionSetting[0], positionSetting[1], positionSetting[2]);
+            Vector3D normal(normalSetting[0], normalSetting[1], normalSetting[2]);
+            double distance = distanceSetting;
+            std::string material = materialSetting;
+
+            scene.addShape(std::make_unique<RayTracer::PlaneShape>(position, normal, distance, material));
+        } else {
+            throw ParserException{"Invalid shape type"};
+        }
+    }
+}
+
 std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)
 {
     libconfig::Config cfg;
@@ -35,6 +60,7 @@ std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string
         cfg.readFile(filePath.c_str());
         libconfig::Setting& root = cfg.getRoot();
         parseRenderer(root["renderer"], *scene);
+        parseShapes(root["shapes"], *scene);
     } catch (const libconfig::FileIOException &e) {
         throw ParserException{"Error while reading file"};
     } catch (const libconfig::ParseException &e) {
