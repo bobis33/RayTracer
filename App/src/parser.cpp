@@ -12,17 +12,19 @@
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
     const std::string &rendererType = renderer["type"];
+    RendererType type{RendererType::NONE};
     if (rendererType == "sfml") {
-        scene.setRenderer(RendererType::SFML);
+        type = RendererType::SFML;
     } else if (rendererType == "ppm") {
-        scene.setRenderer(RendererType::PPM);
+        type = RendererType::PPM;
     } else {
         throw ParserException{"Invalid renderer type"};
     }
-    scene.getRenderer()->setName(renderer["fileName"]);
+    const std::string &name = renderer["fileName"];
     int width = renderer["width"];
     int height = renderer["height"];
-    scene.getRenderer()->getResolution().setResolution({static_cast<uint16_t>(width), static_cast<uint16_t>(height)});
+    Resolution_t resolution = {static_cast<uint16_t>(width), static_cast<uint16_t>(height)};
+    scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
 }
 
 std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)

@@ -23,7 +23,7 @@ namespace RayTracer {
             ~Scene() = default;
 
             void setCamera(const Camera &camera) { m_camera = camera; };
-            void setRenderer(const RendererType &rendererType) { m_renderer = RendererFactory::createRenderer(rendererType); };
+            void setRenderer(std::unique_ptr<ARenderer> renderer) { m_renderer = std::move(renderer); };
 
             void addShape(std::unique_ptr<AShape> shape) { m_shapes.push_back(std::move(shape)); };
             void addLight(std::unique_ptr<ALight> light) { m_lights.push_back(std::move(light)); };

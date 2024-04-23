@@ -15,7 +15,9 @@ namespace RayTracer {
 
     class RendererFactory {
         public:
-            static std::unique_ptr<ARenderer> createRenderer(const RendererType &type)
+            static std::unique_ptr<ARenderer> createRenderer(const RendererType &type,
+                                                             const std::string &name,
+                                                             const Resolution_t &resolution)
             {
                 std::unique_ptr<ARenderer> renderer;
                 switch (type) {
@@ -29,6 +31,8 @@ namespace RayTracer {
                         throw RunTimeException("Renderer type not found");
                 }
                 renderer->setType(type);
+                renderer->getResolution().setResolution(resolution);
+                renderer->setName(name);
                 return renderer;
             };
 
