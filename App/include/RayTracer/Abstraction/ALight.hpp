@@ -20,8 +20,8 @@ namespace RayTracer {
             void setType(const LightType &type) override { m_type = type; };
 
             [[nodiscard]] LightType getType() const override { return m_type; };
-            [[nodiscard]] Position getPosition() const override { return m_position; };
-            [[nodiscard]] RGBColor getColor() const override { return m_color; }
+            [[nodiscard]] Position& getPosition() override { return m_position; };
+            [[nodiscard]] RGBColor& getColor() override { return m_color; }
 
         private:
             LightType m_type{LightType::NONE};

@@ -16,7 +16,7 @@ namespace RayTracer {
     class RendererFactory {
         public:
             static std::unique_ptr<ALight> createLights(const LightType &type,
-                                                         const Position_t &position)
+                                                        const Position_t &position)
             {
                 std::unique_ptr<ALight> lights;
                 switch (type) {

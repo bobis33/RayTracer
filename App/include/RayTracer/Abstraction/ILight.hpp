@@ -22,8 +22,8 @@ namespace RayTracer {
             virtual void setType(const LightType &type) = 0;
 
             [[nodiscard]] virtual LightType getType() const = 0;
-            [[nodiscard]] virtual Position getPosition() const = 0;
-            [[nodiscard]] virtual RGBColor getColor() const = 0;
+            [[nodiscard]] virtual Position& getPosition() = 0;
+            [[nodiscard]] virtual RGBColor& getColor() = 0;
 
     }; // class ILight
 
