@@ -9,8 +9,8 @@
 #define RAYTRACER_ILIGHT_HPP
 
 #include "RayTracer/Constants.hpp"
-#include "RayTracer/Position.hpp"
-#include "RayTracer/RGBColor.hpp"
+#include "RayTracer/Utils/Vector.hpp"
+#include "RayTracer/Utils/Color.hpp"
 
 namespace RayTracer {
 
@@ -22,8 +22,8 @@ namespace RayTracer {
             virtual void setType(const LightType &type) = 0;
 
             [[nodiscard]] virtual LightType getType() const = 0;
-            [[nodiscard]] virtual Position& getPosition() = 0;
-            [[nodiscard]] virtual RGBColor& getColor() = 0;
+            [[nodiscard]] virtual Vector& getPosition() = 0;
+            [[nodiscard]] virtual Color& getColor() = 0;
 
     }; // class ILight
 

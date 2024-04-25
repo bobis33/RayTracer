@@ -23,13 +23,13 @@ namespace RayTracer {
 
             [[nodiscard]] ShapeType getType() const override { return m_type; };
             [[nodiscard]] AMaterial* getMaterial() const override { return m_material.get(); };
-            [[nodiscard]] Position& getPosition() override { return m_position; };
+            [[nodiscard]] Vector& getPosition() override { return m_position; };
             [[nodiscard]] float getRadius() const override { return m_radius; };
 
         private:
             ShapeType m_type{ShapeType::NONE};
             std::unique_ptr<AMaterial> m_material;
-            Position m_position{0, 0, 0};
+            Vector m_position{0, 0, 0};
             float m_radius{0};
 
     }; // class AShape
