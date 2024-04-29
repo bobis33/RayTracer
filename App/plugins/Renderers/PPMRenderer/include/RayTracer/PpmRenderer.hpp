@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~PpmRenderer() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "PpmRenderer"; };
+
             void render() override;
 
     }; // class PpmRenderer

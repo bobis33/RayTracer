@@ -10,16 +10,16 @@
 
 #include <memory>
 
+#include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Abstraction/AMaterial.hpp"
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 
 namespace RayTracer {
 
-    class IShape {
+    class IShape : public IPlugin {
 
         public:
-            virtual ~IShape() = default;
 
             virtual void setType(const ShapeType& type) = 0;
             virtual void setRadius(float radius) = 0;

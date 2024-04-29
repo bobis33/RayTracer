@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~CylinderShape() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "CylinderShape"; };
+
     }; // class CylinderShape
 
 } // namespace RayTracer

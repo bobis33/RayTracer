@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~SphereShape() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "SphereShape"; };
+
     }; // class SphereShape
 
 } // namespace RayTracer

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** raytracer
+** raytracer | materialsFactory
 ** File description:
 ** MaterialsFactory
 */
@@ -22,7 +22,7 @@ namespace RayTracer {
                 std::unique_ptr<AMaterial> material;
                 switch (type) {
                     case MaterialType::COLOR:
-                        material = PluginLoader::loadPlugin<AMaterial>("./plugins/material_color.so");
+                        material = PluginLoader::getInstance().getPlugin<AMaterial>("FlatColor");
                         break;
                     default:
                         throw RunTimeException("Materials type not found");

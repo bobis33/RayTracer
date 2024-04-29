@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** Raytracer | rendererFactory
+** Raytracer | shapesFactory
 ** File description:
 ** ShapesFactory.hpp
 */
@@ -22,7 +22,7 @@ namespace RayTracer {
 
                 switch (type) {
                 case ShapeType::PLANE:
-                    shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_cone.so");
+                    shape = PluginLoader::getInstance().getPlugin<AShape>("PlaneShape");
                     break;
                 default:
                     throw RunTimeException("Invalid shape type");
@@ -41,13 +41,13 @@ namespace RayTracer {
 
                 switch (type) {
                     case ShapeType::SPHERE:
-                        shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_sphere.so");
+                        shape = PluginLoader::getInstance().getPlugin<AShape>("SphereShape");
                         break;
                     case ShapeType::CYLINDER:
-                        shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_cylinder.so");
+                        shape = PluginLoader::getInstance().getPlugin<AShape>("CylinderShape");
                         break;
                     case ShapeType::CONE:
-                        shape = PluginLoader::loadPlugin<AShape>("./plugins/shape_sphere.so");
+                        shape = PluginLoader::getInstance().getPlugin<AShape>("ConeShape");
                         break;
                     default:
                         throw RunTimeException("Invalid shape type");

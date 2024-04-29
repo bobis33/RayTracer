@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~PointLight() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "PointLight"; };
+
     }; // class PointLight
 
 } // namespace RayTracer

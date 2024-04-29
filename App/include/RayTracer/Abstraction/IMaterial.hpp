@@ -10,16 +10,15 @@
 
 #include <string>
 
+#include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Constants.hpp"
 
-namespace RayTracer {
+namespace RayTracer{
 
-    class IMaterial {
+    class IMaterial : public IPlugin {
 
         public:
-
-            virtual ~IMaterial() = default;
 
             virtual void setType(const MaterialType &type) = 0;
             virtual void setName(const std::string &name) = 0;

@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~DirectionalLight() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "DirectionalLight"; };
+
     }; // class DirectionalLight
 
 } // namespace RayTracer

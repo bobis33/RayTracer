@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~ConeShape() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "ConeShape"; };
+
     }; // class ConeShape
 
 } // namespace RayTracer

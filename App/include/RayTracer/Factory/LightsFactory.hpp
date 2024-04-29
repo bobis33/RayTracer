@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** Raytracer | rendererFactory
+** Raytracer | lightsFactory
 ** File description:
 ** LightsFactory.hpp
 */
@@ -16,16 +16,16 @@ namespace RayTracer {
     class RendererFactory {
         public:
             static std::unique_ptr<ALight> createLights(const LightType &type,
-                                                         const vector_t &position,
-                                                         const color_t &color)
+                                                        const vector_t &position,
+                                                        const color_t &color)
             {
                 std::unique_ptr<ALight> lights;
                 switch (type) {
                     case LightType::AMBIENT:
-                        lights = PluginLoader::loadPlugin<ALight>("./plugins/light_ambient.so");
+                        lights = PluginLoader::getInstance().getPlugin<ALight>("AmbientLight");
                         break;
                     case LightType::DIRECTIONAL:
-                        lights = PluginLoader::loadPlugin<ALight>("./plugins/light_directional.so");
+                        lights = PluginLoader::getInstance().getPlugin<ALight>("DirectionalLight");
                         break;
                     default:
                         throw RunTimeException("Lights type not found");

@@ -22,10 +22,10 @@ namespace RayTracer {
                 std::unique_ptr<ARenderer> renderer;
                 switch (type) {
                     case RendererType::PPM:
-                        renderer = PluginLoader::loadPlugin<ARenderer>("./plugins/renderer_ppm.so");
+                        renderer = PluginLoader::getInstance().getPlugin<ARenderer>("PpmRenderer");
                         break;
                     case RendererType::SFML:
-                        renderer = PluginLoader::loadPlugin<ARenderer>("./plugins/renderer_sfml.so");
+                        renderer = PluginLoader::getInstance().getPlugin<ARenderer>("SfmlRenderer");
                         break;
                     default:
                         throw RunTimeException("Renderer type not found");

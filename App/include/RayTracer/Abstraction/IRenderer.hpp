@@ -10,15 +10,15 @@
 
 #include <cstdint>
 
+#include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Utils/Resolution.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
 
-    class IRenderer {
+    class IRenderer : public IPlugin {
 
         public:
-            virtual ~IRenderer() = default;
 
             virtual void render() = 0;
 
@@ -26,8 +26,8 @@ namespace RayTracer {
             virtual void setName(const std::string &name) = 0;
 
             [[nodiscard]] virtual RendererType getType() const = 0;
-            [[nodiscard]] virtual Resolution& getResolution() = 0;
             [[nodiscard]] virtual std::string getName() const = 0;
+            [[nodiscard]] virtual Resolution& getResolution() = 0;
 
     }; // IRenderer
 

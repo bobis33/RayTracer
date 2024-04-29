@@ -8,16 +8,16 @@
 #ifndef RAYTRACER_ILIGHT_HPP
 #define RAYTRACER_ILIGHT_HPP
 
+#include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 #include "RayTracer/Utils/Color.hpp"
 
 namespace RayTracer {
 
-    class ILight {
+    class ILight : public IPlugin {
 
         public:
-            virtual ~ILight() = default;
 
             virtual void setType(const LightType &type) = 0;
 

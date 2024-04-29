@@ -17,6 +17,8 @@ namespace RayTracer {
         public:
             ~FlatColor() override = default;
 
+            [[nodiscard]] std::string getPluginName() const override { return "FlatColor"; };
+
     }; // class FlatColor
 
 } // namespace RayTracer
