@@ -25,6 +25,7 @@ namespace RayTracer {
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
             static void parseShapes(const libconfig::Setting &shapesSetting, Scene &scene);
 
+            static int16_t getDouble(const libconfig::Setting &setting);
             class ParserException : public std::exception
             {
                 public:

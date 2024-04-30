@@ -8,7 +8,7 @@
 #include <filesystem>
 
 #include "RayTracer/Parser.hpp"
-#include "../plugins/Shapes/Plane/include/RayTracer/PlaneShape.hpp"
+#include "RayTracer/Factory/ShapesFactory.hpp"
 
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
@@ -28,27 +28,35 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
 }
 
+int16_t RayTracer::Parser::getDouble(const libconfig::Setting &setting)
+{
+    if (setting.getType() == libconfig::Setting::Type::TypeInt) {
+        int value = setting;
+        return static_cast<int16_t>(value);
+    } else if (setting.getType() == libconfig::Setting::Type::TypeInt64) {
+        long long value = setting;
+        return static_cast<int16_t>(value);
+    }
+    throw ParserException{"Invalid setting type"};
+}
 
 void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
 {
+    (void)scene;
     for (int i = 0; i < shapesSetting.getLength(); ++i) {
         const libconfig::Setting &shapeSetting = shapesSetting[i];
         std::string type = shapeSetting["type"];
         if (type == "plane") {
             libconfig::Setting &positionSetting = shapeSetting["position"];
-            libconfig::Setting &normalSetting = shapeSetting["normal"];
-            libconfig::Setting &distanceSetting = shapeSetting["distance"];
-            libconfig::Setting &materialSetting = shapeSetting["material"];
-
-            Vector3D position(positionSetting[0], positionSetting[1], positionSetting[2]);
-            Vector3D normal(normalSetting[0], normalSetting[1], normalSetting[2]);
-            double distance = distanceSetting;
-            std::string material = materialSetting;
-
-            scene.addShape(std::make_unique<RayTracer::PlaneShape>(position, normal, distance, material));
+            if (positionSetting.getLength() != 3 || positionSetting.getType() != libconfig::Setting::TypeArray) {
+                throw ParserException{"Invalid shape setting"};
+            }
+            vector_t pos = {getDouble(positionSetting[0]), getDouble(positionSetting[1]), getDouble(positionSetting[2])};
+            scene.addShape(ShapesFactory::createShape(ShapeType::PLANE, pos));
         } else {
             throw ParserException{"Invalid shape type"};
         }
+        std::cout << "Out of Parsing" << std::endl;
     }
 }
 

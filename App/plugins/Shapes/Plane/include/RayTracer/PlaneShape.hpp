@@ -10,7 +10,6 @@
 
 #include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Exceptions/RuntimeException.hpp"
-#include "RayTracer/Utils/Vector3D.hpp"
 
 namespace RayTracer {
 
@@ -25,10 +24,6 @@ namespace RayTracer {
 
             [[nodiscard]] float getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
 
-            Vector3D position;
-            Vector3D normal;
-            double distance;
-            std::string material;
     }; // class PlaneShape
 
 } // namespace RayTracer
