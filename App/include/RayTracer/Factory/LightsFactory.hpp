@@ -22,10 +22,13 @@ namespace RayTracer {
                 std::unique_ptr<ALight> lights;
                 switch (type) {
                     case LightType::AMBIENT:
-                        lights = PluginLoader::getInstance().getPlugin<ALight>("AmbientLight");
+                        lights = PluginLoader::getInstance().getPlugin<ALight>(AMBIENT_LIGHT);
                         break;
                     case LightType::DIRECTIONAL:
-                        lights = PluginLoader::getInstance().getPlugin<ALight>("DirectionalLight");
+                        lights = PluginLoader::getInstance().getPlugin<ALight>(DIRECTIONAL_LIGHT);
+                        break;
+                    case LightType::POINT:
+                        lights = PluginLoader::getInstance().getPlugin<ALight>(POINT_LIGHT);
                         break;
                     default:
                         throw RunTimeException("Lights type not found");

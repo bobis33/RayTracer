@@ -35,7 +35,7 @@ namespace RayTracer {
                 }
                 PluginCreator creator = plugin_iterator->second;
                 if constexpr (std::is_base_of_v<IPlugin, T>) {
-                    return std::unique_ptr<T>(static_cast<T*>(std::move(creator().release())));
+                    return std::unique_ptr<T>(static_cast<T*>(creator().release()));
                 } else {
                     throw RunTimeException("Invalid plugin type");
                 }

@@ -18,7 +18,7 @@ namespace RayTracer {
             SfmlRenderer() = default;
             ~SfmlRenderer() override = default;
 
-            [[nodiscard]] std::string getPluginName() const override { return "SfmlRenderer"; };
+            [[nodiscard]] std::string getPluginName() const override { return SFML_RENDERER; };
 
             void render() override;
 

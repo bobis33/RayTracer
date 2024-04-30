@@ -17,7 +17,7 @@ namespace RayTracer {
         public:
             ~AmbientLight() override = default;
 
-            [[nodiscard]] std::string getPluginName() const override { return "AmbientLight"; };
+            [[nodiscard]] std::string getPluginName() const override { return AMBIENT_LIGHT; };
 
     }; // class AmbientLight
 

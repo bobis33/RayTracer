@@ -22,7 +22,7 @@ namespace RayTracer {
 
                 switch (type) {
                 case ShapeType::PLANE:
-                    shape = PluginLoader::getInstance().getPlugin<AShape>("PlaneShape");
+                    shape = PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE);
                     break;
                 default:
                     throw RunTimeException("Invalid shape type");
@@ -41,13 +41,13 @@ namespace RayTracer {
 
                 switch (type) {
                     case ShapeType::SPHERE:
-                        shape = PluginLoader::getInstance().getPlugin<AShape>("SphereShape");
+                        shape = PluginLoader::getInstance().getPlugin<AShape>(SPHERE_SHAPE);
                         break;
                     case ShapeType::CYLINDER:
-                        shape = PluginLoader::getInstance().getPlugin<AShape>("CylinderShape");
+                        shape = PluginLoader::getInstance().getPlugin<AShape>(CYLINDER_SHAPE);
                         break;
                     case ShapeType::CONE:
-                        shape = PluginLoader::getInstance().getPlugin<AShape>("ConeShape");
+                        shape = PluginLoader::getInstance().getPlugin<AShape>(CONE_SHAPE);
                         break;
                     default:
                         throw RunTimeException("Invalid shape type");
