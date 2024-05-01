@@ -13,7 +13,7 @@
 
 namespace RayTracer {
 
-    class RendererFactory {
+    class LightsFactory {
         public:
             static std::unique_ptr<ALight> createLights(const LightType &type,
                                                         const Vector &position,
