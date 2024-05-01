@@ -16,7 +16,7 @@ namespace RayTracer {
     class ShapesFactory {
         public:
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
-                                                       const vector_t &position)
+                                                       const Vector &position)
             {
                 std::unique_ptr<AShape> shape;
 
@@ -29,12 +29,12 @@ namespace RayTracer {
                 }
 
                 shape->setType(type);
-                shape->getPosition().setPosition(position);
+                shape->getPosition().setPosition(position.getValue());
                 return shape;
             };
 
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
-                                                       const vector_t &position,
+                                                       const Vector &position,
                                                        int16_t radius)
             {
                 std::unique_ptr<AShape> shape;
@@ -54,7 +54,7 @@ namespace RayTracer {
                 }
 
                 shape->setType(type);
-                shape->getPosition().setPosition(position);
+                shape->getPosition().setPosition(position.getValue());
                 shape->setRadius(radius);
                 return shape;
             };
