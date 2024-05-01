@@ -7,6 +7,7 @@
 
 #include <filesystem>
 
+#include "RayTracer/Factory/LightsFactory.hpp"
 #include "RayTracer/Factory/ShapesFactory.hpp"
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Scene/Camera.hpp"
@@ -20,6 +21,17 @@ T RayTracer::Parser::convertInt(const libconfig::Setting &setting)
     }
     throw ParserException{"Invalid setting type"};
 }
+
+RayTracer::Vector RayTracer::Parser::getVector(const libconfig::Setting &positionSettings)
+{
+    if (positionSettings.getLength() != 3 || positionSettings.getType() != libconfig::Setting::TypeArray) {
+        throw ParserException{"Invalid position settings: Wrong amount of values or wrong type"};
+    }
+    Vector position(convertInt<int16_t>(positionSettings[0]), convertInt<int16_t>(positionSettings[1]), convertInt<int16_t>(positionSettings[2]));
+
+    return position;
+}
+
 
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
@@ -51,7 +63,6 @@ void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &sce
     if (cameraFov.getType() != libconfig::Setting::TypeInt) {
         throw ParserException{"Invalid camera settings: Wrong fov type"};
     }
-
     Vector origin = {convertInt<int16_t>(camera["origin"][0]), convertInt<int16_t>(camera["origin"][1]), convertInt<int16_t>(camera["origin"][2])};
     Vector direction = {convertInt<int16_t>(camera["lookAt"][0]), convertInt<int16_t>(camera["lookAt"][1]), convertInt<int16_t>(camera["lookAt"][2])};
     Vector up = {convertInt<int16_t>(camera["up"][0]), convertInt<int16_t>(camera["up"][1]), convertInt<int16_t>(camera["up"][2])};
@@ -62,30 +73,53 @@ void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &sce
 
 void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
 {
-    for (int i = 0; i < shapesSetting.getLength(); ++i) {
+    for (int i = 0; i < shapesSetting.getLength(); i++) {
         const libconfig::Setting &shapeSetting = shapesSetting[i];
         std::string type = shapeSetting["type"];
-        libconfig::Setting &positionSetting = shapeSetting["position"];
-        if (positionSetting.getLength() != 3 || positionSetting.getType() != libconfig::Setting::TypeArray) {
-            throw ParserException{"Invalid shape settings: Wrong amount of position values or wrong type"};
-        }
-        vector_t pos = {convertInt<int16_t>(positionSetting[0]), convertInt<int16_t>(positionSetting[1]), convertInt<int16_t>(positionSetting[2])};
+        Vector position = getVector(shapeSetting["position"]);
+        libconfig::Setting &materialSetting = shapeSetting["material"];
+        Color color = {convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2])};
+        // float reflection = materialSetting["reflectivity"];
+        // float transparency = materialSetting["transparency"];
 
         if (type == "plane") {
-            scene.addShape(ShapesFactory::createShape(ShapeType::PLANE, pos));
-
+            scene.addShape(ShapesFactory::createShape(ShapeType::PLANE, position));
         } else if (type == "sphere" || type == "cylinder" || type == "cone") {
             libconfig::Setting &radiusSetting = shapeSetting["radius"];
             int16_t radius = convertInt<int16_t>(radiusSetting);
             if (type == "sphere") {
-                scene.addShape(ShapesFactory::createShape(ShapeType::SPHERE, pos, radius));
+                scene.addShape(ShapesFactory::createShape(ShapeType::SPHERE, position, radius));
             } else if (type == "cylinder") {
-                scene.addShape(ShapesFactory::createShape(ShapeType::CYLINDER, pos, radius));
+                // Vector rotation = getVector(shapeSetting["rotation"]);
+                scene.addShape(ShapesFactory::createShape(ShapeType::CYLINDER, position, radius));
             } else if (type == "cone") {
-                scene.addShape(ShapesFactory::createShape(ShapeType::CONE, pos, radius));
+                // Vector rotation = getVector(shapeSetting["rotation"]);
+                scene.addShape(ShapesFactory::createShape(ShapeType::CONE, position, radius));
             }
         } else {
             throw ParserException{"Invalid shape type"};
+        }
+    }
+}
+
+void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &scene)
+{
+    for (int i = 0; i < lightsSetting.getLength(); i++) {
+        const libconfig::Setting &Light = lightsSetting[i];
+        std::string type = Light["type"];
+        Vector position = getVector(Light["position"]);
+        Color color = {convertInt<uint8_t>(Light["color"][0]), convertInt<uint8_t>(Light["color"][1]), convertInt<uint8_t>(Light["color"][2])};
+        // float intensity = Light["intensity"];
+
+        if (type == "point") {
+            scene.addLight(LightsFactory::createLights(LightType::POINT, position, color));
+        } else if (type == "ambient") {
+            scene.addLight(LightsFactory::createLights(LightType::AMBIENT, position, color));
+        } else if (type == "directional") {
+            // Vector dir = getVector(Light["direction"]);
+            scene.addLight(LightsFactory::createLights(LightType::DIRECTIONAL, position, color));
+        } else {
+            throw ParserException{"Invalid light type"};
         }
     }
 }
@@ -100,6 +134,7 @@ std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string
         parseRenderer(root["renderer"], *scene);
         parseCamera(root["camera"], *scene);
         parseShapes(root["shapes"], *scene);
+        parseLights(root["lights"], *scene);
     } catch (const libconfig::FileIOException &e) {
         throw ParserException{"Error while reading file"};
     } catch (const libconfig::ParseException &e) {
