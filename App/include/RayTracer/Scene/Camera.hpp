@@ -16,7 +16,7 @@ namespace RayTracer {
         public:
             Camera() = default;
             ~Camera() = default;
-            Camera(uint8_t fov, Vector position, Vector direction, Vector up)
+            Camera(uint16_t fov, Vector position, Vector direction, Vector up)
                 : m_fov(fov), m_position(position), m_direction(direction), m_up(up) {};
 
             void setFov(const uint16_t &fov) { m_fov = fov; };

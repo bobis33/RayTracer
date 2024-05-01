@@ -7,8 +7,19 @@
 
 #include <filesystem>
 
-#include "RayTracer/Parser.hpp"
 #include "RayTracer/Factory/ShapesFactory.hpp"
+#include "RayTracer/Parser.hpp"
+#include "RayTracer/Scene/Camera.hpp"
+
+template<typename T>
+T RayTracer::Parser::convertInt(const libconfig::Setting &setting)
+{
+    if (setting.getType() == libconfig::Setting::Type::TypeInt) {
+        int value = setting;
+        return static_cast<T>(value);
+    }
+    throw ParserException{"Invalid setting type"};
+}
 
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
@@ -28,16 +39,25 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
 }
 
-int16_t RayTracer::Parser::getShort(const libconfig::Setting &setting)
+void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &scene)
 {
-    if (setting.getType() == libconfig::Setting::Type::TypeInt) {
-        int value = setting;
-        return static_cast<int16_t>(value);
-    } else if (setting.getType() == libconfig::Setting::Type::TypeInt64) {
-        long long value = setting;
-        return static_cast<int16_t>(value);
+    const libconfig::Setting &cameraFov = camera["fov"];
+    std::vector<libconfig::Setting *> settings = {&camera["origin"], &camera["lookAt"], &camera["up"]};
+    for (const auto &setting : settings) {
+        if (setting->getLength() != 3 || setting->getType() != libconfig::Setting::TypeArray) {
+            throw ParserException{"Invalid camera settings: Wrong amount of values or wrong type"};
+        }
     }
-    throw ParserException{"Invalid setting type"};
+    if (cameraFov.getType() != libconfig::Setting::TypeInt) {
+        throw ParserException{"Invalid camera settings: Wrong fov type"};
+    }
+
+    Vector origin = {convertInt<int16_t>(camera["origin"][0]), convertInt<int16_t>(camera["origin"][1]), convertInt<int16_t>(camera["origin"][2])};
+    Vector direction = {convertInt<int16_t>(camera["lookAt"][0]), convertInt<int16_t>(camera["lookAt"][1]), convertInt<int16_t>(camera["lookAt"][2])};
+    Vector up = {convertInt<int16_t>(camera["up"][0]), convertInt<int16_t>(camera["up"][1]), convertInt<int16_t>(camera["up"][2])};
+    uint16_t fov = convertInt<uint16_t>(cameraFov);
+
+    scene.setCamera(Camera(fov, origin, direction, up));
 }
 
 void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
@@ -49,14 +69,14 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
         if (positionSetting.getLength() != 3 || positionSetting.getType() != libconfig::Setting::TypeArray) {
             throw ParserException{"Invalid shape settings: Wrong amount of position values or wrong type"};
         }
-        vector_t pos = {getShort(positionSetting[0]), getShort(positionSetting[1]), getShort(positionSetting[2])};
+        vector_t pos = {convertInt<int16_t>(positionSetting[0]), convertInt<int16_t>(positionSetting[1]), convertInt<int16_t>(positionSetting[2])};
 
         if (type == "plane") {
             scene.addShape(ShapesFactory::createShape(ShapeType::PLANE, pos));
 
         } else if (type == "sphere" || type == "cylinder" || type == "cone") {
             libconfig::Setting &radiusSetting = shapeSetting["radius"];
-            int16_t radius = getShort(radiusSetting);
+            int16_t radius = convertInt<int16_t>(radiusSetting);
             if (type == "sphere") {
                 scene.addShape(ShapesFactory::createShape(ShapeType::SPHERE, pos, radius));
             } else if (type == "cylinder") {
@@ -78,6 +98,7 @@ std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string
         cfg.readFile(filePath.c_str());
         libconfig::Setting& root = cfg.getRoot();
         parseRenderer(root["renderer"], *scene);
+        parseCamera(root["camera"], *scene);
         parseShapes(root["shapes"], *scene);
     } catch (const libconfig::FileIOException &e) {
         throw ParserException{"Error while reading file"};

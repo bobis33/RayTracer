@@ -23,9 +23,11 @@ namespace RayTracer {
             static std::unique_ptr<RayTracer::Scene> parseFile(const std::string &filePath);
 
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
+            static void parseCamera(const libconfig::Setting &camera, Scene &scene);
             static void parseShapes(const libconfig::Setting &shapesSetting, Scene &scene);
 
-            static int16_t getShort(const libconfig::Setting &setting);
+            template<typename T>
+            static T convertInt(const libconfig::Setting &setting);
             class ParserException : public std::exception
             {
                 public:
