@@ -20,9 +20,9 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return PLANE_SHAPE; };
 
-            void setRadius(float radius) override { (void) radius; throw RunTimeException("Plane shape does not have a radius");};
+            void setRadius(int16_t radius) override { (void) radius; throw RunTimeException("Plane shape does not have a radius");};
 
-            [[nodiscard]] float getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
+            [[nodiscard]] int16_t getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
 
     }; // class PlaneShape
 

@@ -35,7 +35,7 @@ namespace RayTracer {
 
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
                                                        const vector_t &position,
-                                                       float radius)
+                                                       int16_t radius)
             {
                 std::unique_ptr<AShape> shape;
 

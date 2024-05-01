@@ -18,19 +18,19 @@ namespace RayTracer {
             ~AShape() override = default;
 
             void setType(const ShapeType &type) override { m_type = type; };
-            void setRadius(float radius) override { m_radius = radius; };
+            void setRadius(int16_t radius) override { m_radius = radius; };
             void setMaterial(std::unique_ptr<AMaterial> material) override { m_material = std::move(material); };
 
             [[nodiscard]] ShapeType getType() const override { return m_type; };
             [[nodiscard]] AMaterial* getMaterial() const override { return m_material.get(); };
             [[nodiscard]] Vector& getPosition() override { return m_position; };
-            [[nodiscard]] float getRadius() const override { return m_radius; };
+            [[nodiscard]] int16_t getRadius() const override { return m_radius; };
 
         private:
             ShapeType m_type{ShapeType::NONE};
             std::unique_ptr<AMaterial> m_material;
             Vector m_position{0, 0, 0};
-            float m_radius{0};
+            int16_t m_radius{0};
 
     }; // class AShape
 
