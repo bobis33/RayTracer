@@ -9,18 +9,16 @@
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Exceptions/RuntimeException.hpp"
 
-static constexpr char const * USAGE_MSG = "USAGE\n"
-                                          "\t./raytracer <SCENE_FILE>\n"
-                                          "SCENE_FILE\n"
-                                          "\tscene configuration";
-
 using namespace RayTracer;
 
 int main(int argc, const char * argv[])
 {
     try {
         if (argc != 2) {
-            throw Parser::ParserException{USAGE_MSG};
+            throw Parser::ParserException{"USAGE\n"
+                                          "\t./raytracer <SCENE_FILE>\n"
+                                          "SCENE_FILE\n"
+                                          "\tscene configuration"};
         } if (Parser::parseArgs(argv[1]) == ERROR) {
             return SUCCESS;
         }
@@ -35,7 +33,7 @@ int main(int argc, const char * argv[])
         std::cerr << "Runtime exception: " << e.what() << '\n';
         return EPITECH_ERROR;
     } catch (...) {
-        std::cerr <<"Unknow error"<< '\n';
+        std::cerr <<"Unknown error"<< '\n';
         return EPITECH_ERROR;
     }
 }

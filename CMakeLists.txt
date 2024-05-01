@@ -33,8 +33,12 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/main.cpp
-        ${SRC_DIR}/parser.cpp
         ${SRC_DIR}/core.cpp
+        ${SRC_DIR}/Parser/parser.cpp
+        ${SRC_DIR}/Parser/camera.cpp
+        ${SRC_DIR}/Parser/light.cpp
+        ${SRC_DIR}/Parser/renderer.cpp
+        ${SRC_DIR}/Parser/shape.cpp
         ${SRC_DIR}/Factory/lightsFactory.cpp
         ${SRC_DIR}/Factory/materialsFactory.cpp
         ${SRC_DIR}/Factory/renderersFactory.cpp
