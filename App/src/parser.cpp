@@ -28,7 +28,7 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
 }
 
-int16_t RayTracer::Parser::getDouble(const libconfig::Setting &setting)
+int16_t RayTracer::Parser::getShort(const libconfig::Setting &setting)
 {
     if (setting.getType() == libconfig::Setting::Type::TypeInt) {
         int value = setting;
@@ -42,21 +42,31 @@ int16_t RayTracer::Parser::getDouble(const libconfig::Setting &setting)
 
 void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
 {
-    (void)scene;
     for (int i = 0; i < shapesSetting.getLength(); ++i) {
         const libconfig::Setting &shapeSetting = shapesSetting[i];
         std::string type = shapeSetting["type"];
+        libconfig::Setting &positionSetting = shapeSetting["position"];
+        if (positionSetting.getLength() != 3 || positionSetting.getType() != libconfig::Setting::TypeArray) {
+            throw ParserException{"Invalid shape settings: Wrong amount of position values or wrong type"};
+        }
+        vector_t pos = {getShort(positionSetting[0]), getShort(positionSetting[1]), getShort(positionSetting[2])};
+
         if (type == "plane") {
-            libconfig::Setting &positionSetting = shapeSetting["position"];
-            if (positionSetting.getLength() != 3 || positionSetting.getType() != libconfig::Setting::TypeArray) {
-                throw ParserException{"Invalid shape setting"};
-            }
-            vector_t pos = {getDouble(positionSetting[0]), getDouble(positionSetting[1]), getDouble(positionSetting[2])};
             scene.addShape(ShapesFactory::createShape(ShapeType::PLANE, pos));
+
+        } else if (type == "sphere" || type == "cylinder" || type == "cone") {
+            libconfig::Setting &radiusSetting = shapeSetting["radius"];
+            int16_t radius = getShort(radiusSetting);
+            if (type == "sphere") {
+                scene.addShape(ShapesFactory::createShape(ShapeType::SPHERE, pos, radius));
+            } else if (type == "cylinder") {
+                scene.addShape(ShapesFactory::createShape(ShapeType::CYLINDER, pos, radius));
+            } else if (type == "cone") {
+                scene.addShape(ShapesFactory::createShape(ShapeType::CONE, pos, radius));
+            }
         } else {
             throw ParserException{"Invalid shape type"};
         }
-        std::cout << "Out of Parsing" << std::endl;
     }
 }
 
