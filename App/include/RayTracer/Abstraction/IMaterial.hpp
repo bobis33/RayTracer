@@ -21,13 +21,11 @@ namespace RayTracer{
         public:
 
             virtual void setType(const MaterialType &type) = 0;
-            virtual void setName(const std::string &name) = 0;
             virtual void setReflectivity(const uint8_t &reflectivity) = 0;
             virtual void setTransparency(const uint8_t &transparency) = 0;
 
             [[nodiscard]] virtual MaterialType getType() const = 0;
             [[nodiscard]] virtual Color& getColor() = 0;
-            [[nodiscard]] virtual std::string getName() const = 0;
             [[nodiscard]] virtual float getReflectivity() const = 0;
             [[nodiscard]] virtual float getTransparency() const = 0;
 

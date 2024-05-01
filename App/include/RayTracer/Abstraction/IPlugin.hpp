@@ -15,6 +15,7 @@ namespace RayTracer {
     class IPlugin {
 
         public:
+
             virtual ~IPlugin() = default;
 
             [[nodiscard]] virtual std::string getPluginName() const = 0;

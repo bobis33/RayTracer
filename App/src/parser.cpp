@@ -19,7 +19,7 @@ T RayTracer::Parser::convertInt(const libconfig::Setting &setting)
         int value = setting;
         return static_cast<T>(value);
     }
-    throw ParserException{"Invalid setting type"};
+    throw ParserException{"Invalid setting type (Integer)"};
 }
 
 RayTracer::Vector RayTracer::Parser::getVector(const libconfig::Setting &positionSettings)
@@ -27,16 +27,15 @@ RayTracer::Vector RayTracer::Parser::getVector(const libconfig::Setting &positio
     if (positionSettings.getLength() != 3 || positionSettings.getType() != libconfig::Setting::TypeArray) {
         throw ParserException{"Invalid position settings: Wrong amount of values or wrong type"};
     }
-    Vector position(convertInt<int16_t>(positionSettings[0]), convertInt<int16_t>(positionSettings[1]), convertInt<int16_t>(positionSettings[2]));
 
-    return position;
+    return {convertInt<int16_t>(positionSettings[0]), convertInt<int16_t>(positionSettings[1]), convertInt<int16_t>(positionSettings[2])};
 }
 
 
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
     const std::string &rendererType = renderer["type"];
-    RendererType type{RendererType::NONE};
+    RendererType type(RendererType::NONE);
     if (rendererType == "sfml") {
         type = RendererType::SFML;
     } else if (rendererType == "ppm") {
@@ -44,11 +43,9 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     } else {
         throw ParserException{"Invalid renderer type"};
     }
-    const std::string &name = renderer["fileName"];
     int width = renderer["width"];
     int height = renderer["height"];
-    resolution_t resolution = {static_cast<uint16_t>(width), static_cast<uint16_t>(height)};
-    scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
+    scene.setRenderer(RenderersFactory::createRenderer(type, renderer["fileName"], Resolution(static_cast<uint16_t>(width), static_cast<uint16_t>(height))));
 }
 
 void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &scene)
@@ -63,22 +60,21 @@ void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &sce
     if (cameraFov.getType() != libconfig::Setting::TypeInt) {
         throw ParserException{"Invalid camera settings: Wrong fov type"};
     }
-    Vector origin = {convertInt<int16_t>(camera["origin"][0]), convertInt<int16_t>(camera["origin"][1]), convertInt<int16_t>(camera["origin"][2])};
-    Vector direction = {convertInt<int16_t>(camera["lookAt"][0]), convertInt<int16_t>(camera["lookAt"][1]), convertInt<int16_t>(camera["lookAt"][2])};
-    Vector up = {convertInt<int16_t>(camera["up"][0]), convertInt<int16_t>(camera["up"][1]), convertInt<int16_t>(camera["up"][2])};
-    uint16_t fov = convertInt<uint16_t>(cameraFov);
+    Vector origin(convertInt<int16_t>(camera["origin"][0]), convertInt<int16_t>(camera["origin"][1]), convertInt<int16_t>(camera["origin"][2]));
+    Vector direction(convertInt<int16_t>(camera["lookAt"][0]), convertInt<int16_t>(camera["lookAt"][1]), convertInt<int16_t>(camera["lookAt"][2]));
+    Vector up(convertInt<int16_t>(camera["up"][0]), convertInt<int16_t>(camera["up"][1]), convertInt<int16_t>(camera["up"][2]));
 
-    scene.setCamera(Camera(fov, origin, direction, up));
+    scene.setCamera(Camera(convertInt<uint16_t>(cameraFov), origin, direction, up));
 }
 
 void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
 {
     for (int i = 0; i < shapesSetting.getLength(); i++) {
         const libconfig::Setting &shapeSetting = shapesSetting[i];
-        std::string type = shapeSetting["type"];
-        Vector position = getVector(shapeSetting["position"]);
         libconfig::Setting &materialSetting = shapeSetting["material"];
-        Color color = {convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2])};
+        std::string type = shapeSetting["type"];
+        Vector position(getVector(shapeSetting["position"]));
+        Color color(convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2]));
         // float reflection = materialSetting["reflectivity"];
         // float transparency = materialSetting["transparency"];
 
@@ -107,8 +103,8 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
     for (int i = 0; i < lightsSetting.getLength(); i++) {
         const libconfig::Setting &Light = lightsSetting[i];
         std::string type = Light["type"];
-        Vector position = getVector(Light["position"]);
-        Color color = {convertInt<uint8_t>(Light["color"][0]), convertInt<uint8_t>(Light["color"][1]), convertInt<uint8_t>(Light["color"][2])};
+        Vector position(getVector(Light["position"]));
+        Color color(convertInt<uint8_t>(Light["color"][0]), convertInt<uint8_t>(Light["color"][1]), convertInt<uint8_t>(Light["color"][2]));
         // float intensity = Light["intensity"];
 
         if (type == "point") {
@@ -116,7 +112,7 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
         } else if (type == "ambient") {
             scene.addLight(LightsFactory::createLights(LightType::AMBIENT, position, color));
         } else if (type == "directional") {
-            // Vector dir = getVector(Light["direction"]);
+            // Vector direction(getVector(Light["direction"]));
             scene.addLight(LightsFactory::createLights(LightType::DIRECTIONAL, position, color));
         } else {
             throw ParserException{"Invalid light type"};

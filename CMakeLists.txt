@@ -35,6 +35,10 @@ target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/main.cpp
         ${SRC_DIR}/parser.cpp
         ${SRC_DIR}/core.cpp
+        ${SRC_DIR}/Factory/lightsFactory.cpp
+        ${SRC_DIR}/Factory/materialsFactory.cpp
+        ${SRC_DIR}/Factory/renderersFactory.cpp
+        ${SRC_DIR}/Factory/shapesFactory.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR})

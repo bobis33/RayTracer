@@ -14,28 +14,11 @@
 namespace RayTracer {
 
     class MaterialsFactory {
+
         public:
+
             static std::unique_ptr<AMaterial> createMaterials(const MaterialType &type,
-                                                              const Color &color,
-                                                              const std::string &name)
-            {
-                std::unique_ptr<AMaterial> material;
-                switch (type) {
-                    case MaterialType::COLOR:
-                        material = PluginLoader::getInstance().getPlugin<AMaterial>(COLOR_MATERIAL);
-                        break;
-                    default:
-                        throw RunTimeException("Materials type not found");
-                }
-                material->setType(type);
-                material->getColor().setColor(color.getValue());
-                material->setName(name);
-                return material;
-            };
-
-
-        private:
-
+                                                              const Color &color);
 
     }; // class MaterialsFactory
 
