@@ -19,8 +19,8 @@ namespace RayTracer {
             ~AMaterial() override = default;
 
             void setType(const MaterialType &type) override { m_type = type; };
-            void setReflectivity(const uint8_t &reflectivity) override { m_reflectivity = reflectivity; };
-            void setTransparency(const uint8_t &transparency) override { m_transparency = transparency; };
+            void setReflectivity(const float &reflectivity) override { m_reflectivity = reflectivity; };
+            void setTransparency(const float &transparency) override { m_transparency = transparency; };
 
             [[nodiscard]] MaterialType getType() const override { return m_type; };
             [[nodiscard]] Color& getColor() override { return m_color; };
