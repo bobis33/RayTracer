@@ -23,6 +23,20 @@ namespace RayTracer {
             static std::unique_ptr<RayTracer::Scene> parseFile(const std::string &filePath);
 
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
+            static void parseCamera(const libconfig::Setting &camera, Scene &scene);
+            static void parseShapes(const libconfig::Setting &shapesSetting, Scene &scene);
+            static void parseLights(const libconfig::Setting &lightsSetting, Scene &scene);
+
+            static Vector getVector(const libconfig::Setting &setting);
+
+            template<typename T>
+            static T convertInt(const libconfig::Setting &setting) {
+                if (setting.getType() == libconfig::Setting::Type::TypeInt) {
+                    int value = setting;
+                    return static_cast<T>(value);
+                }
+                throw ParserException{"Invalid setting type (Integer)"};
+            }
 
             class ParserException : public std::exception
             {

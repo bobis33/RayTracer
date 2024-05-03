@@ -13,7 +13,7 @@
 #include "RayTracer/Scene/Camera.hpp"
 #include "RayTracer/Abstraction/ALight.hpp"
 #include "RayTracer/Abstraction/AShape.hpp"
-#include "RayTracer/Factory/RendererFactory.hpp"
+#include "RayTracer/Factory/RenderersFactory.hpp"
 
 namespace RayTracer {
 

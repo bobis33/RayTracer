@@ -7,24 +7,17 @@
 
 #include <filesystem>
 
+#include "RayTracer/Factory/LightsFactory.hpp"
 #include "RayTracer/Parser.hpp"
+#include "RayTracer/Scene/Camera.hpp"
 
-void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
+RayTracer::Vector RayTracer::Parser::getVector(const libconfig::Setting &positionSettings)
 {
-    const std::string &rendererType = renderer["type"];
-    RendererType type{RendererType::NONE};
-    if (rendererType == "sfml") {
-        type = RendererType::SFML;
-    } else if (rendererType == "ppm") {
-        type = RendererType::PPM;
-    } else {
-        throw ParserException{"Invalid renderer type"};
+    if (positionSettings.getLength() != 3 || positionSettings.getType() != libconfig::Setting::TypeArray) {
+        throw ParserException{"Invalid position settings: Wrong amount of values or wrong type"};
     }
-    const std::string &name = renderer["fileName"];
-    int width = renderer["width"];
-    int height = renderer["height"];
-    resolution_t resolution = {static_cast<uint16_t>(width), static_cast<uint16_t>(height)};
-    scene.setRenderer(RendererFactory::createRenderer(type, name, resolution));
+
+    return {convertInt<int16_t>(positionSettings[0]), convertInt<int16_t>(positionSettings[1]), convertInt<int16_t>(positionSettings[2])};
 }
 
 std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)
@@ -35,6 +28,9 @@ std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string
         cfg.readFile(filePath.c_str());
         libconfig::Setting& root = cfg.getRoot();
         parseRenderer(root["renderer"], *scene);
+        parseCamera(root["camera"], *scene);
+        parseShapes(root["shapes"], *scene);
+        parseLights(root["lights"], *scene);
     } catch (const libconfig::FileIOException &e) {
         throw ParserException{"Error while reading file"};
     } catch (const libconfig::ParseException &e) {

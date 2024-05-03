@@ -13,31 +13,12 @@
 
 namespace RayTracer {
 
-    class RendererFactory {
+    class LightsFactory {
+
         public:
             static std::unique_ptr<ALight> createLights(const LightType &type,
-                                                        const vector_t &position,
-                                                        const color_t &color)
-            {
-                std::unique_ptr<ALight> lights;
-                switch (type) {
-                    case LightType::AMBIENT:
-                        lights = PluginLoader::getInstance().getPlugin<ALight>(AMBIENT_LIGHT);
-                        break;
-                    case LightType::DIRECTIONAL:
-                        lights = PluginLoader::getInstance().getPlugin<ALight>(DIRECTIONAL_LIGHT);
-                        break;
-                    case LightType::POINT:
-                        lights = PluginLoader::getInstance().getPlugin<ALight>(POINT_LIGHT);
-                        break;
-                    default:
-                        throw RunTimeException("Lights type not found");
-                }
-                lights->setType(type);
-                lights->getPosition().setPosition(position);
-                lights->getColor().setColor(color);
-                return lights;
-            };
+                                                        const Vector &position,
+                                                        const Color &color);
 
     }; // class LightsFactory
 
