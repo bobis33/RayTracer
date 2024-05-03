@@ -9,8 +9,10 @@
 #define RAYTRACER_IRENDERER_HPP
 
 #include <cstdint>
+#include <vector>
 
 #include "RayTracer/Abstraction/IPlugin.hpp"
+#include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Utils/Resolution.hpp"
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Constants.hpp"
@@ -21,7 +23,7 @@ namespace RayTracer {
 
         public:
 
-            virtual void render() = 0;
+            virtual void render(const std::vector<std::unique_ptr<AShape>> &shapes) = 0;
 
             virtual void setType(const RendererType &rendererType) = 0;
             virtual void setName(const std::string &name) = 0;

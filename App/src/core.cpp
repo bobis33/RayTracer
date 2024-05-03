@@ -9,5 +9,7 @@
 
 void RayTracer::Core::runRayTracer(const Scene &scene)
 {
-    scene.getRenderer()->render();
+    ARenderer& renderer = *scene.getRenderer();
+
+    renderer.render(scene.getShapes());
 }

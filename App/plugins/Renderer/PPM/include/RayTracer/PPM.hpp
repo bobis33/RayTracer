@@ -8,6 +8,9 @@
 #ifndef RAYTRACER_PPM_RENDERER_HPP
 #define RAYTRACER_PPM_RENDERER_HPP
 
+#include <vector>
+
+#include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Abstraction/ARenderer.hpp"
 
 namespace RayTracer {
@@ -19,7 +22,7 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return PPM_RENDERER; };
 
-            void render() override;
+            void render(const std::vector<std::unique_ptr<AShape>>& shapes) override;
 
     }; // class PPM
 

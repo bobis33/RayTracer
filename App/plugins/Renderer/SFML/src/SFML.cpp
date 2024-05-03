@@ -10,9 +10,9 @@
 
 #include "RayTracer/SFML.hpp"
 
-void RayTracer::SFML::render()
+void RayTracer::SFML::render(const std::vector<std::unique_ptr<AShape>> &shapes)
 {
-
+    (void) shapes;
     sf::RenderWindow window(sf::VideoMode(getResolution().getWidth(), getResolution().getWidth()), getName());
 
     while (window.isOpen()) {
