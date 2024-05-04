@@ -1,2 +1,2 @@
-add_subdirectory(PPMRenderer)
-add_subdirectory(SFMLRenderer)
+add_subdirectory(PPM)
+add_subdirectory(SFML)
