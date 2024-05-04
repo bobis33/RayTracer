@@ -18,7 +18,7 @@ namespace RayTracer {
         public:
 
             static std::unique_ptr<AMaterial> createMaterials(const MaterialType &type,
-                                                              const Color &color);
+                                                              const float &floatValue);
 
     }; // class MaterialsFactory
 

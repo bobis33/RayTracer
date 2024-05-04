@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** raytracer
 ** File description:
-** CompositeMaterial
+** CompositeMaterial.hpp
 */
 
 #ifndef RAYTRACER_COMPOSITE_MATERIAL_HPP
@@ -19,21 +19,21 @@ namespace RayTracer {
 
         public:
 
-            CompositeMaterial() = default;
-            ~CompositeMaterial() = default;
+            ~CompositeMaterial() override = default;
+
+            [[nodiscard]] std::string getPluginName() const override { return COMPOSITE_MATERIAL; };
 
             void addMaterial(std::unique_ptr<AMaterial> material) { m_materials.push_back(std::move(material)); };
 
-            /*
-                void doSomething() {
-                for (auto &material : m_materials) {
-                    material->doSomething();
+            void applyMaterial(Color* color) override {
+                for (const auto& material : m_materials) {
+                    material->applyMaterial(color);
                 }
-             */
+                this->getMaterial().setColor(color->getValue());
+            }
 
         private:
             std::vector<std::unique_ptr<AMaterial>> m_materials;
-
 
     }; // class CompositeMaterial
 

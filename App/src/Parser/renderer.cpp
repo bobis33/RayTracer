@@ -10,6 +10,7 @@
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
     const std::string &rendererType = renderer["type"];
+    const libconfig::Setting &resolution = renderer["resolution"];
     RendererType type(RendererType::NONE);
     if (rendererType == "sfml") {
         type = RendererType::SFML;
@@ -18,7 +19,8 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     } else {
         throw ParserException{"Invalid renderer type"};
     }
-    int width = renderer["width"];
-    int height = renderer["height"];
-    scene.setRenderer(RenderersFactory::createRenderer(type, renderer["fileName"], Resolution(static_cast<uint16_t>(width), static_cast<uint16_t>(height))));
+    scene.setRenderer(RenderersFactory::createRenderer(type,
+                                                       renderer["name"],
+                                                       Resolution(convertInt<uint16_t>(resolution[0]),
+                                                                  convertInt<uint16_t>(resolution[1]))));
 }
