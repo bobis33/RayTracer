@@ -5,11 +5,7 @@
 ** Parser.cpp
 */
 
-#include <filesystem>
-
-#include "RayTracer/Factory/Light.hpp"
 #include "RayTracer/Parser.hpp"
-#include "RayTracer/Scene/Camera.hpp"
 
 RayTracer::Vector RayTracer::Parser::getVector(const libconfig::Setting &positionSettings)
 {

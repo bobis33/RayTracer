@@ -12,6 +12,7 @@
 
 #include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Utils/Resolution.hpp"
+#include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Constants.hpp"
 
 namespace RayTracer {
@@ -28,6 +29,7 @@ namespace RayTracer {
             [[nodiscard]] virtual const RendererType& getType() const = 0;
             [[nodiscard]] virtual const std::string& getName() const = 0;
             [[nodiscard]] virtual Resolution& getResolution() = 0;
+            [[nodiscard]] virtual Color& getBackgroundColor() = 0;
 
     }; // IRenderer
 

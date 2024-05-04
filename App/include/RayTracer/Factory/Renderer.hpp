@@ -18,7 +18,8 @@ namespace RayTracer {
         public:
             static std::unique_ptr<ARenderer> createRenderer(const RendererType &type,
                                                              const std::string &name,
-                                                             const Resolution &resolution);
+                                                             const Resolution &resolution,
+                                                             const Color &backgroundColor);
 
     }; // class RendererFactory
 
