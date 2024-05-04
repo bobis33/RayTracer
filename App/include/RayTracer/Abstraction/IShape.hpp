@@ -22,11 +22,11 @@ namespace RayTracer {
         public:
 
             virtual void setType(const ShapeType& type) = 0;
-            virtual void setRadius(int16_t radius) = 0;
+            virtual void setRadius(const int16_t& radius) = 0;
             virtual void setMaterial(std::unique_ptr<AMaterial> material) = 0;
 
-            [[nodiscard]] virtual ShapeType getType() const = 0;
-            [[nodiscard]] virtual AMaterial* getMaterial() const = 0;
+            [[nodiscard]] virtual const ShapeType& getType() const = 0;
+            [[nodiscard]] virtual const AMaterial& getMaterial() const = 0;
             [[nodiscard]] virtual Vector& getPosition() = 0;
             [[nodiscard]] virtual int16_t getRadius() const = 0;
 

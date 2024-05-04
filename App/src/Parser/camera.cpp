@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** raytracer | parser
 ** File description:
-** camera
+** camera.cpp
 */
 
 #include "RayTracer/Parser.hpp"
@@ -15,9 +15,6 @@ void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &sce
         if (setting->getLength() != 3 || setting->getType() != libconfig::Setting::TypeArray) {
             throw ParserException{"Invalid camera settings: Wrong amount of values or wrong type"};
         }
-    }
-    if (cameraFov.getType() != libconfig::Setting::TypeInt) {
-        throw ParserException{"Invalid camera settings: Wrong fov type"};
     }
     Vector origin(convertInt<int16_t>(camera["origin"][0]), convertInt<int16_t>(camera["origin"][1]), convertInt<int16_t>(camera["origin"][2]));
     Vector direction(convertInt<int16_t>(camera["lookAt"][0]), convertInt<int16_t>(camera["lookAt"][1]), convertInt<int16_t>(camera["lookAt"][2]));

@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** Raytracer
+** Raytracer | parser
 ** File description:
 ** Parser.cpp
 */
 
 #include <filesystem>
 
-#include "RayTracer/Factory/LightsFactory.hpp"
+#include "RayTracer/Factory/Light.hpp"
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Scene/Camera.hpp"
 

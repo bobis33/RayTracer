@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2024
 ** raytracer | parser
 ** File description:
-** light
+** light.cpp
 */
 
 #include "RayTracer/Parser.hpp"
-#include "RayTracer/Factory/LightsFactory.hpp"
+#include "RayTracer/Factory/Light.hpp"
 
 void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &scene)
 {
@@ -18,12 +18,12 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
         // float intensity = Light["intensity"];
 
         if (type == "point") {
-            scene.addLight(LightsFactory::createLights(LightType::POINT, position, color));
+            scene.addLight(LightFactory::createLight(LightType::POINT, position, color));
         } else if (type == "ambient") {
-            scene.addLight(LightsFactory::createLights(LightType::AMBIENT, position, color));
+            scene.addLight(LightFactory::createLight(LightType::AMBIENT, position, color));
         } else if (type == "directional") {
             // Vector direction(getVector(Light["direction"]));
-            scene.addLight(LightsFactory::createLights(LightType::DIRECTIONAL, position, color));
+            scene.addLight(LightFactory::createLight(LightType::DIRECTIONAL, position, color));
         } else {
             throw ParserException{"Invalid light type"};
         }

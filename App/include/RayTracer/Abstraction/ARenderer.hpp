@@ -20,9 +20,9 @@ namespace RayTracer {
             void setType(const RendererType &rendererType) override { m_type = rendererType; };
             void setName(const std::string &name) override { m_name = name; };
 
-            [[nodiscard]] RendererType getType() const override { return m_type; };
+            [[nodiscard]] const RendererType& getType() const override { return m_type; };
             [[nodiscard]] Resolution& getResolution() override { return m_resolution; };
-            [[nodiscard]] std::string getName() const override { return m_name; };
+            [[nodiscard]] const std::string& getName() const override { return m_name; };
 
         private:
             RendererType m_type{RendererType::NONE};

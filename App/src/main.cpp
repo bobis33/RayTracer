@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** Raytracer
+** Raytracer | core
 ** File description:
 ** main.cpp
 */
 
 #include "RayTracer/Core.hpp"
 #include "RayTracer/Parser.hpp"
-#include "RayTracer/Exceptions/RuntimeException.hpp"
+#include "RayTracer/Exception/RunTime.hpp"
 
 using namespace RayTracer;
 

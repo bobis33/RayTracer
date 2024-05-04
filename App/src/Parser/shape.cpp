@@ -2,13 +2,13 @@
 ** EPITECH PROJECT, 2024
 ** raytracer | parser
 ** File description:
-** shape
+** shape.cpp
 */
 
 #include "RayTracer/Parser.hpp"
-#include "RayTracer/Factory/ShapesFactory.hpp"
-#include "RayTracer/Factory/MaterialsFactory.hpp"
-#include "RayTracer/Composite/CompositeMaterial.hpp"
+#include "RayTracer/Factory/Shape.hpp"
+#include "RayTracer/Factory/Material.hpp"
+#include "RayTracer/Composite/Material.hpp"
 
 std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const libconfig::Setting &materialSetting)
 {
@@ -16,10 +16,10 @@ std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const lib
     Color color(convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2]));
     if (materialSetting.exists("reflectivity")) {
         float reflection = materialSetting["reflectivity"];
-        composite->addMaterial(MaterialsFactory::createMaterials(MaterialType::REFLECTIVE, reflection));
+        composite->addMaterial(MaterialFactory::createMaterial(MaterialType::REFLECTIVE, reflection));
     } if (materialSetting.exists("transparency")) {
         float transparency = materialSetting["transparency"];
-        composite->addMaterial(MaterialsFactory::createMaterials(MaterialType::TRANSPARENT, transparency));
+        composite->addMaterial(MaterialFactory::createMaterial(MaterialType::TRANSPARENT, transparency));
     }
 
     composite->applyMaterial(&color);
@@ -41,24 +41,26 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
             material = parseMaterial(materialSetting);
         }
         if (type == "plane") {
-            shape = ShapesFactory::createShape(ShapeType::PLANE, position);
+            shape = ShapeFactory::createShape(ShapeType::PLANE, position);
         } else if (type == "sphere" || type == "cylinder" || type == "cone") {
             libconfig::Setting &radiusSetting = shapeSetting["radius"];
-            int16_t radius = convertInt<int16_t>(radiusSetting);
+            auto radius = convertInt<int16_t>(radiusSetting);
             if (type == "sphere") {
-                shape = ShapesFactory::createShape(ShapeType::SPHERE, position, radius);
+                shape = ShapeFactory::createShape(ShapeType::SPHERE, position, radius);
             } else if (type == "cylinder") {
                 // Vector rotation(getVector(shapeSetting["rotation"]));
-                shape = ShapesFactory::createShape(ShapeType::CYLINDER, position, radius);
+                shape = ShapeFactory::createShape(ShapeType::CYLINDER, position, radius);
             } else if (type == "cone") {
                 // Vector rotation(getVector(shapeSetting["rotation"]));
-                shape = ShapesFactory::createShape(ShapeType::CONE, position, radius);
+                shape = ShapeFactory::createShape(ShapeType::CONE, position, radius);
             }
         } else {
             throw ParserException{"Invalid shape type"};
         }
-        if (material != nullptr)
+
+        if (material != nullptr) {
             shape->setMaterial(std::move(material));
+        }
         scene.addShape(std::move(shape));
     }
 }

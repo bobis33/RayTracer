@@ -21,10 +21,10 @@ namespace RayTracer {
 
             void setFov(const uint16_t &fov) { m_fov = fov; };
 
-            [[nodiscard]] uint16_t getFov() const { return m_fov; };
-            [[nodiscard]] Vector& getPosition() { return m_position; };
-            [[nodiscard]] Vector& getDirection() { return m_direction; };
-            [[nodiscard]] Vector& getUp() { return m_up; };
+            [[nodiscard]] const uint16_t &getFov() const { return m_fov; };
+            [[nodiscard]] const Vector &getPosition() const { return m_position; };
+            [[nodiscard]] const Vector &getDirection() const { return m_direction; };
+            [[nodiscard]] const Vector &getUp() const { return m_up; };
 
         private:
             uint16_t m_fov{0};

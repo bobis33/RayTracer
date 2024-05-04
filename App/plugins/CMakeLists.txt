@@ -1,4 +1,4 @@
-add_subdirectory(Lights)
-add_subdirectory(Materials)
-add_subdirectory(Renderers)
-add_subdirectory(Shapes)
+add_subdirectory(Light)
+add_subdirectory(Material)
+add_subdirectory(Renderer)
+add_subdirectory(Shape)

@@ -22,10 +22,10 @@ namespace RayTracer {
             void setReflectivity(const float &reflectivity) override { m_reflectivity = reflectivity; };
             void setTransparency(const float &transparency) override { m_transparency = transparency; };
 
-            [[nodiscard]] MaterialType getType() const override { return m_type; };
-            [[nodiscard]] Color& getMaterial() override { return m_color; };
-            [[nodiscard]] float getReflectivity() const override { return m_reflectivity; };
-            [[nodiscard]] float getTransparency() const override { return m_transparency; };
+            [[nodiscard]] const MaterialType& getType() const override { return m_type; };
+            [[nodiscard]] Color& getColor() override { return m_color; };
+            [[nodiscard]] const float& getReflectivity() const override { return m_reflectivity; };
+            [[nodiscard]] const float& getTransparency() const override { return m_transparency; };
 
         private:
             MaterialType m_type{MaterialType::NONE};

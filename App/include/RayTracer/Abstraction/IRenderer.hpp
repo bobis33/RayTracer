@@ -25,8 +25,8 @@ namespace RayTracer {
             virtual void setType(const RendererType &rendererType) = 0;
             virtual void setName(const std::string &name) = 0;
 
-            [[nodiscard]] virtual RendererType getType() const = 0;
-            [[nodiscard]] virtual std::string getName() const = 0;
+            [[nodiscard]] virtual const RendererType& getType() const = 0;
+            [[nodiscard]] virtual const std::string& getName() const = 0;
             [[nodiscard]] virtual Resolution& getResolution() = 0;
 
     }; // IRenderer

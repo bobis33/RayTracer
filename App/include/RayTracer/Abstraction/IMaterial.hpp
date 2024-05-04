@@ -26,10 +26,10 @@ namespace RayTracer{
             virtual void setReflectivity(const float &reflectivity) = 0;
             virtual void setTransparency(const float &transparency) = 0;
 
-            [[nodiscard]] virtual MaterialType getType() const = 0;
-            [[nodiscard]] virtual Color& getMaterial() = 0;
-            [[nodiscard]] virtual float getReflectivity() const = 0;
-            [[nodiscard]] virtual float getTransparency() const = 0;
+            [[nodiscard]] virtual const MaterialType& getType() const = 0;
+            [[nodiscard]] virtual Color& getColor() = 0;
+            [[nodiscard]] virtual const float& getReflectivity() const = 0;
+            [[nodiscard]] virtual const float& getTransparency() const = 0;
 
     }; // class IMaterial
 

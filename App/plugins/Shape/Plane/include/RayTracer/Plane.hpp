@@ -1,0 +1,31 @@
+/*
+** EPITECH PROJECT, 2024
+** Raytracer | Shapes
+** File description:
+** Plane.hpp
+*/
+
+#ifndef RAYTRACER_PLANE_SHAPE_HPP
+#define RAYTRACER_PLANE_SHAPE_HPP
+
+#include "RayTracer/Abstraction/AShape.hpp"
+#include "RayTracer/Exception/RunTime.hpp"
+
+namespace RayTracer {
+
+    class Plane : public AShape {
+
+        public:
+            ~Plane() override = default;
+
+            [[nodiscard]] std::string getPluginName() const override { return PLANE_SHAPE; };
+
+            void setRadius(const int16_t& radius) override { (void) radius; throw RunTimeException("Plane shape does not have a radius");};
+
+            [[nodiscard]] int16_t getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
+
+    }; // class Plane
+
+} // namespace RayTracer
+
+#endif // RAYTRACER_PLANE_SHAPE_HPP
