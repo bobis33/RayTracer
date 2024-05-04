@@ -23,7 +23,7 @@ namespace RayTracer {
             void setTransparency(const float &transparency) override { m_transparency = transparency; };
 
             [[nodiscard]] MaterialType getType() const override { return m_type; };
-            [[nodiscard]] Color& getColor() override { return m_color; };
+            [[nodiscard]] Color& getMaterial() override { return m_color; };
             [[nodiscard]] float getReflectivity() const override { return m_reflectivity; };
             [[nodiscard]] float getTransparency() const override { return m_transparency; };
 

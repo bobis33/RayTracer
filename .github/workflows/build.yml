@@ -8,7 +8,7 @@ on:
 env:
   EXECUTABLE: "raytracer"
   LIGHT_LIBRARY: "light_ambient.so,light_directional.so,light_point.so"
-  MATERIAL_LIBRARY: "material_color.so"
+  MATERIAL_LIBRARY: "material_reflective.so,material_transparent.so"
   RENDERER_LIBRARY: "renderer_sfml.so,renderer_ppm.so"
   SHAPE_LIBRARY: "shape_cone.so,shape_cylinder.so,shape_plane.so,shape_sphere.so"
 

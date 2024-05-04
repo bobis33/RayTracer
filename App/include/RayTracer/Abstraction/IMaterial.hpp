@@ -20,12 +20,14 @@ namespace RayTracer{
 
         public:
 
+            virtual void applyMaterial(Color* color) = 0;
+
             virtual void setType(const MaterialType &type) = 0;
             virtual void setReflectivity(const float &reflectivity) = 0;
             virtual void setTransparency(const float &transparency) = 0;
 
             [[nodiscard]] virtual MaterialType getType() const = 0;
-            [[nodiscard]] virtual Color& getColor() = 0;
+            [[nodiscard]] virtual Color& getMaterial() = 0;
             [[nodiscard]] virtual float getReflectivity() const = 0;
             [[nodiscard]] virtual float getTransparency() const = 0;
 

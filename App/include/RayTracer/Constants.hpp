@@ -16,7 +16,9 @@ static constexpr const char * AMBIENT_LIGHT = "ambientLight";
 static constexpr const char * DIRECTIONAL_LIGHT = "directionalLight";
 static constexpr const char * POINT_LIGHT = "pointLight";
 
-static constexpr const char * COLOR_MATERIAL = "flatColor";
+static constexpr const char * COMPOSITE_MATERIAL = "compositeMaterial";
+static constexpr const char * TRANSPARENT_MATERIAL = "transparent";
+static constexpr const char * REFLECTIVE_MATERIAL = "reflective";
 
 static constexpr const char * PPM_RENDERER = "ppmRenderer";
 static constexpr const char * SFML_RENDERER = "sfmlRenderer";
@@ -50,7 +52,8 @@ namespace RayTracer {
     };
 
     enum class MaterialType {
-        COLOR,
+        TRANSPARENT,
+        REFLECTIVE,
         NONE
     };
 

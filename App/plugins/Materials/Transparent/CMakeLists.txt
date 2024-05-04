@@ -1,5 +1,5 @@
-project(material_color
-        DESCRIPTION "Raytracer Color Material plugin"
+project(material_transparent
+        DESCRIPTION "Raytracer Transparent Material plugin"
         LANGUAGES CXX
 )
 
@@ -9,7 +9,7 @@ add_library(${PROJECT_NAME} SHARED ${SOURCE})
 
 target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/entryPoint.cpp
-        ${SRC_DIR}/flatColor.cpp
+        ${SRC_DIR}/transparent.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${INCLUDE_DIR} include)
