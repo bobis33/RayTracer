@@ -11,5 +11,5 @@ void RayTracer::Core::runRayTracer(const Scene &scene)
 {
     ARenderer& renderer = *scene.getRenderer();
 
-    renderer.render(scene.getShapes());
+    renderer.render(scene.getShapes(), scene.getCamera());
 }

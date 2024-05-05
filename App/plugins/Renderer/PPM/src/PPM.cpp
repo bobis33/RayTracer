@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Raytracer | renderer
 ** File description:
-** PPM.cpp
+** renderer.cpp
 */
 
 #include <iostream>
@@ -10,39 +10,47 @@
 
 #include "RayTracer/PPM.hpp"
 
-void RayTracer::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes)
+void RayTracer::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const Camera &camera)
 {
-    RayTracer::Point3D point3D(0, 0, 0);
-    double radius = 0;
+    uint16_t width = getResolution().getWidth();
+    uint16_t height = getResolution().getHeight();
+
+    Vector cameraOrigin(camera.getOrigin());
+    Vector cameraDirection(camera.getDirection());
+    int16_t aspectRatio = static_cast<int16_t>(width / height);
+    Rectangle3D cameraScreen(RayTracer::Vector(-aspectRatio, -1, 0), RayTracer::Vector(2 * aspectRatio, 0, 0), RayTracer::Vector(0, 2, 0));
+
+    Cameraa cam(cameraOrigin, cameraScreen, cameraDirection);
+
+    Color backgroundColor(this->getBackgroundColor().getValue());
+    std::vector<std::vector<RayTracer::Color>> pixels(height, std::vector<RayTracer::Color>(width));
+    for (unsigned long y = 0; y < height; y++) {
+        for (unsigned long x = 0; x < width; x++) {
+            pixels[y][x] = backgroundColor;
+        }
+    }
+    setPixels(pixels);
+
     for(const auto &shape : shapes) {
-        auto a = shape->getPosition();
+        Vector position(shape->getPosition());
         //std::cout << +a.getX() << " " << +a.getY() << " " << +a.getZ() << std::endl;
-        if (shape->getType() == RayTracer::ShapeType::SPHERE) {
-            point3D.x = a.getX();
-            point3D.y = a.getY();
-            point3D.z = a.getZ();
-            radius = shape->getRadius();
+        switch (shape->getType()) {
+            case ShapeType::SPHERE:
+                Color(shape->getMaterial().getColor());
+                break;
+            default:
+                break;
         }
     }
 
-    unsigned long width = getResolution().getWidth();
-    unsigned long height = getResolution().getHeight();
+    //RayTracer::Sphere s(point3D, radius);
 
-    RayTracer::Sphere s(point3D, radius);
+    //std::vector<std::vector<RayTracer::Color> > pixels(height, std::vector<RayTracer::Color>(width));
 
-    RayTracer::Point3D cameraOrigin(0, 0, 0);
-    RayTracer::Vector3D cameraDirection(0, 0, -1);
-    double aspectRatio = static_cast<double>(width) / static_cast<double>(height);
-    RayTracer::Rectangle3D cameraScreen(RayTracer::Point3D(-aspectRatio, -1, 0), RayTracer::Vector3D(2 * aspectRatio, 0, 0), RayTracer::Vector3D(0, 2, 0));
-
-    RayTracer::Cameraa cam(cameraOrigin, cameraScreen, cameraDirection);
-
-    std::vector<std::vector<RayTracer::Color> > pixels(height, std::vector<RayTracer::Color>(width));
-
-    for (unsigned long y = 0; y < height; y++) {
-        for (unsigned long x = 0; x < width; x++) {
-            double u = static_cast<double>(x) / static_cast<double>(width);
-            double v = static_cast<double>(y) / static_cast<double>(height);
+    /* for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            double u = static_cast<double>(x) / width;
+            double v = static_cast<double>(y) / height;
 
             RayTracer::Ray r = cam.ray(u, v);
 
@@ -52,7 +60,7 @@ void RayTracer::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes)
                 pixels[y][x] = RayTracer::Color(0, 0, 0);
             }
         }
-    }
+    } */
 
     std::ofstream file(getName() + ".ppm");
     if (file.is_open()) {
@@ -60,9 +68,15 @@ void RayTracer::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes)
 
         for (unsigned long y = 0; y < height; y++) {
             for (unsigned long x = 0; x < width; x++) {
-                file << static_cast<char>(pixels[y][x].getValue().r) << static_cast<char>(pixels[y][x].getValue().g) << static_cast<char>(pixels[y][x].getValue().b);
+                file << static_cast<char>(getPixels()[y][x].getValue().r) << static_cast<char>(getPixels()[y][x].getValue().g) << static_cast<char>(getPixels()[y][x].getValue().b);
             }
         }
         file.close();
+
     }
+
+    std::string command = "open " + getName() + ".ppm";
+    system(command.c_str());
+    return;
+
 }

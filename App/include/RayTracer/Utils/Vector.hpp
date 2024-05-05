@@ -59,6 +59,20 @@ namespace RayTracer {
                         static_cast<double>(m_position.z * other.getZ())
                 };
             };
+            Vector operator*(const int16_t &scalar) const {
+                return {
+                    static_cast<int16_t>(m_position.x * scalar),
+                    static_cast<int16_t>(m_position.y * scalar),
+                    static_cast<int16_t>(m_position.z * scalar)
+                };
+            };
+            Vector operator/(const int16_t &scalar) const {
+                return {
+                    static_cast<int16_t>(m_position.x / scalar),
+                    static_cast<int16_t>(m_position.y / scalar),
+                    static_cast<int16_t>(m_position.z / scalar)
+                };
+            };
 
             [[nodiscard]] double length() const { return sqrt(m_position.x * m_position.x + m_position.y * m_position.y + m_position.z * m_position.z); };
 
@@ -85,65 +99,14 @@ namespace RayTracer {
 
     }; // class Vector
 
-    class Vector3D {
-    public:
-        double x, y, z;
-
-        Vector3D() : x(0), y(0), z(0) {}
-        Vector3D(double x, double y, double z) : x(x), y(y), z(z) {}
-
-        double length() const {
-            return std::sqrt(x*x + y*y + z*z);
-        }
-
-        Vector3D operator+(const Vector3D& other) const {
-            return Vector3D(x + other.x, y + other.y, z + other.z);
-        }
-
-        Vector3D operator-(const Vector3D& other) const {
-            return Vector3D(x - other.x, y - other.y, z - other.z);
-        }
-
-        Vector3D operator*(double scalar) const {
-            return Vector3D(x * scalar, y * scalar, z * scalar);
-        }
-
-        Vector3D operator/(double scalar) const {
-            return Vector3D(x / scalar, y / scalar, z / scalar);
-        }
-
-        double dot(const Vector3D& other) const {
-            return x * other.x + y * other.y + z * other.z;
-        }
-    }; // class Vector3D
-
-    class Point3D {
-    public:
-        double x, y, z;
-
-        Point3D() : x(0), y(0), z(0) {}
-        Point3D(double x, double y, double z) : x(x), y(y), z(z) {}
-
-        Point3D operator+(const Vector3D& vector) const {
-            return Point3D(x + vector.x, y + vector.y, z + vector.z);
-        }
-
-        Point3D operator-(const Point3D& other) const {
-            return Point3D(x - other.x, y - other.y, z - other.z);
-        }
-    }; // class Point3D
-
     class Rectangle3D {
     public:
-        Point3D origin;
-        Vector3D bottom_side, left_side;
+        Vector m_origin, m_bottom_side, m_left_side;
 
-        Rectangle3D(const Point3D& origin, const Vector3D& bottom_side, const Vector3D& left_side)
-            : origin(origin), bottom_side(bottom_side), left_side(left_side) {}
+        Rectangle3D(const Vector& origin, const Vector& bottom_side, const Vector& left_side)
+            : m_origin(origin), m_bottom_side(bottom_side), m_left_side(left_side) {}
 
-        Point3D pointAt(double u, double v) const {
-            return origin + bottom_side * u + left_side * v;
-        }
+        [[nodiscard]] Vector pointAt(int16_t u, int16_t v) const { return m_origin + m_bottom_side * u + m_left_side * v; };
     }; // class Rectangle3D
 
 }; // namespace RayTracer

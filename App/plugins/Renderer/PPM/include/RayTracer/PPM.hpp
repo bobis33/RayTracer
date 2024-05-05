@@ -12,6 +12,7 @@
 
 #include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Abstraction/ARenderer.hpp"
+#include "RayTracer/Scene/Camera.hpp"
 
 namespace RayTracer {
 
@@ -22,7 +23,7 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return PPM_RENDERER; };
 
-            void render(const std::vector<std::unique_ptr<AShape>>& shapes) override;
+            void render(const std::vector<std::unique_ptr<AShape>>& shapes, const Camera &camera) override;
 
     }; // class PPM
 

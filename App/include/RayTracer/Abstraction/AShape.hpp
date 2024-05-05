@@ -22,7 +22,7 @@ namespace RayTracer {
             void setMaterial(std::unique_ptr<AMaterial> material) override { m_material = std::move(material); };
 
             [[nodiscard]] const ShapeType& getType() const override { return m_type; };
-            [[nodiscard]] const AMaterial& getMaterial() const override { return *m_material; };
+            [[nodiscard]] AMaterial& getMaterial() override { return *m_material; };
             [[nodiscard]] Vector& getPosition() override { return m_position; };
             [[nodiscard]] Vector& getRotation() override { return m_position; };
             [[nodiscard]] double getRadius() const override { return m_radius; };
