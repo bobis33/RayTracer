@@ -30,8 +30,8 @@ namespace RayTracer {
             void setX(const int16_t &x) { m_position.x = x; };
             void setY(const int16_t &y) { m_position.y = y; };
             void setZ(const int16_t &z) { m_position.z = z; };
-            void setPosition(const int16_t &x, const int16_t &y, const int16_t &z) { m_position = {x, y, z}; };
-            void setPosition(const vector_t &position) { m_position = position; };
+            void setVector(const int16_t &x, const int16_t &y, const int16_t &z) { m_position = {x, y, z}; };
+            void setVector(const vector_t &position) { m_position = position; };
 
             [[nodiscard]] int16_t getX() const { return m_position.x; };
             [[nodiscard]] int16_t getY() const { return m_position.y; };

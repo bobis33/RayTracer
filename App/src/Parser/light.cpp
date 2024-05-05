@@ -15,15 +15,14 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
         std::string type = Light["type"];
         Vector position(getVector<Vector>(Light["position"], convertInt<int16_t>));
         Color color(getVector<Color>(Light["color"], convertInt<uint8_t>));
-        // float intensity = Light["intensity"];
+        float intensity = Light["intensity"];
 
         if (type == "point") {
-            scene.addLight(LightFactory::createLight(LightType::POINT, position, color));
+            scene.addLight(LightFactory::createLight(LightType::POINT, position, color, intensity));
         } else if (type == "ambient") {
-            scene.addLight(LightFactory::createLight(LightType::AMBIENT, position, color));
+            scene.addLight(LightFactory::createLight(LightType::AMBIENT, position, color, intensity));
         } else if (type == "directional") {
-            // Vector direction(getVector(Light["direction"]));
-            scene.addLight(LightFactory::createLight(LightType::DIRECTIONAL, position, color));
+            scene.addLight(LightFactory::createLight(position, color, intensity, Vector(getVector<Vector>(Light["direction"], convertInt<int16_t>))));
         } else {
             throw ParserException{"Invalid light type"};
         }

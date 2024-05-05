@@ -21,7 +21,7 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Sh
     }
 
     shape->setType(type);
-    shape->getPosition().setPosition(position.getValue());
+    shape->getPosition().setVector(position.getValue());
     return shape;
 }
 
@@ -46,7 +46,7 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Sh
     }
 
     shape->setType(type);
-    shape->getPosition().setPosition(position.getValue());
+    shape->getPosition().setVector(position.getValue());
     shape->setRadius(radius);
     return shape;
 }

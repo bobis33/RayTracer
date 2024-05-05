@@ -20,10 +20,13 @@ namespace RayTracer {
         public:
 
             virtual void setType(const LightType &type) = 0;
+            virtual void setIntensity(const float &intensity) = 0;
 
             [[nodiscard]] virtual const LightType& getType() const = 0;
             [[nodiscard]] virtual Vector& getPosition() = 0;
+            [[nodiscard]] virtual Vector& getDirection() = 0;
             [[nodiscard]] virtual Color& getColor() = 0;
+            [[nodiscard]] virtual float& getIntensity() = 0;
 
     }; // class ILight
 

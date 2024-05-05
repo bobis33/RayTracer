@@ -9,6 +9,7 @@
 #define RAYTRACER_AMBIENT_LIGHT_HPP
 
 #include "RayTracer/Abstraction/ALight.hpp"
+#include "RayTracer/Exception/RunTime.hpp"
 
 namespace RayTracer {
 
@@ -18,6 +19,8 @@ namespace RayTracer {
             ~Ambient() override = default;
 
             [[nodiscard]] std::string getPluginName() const override { return AMBIENT_LIGHT; };
+
+            [[nodiscard]] Vector& getDirection() override { throw RunTimeException("Ambient light has no direction");};
 
     }; // class Ambient
 
