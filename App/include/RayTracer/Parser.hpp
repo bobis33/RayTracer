@@ -24,11 +24,21 @@ namespace RayTracer {
 
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
             static void parseCamera(const libconfig::Setting &camera, Scene &scene);
+            static ShapeType parseShapeType(const std::string &type);
             static void parseShapes(const libconfig::Setting &shapesSetting, Scene &scene);
             static std::unique_ptr<AMaterial> parseMaterial(const libconfig::Setting &materialSetting);
             static void parseLights(const libconfig::Setting &lightsSetting, Scene &scene);
 
-            static Vector getVector(const libconfig::Setting &setting);
+            template <typename T, typename ConversionFunc>
+            static T getVector(const libconfig::Setting &setting, ConversionFunc convert) {
+                {
+                    if (setting.getLength() != 3 || setting.getType() != libconfig::Setting::TypeArray) {
+                        throw ParserException{"Invalid setting type (vector or color)"};
+                    }
+
+                    return T{convert(setting[0]), convert(setting[1]), convert(setting[2])};
+                }
+            }
 
             template<typename T>
             static T convertInt(const libconfig::Setting &setting) {

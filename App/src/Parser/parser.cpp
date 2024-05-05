@@ -7,15 +7,6 @@
 
 #include "RayTracer/Parser.hpp"
 
-RayTracer::Vector RayTracer::Parser::getVector(const libconfig::Setting &positionSettings)
-{
-    if (positionSettings.getLength() != 3 || positionSettings.getType() != libconfig::Setting::TypeArray) {
-        throw ParserException{"Invalid position settings: Wrong amount of values or wrong type"};
-    }
-
-    return {convertInt<int16_t>(positionSettings[0]), convertInt<int16_t>(positionSettings[1]), convertInt<int16_t>(positionSettings[2])};
-}
-
 std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)
 {
     libconfig::Config cfg;
@@ -44,8 +35,7 @@ int RayTracer::Parser::parseArgs(const std::string &filePath)
         return ERROR;
     }
 
-    std::filesystem::path path{filePath};
-    if (!std::filesystem::exists(path)) {
+    if (!std::filesystem::exists(std::filesystem::path{filePath})) {
         throw ParserException{"File does not exist"};
     }
     return SUCCESS;

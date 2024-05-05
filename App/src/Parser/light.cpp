@@ -13,8 +13,8 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
     for (int i = 0; i < lightsSetting.getLength(); i++) {
         const libconfig::Setting &Light = lightsSetting[i];
         std::string type = Light["type"];
-        Vector position(getVector(Light["position"]));
-        Color color(convertInt<uint8_t>(Light["color"][0]), convertInt<uint8_t>(Light["color"][1]), convertInt<uint8_t>(Light["color"][2]));
+        Vector position(getVector<Vector>(Light["position"], convertInt<int16_t>));
+        Color color(getVector<Color>(Light["color"], convertInt<uint8_t>));
         // float intensity = Light["intensity"];
 
         if (type == "point") {

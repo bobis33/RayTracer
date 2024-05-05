@@ -10,6 +10,20 @@
 #include "RayTracer/Factory/Material.hpp"
 #include "RayTracer/Composite/Material.hpp"
 
+RayTracer::ShapeType RayTracer::Parser::parseShapeType(const std::string &type)
+{
+    if (type == "plane") {
+        return ShapeType::PLANE;
+    } if (type == "sphere") {
+        return ShapeType::SPHERE;
+    } if (type == "cylinder") {
+        return ShapeType::CYLINDER;
+    } if (type == "cone") {
+        return ShapeType::CONE;
+    }
+    throw ParserException{"Invalid material type"};
+}
+
 std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const libconfig::Setting &materialSetting)
 {
     std::unique_ptr<CompositeMaterial> composite = std::make_unique<CompositeMaterial>();
@@ -28,34 +42,36 @@ std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const lib
 
 void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
 {
-    for (int i = 0; i < shapesSetting.getLength(); i++) {
-        const libconfig::Setting &shapeSetting = shapesSetting[i];
-        std::string type = shapeSetting["type"];
-        Vector position(getVector(shapeSetting["position"]));
+    for (const auto& shapeSetting : shapesSetting) {
         std::unique_ptr<AShape> shape = nullptr;
         std::unique_ptr<AMaterial> material = nullptr;
+        ShapeType shapeType(parseShapeType(shapeSetting["type"]));
+        Vector position(getVector<Vector>(shapeSetting["position"], convertInt<int16_t>));
+        short radius = 0;
 
         if (shapeSetting.exists("material")) {
             libconfig::Setting &materialSetting = shapeSetting["material"];
             material = std::make_unique<CompositeMaterial>();
             material = parseMaterial(materialSetting);
         }
-        if (type == "plane") {
-            shape = ShapeFactory::createShape(ShapeType::PLANE, position);
-        } else if (type == "sphere" || type == "cylinder" || type == "cone") {
-            libconfig::Setting &radiusSetting = shapeSetting["radius"];
-            auto radius = convertInt<int16_t>(radiusSetting);
-            if (type == "sphere") {
-                shape = ShapeFactory::createShape(ShapeType::SPHERE, position, radius);
-            } else if (type == "cylinder") {
+
+        switch (shapeType) {
+            case ShapeType::PLANE:
+                shape = ShapeFactory::createShape(shapeType, position);
+                break;
+            case ShapeType::SPHERE:
+                radius = convertInt<int16_t>(shapeSetting["radius"]);
+                shape = ShapeFactory::createShape(shapeType, position, radius);
+                break;
+            case ShapeType::CYLINDER:
+            case ShapeType::CONE: {
                 // Vector rotation(getVector(shapeSetting["rotation"]));
-                shape = ShapeFactory::createShape(ShapeType::CYLINDER, position, radius);
-            } else if (type == "cone") {
-                // Vector rotation(getVector(shapeSetting["rotation"]));
-                shape = ShapeFactory::createShape(ShapeType::CONE, position, radius);
+                radius = convertInt<int16_t>(shapeSetting["radius"]);
+                shape = ShapeFactory::createShape(shapeType, position, radius);
+                break;
             }
-        } else {
-            throw ParserException{"Invalid shape type"};
+            default:
+                throw ParserException{"Invalid shape type"};
         }
 
         if (material != nullptr) {
