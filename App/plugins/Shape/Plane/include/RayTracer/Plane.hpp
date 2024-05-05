@@ -23,6 +23,7 @@ namespace RayTracer {
             void setRadius(const int16_t& radius) override { (void) radius; throw RunTimeException("Plane shape does not have a radius");};
 
             [[nodiscard]] int16_t getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
+            [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Plane shape does not have a rotation");};
 
     }; // class Plane
 

@@ -57,17 +57,19 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
 
         switch (shapeType) {
             case ShapeType::PLANE:
-                shape = ShapeFactory::createShape(shapeType, position);
+                shape = ShapeFactory::createShape(position);
                 break;
             case ShapeType::SPHERE:
                 radius = convertInt<int16_t>(shapeSetting["radius"]);
-                shape = ShapeFactory::createShape(shapeType, position, radius);
+                shape = ShapeFactory::createShape(position, radius);
                 break;
             case ShapeType::CYLINDER:
             case ShapeType::CONE: {
-                // Vector rotation(getVector(shapeSetting["rotation"]));
                 radius = convertInt<int16_t>(shapeSetting["radius"]);
-                shape = ShapeFactory::createShape(shapeType, position, radius);
+                shape = ShapeFactory::createShape(shapeType,
+                                                  position,
+                                                  Vector(getVector<Vector>(shapeSetting["rotation"], convertInt<int16_t>)),
+                                                  radius);
                 break;
             }
             default:

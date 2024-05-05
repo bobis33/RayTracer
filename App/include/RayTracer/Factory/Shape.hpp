@@ -17,13 +17,15 @@ namespace RayTracer {
 
         public:
 
-            static std::unique_ptr<AShape> createShape(const ShapeType &type,
-                                                       const Vector &position);
+            static std::unique_ptr<AShape> createShape(const Vector &position);
+
+            static std::unique_ptr<AShape> createShape(const Vector &position,
+                                                       const int16_t &radius);
 
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
                                                        const Vector &position,
-                                                       int16_t &radius);
-
+                                                       const Vector &rotation,
+                                                       const int16_t &radius);
     }; // class ShapeFactory
 
 } // namespace RayTracer

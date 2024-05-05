@@ -7,34 +7,36 @@
 
 #include "RayTracer/Factory/Shape.hpp"
 
-std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const ShapeType &type,
-                                                                        const Vector &position)
+std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position)
 {
     std::unique_ptr<AShape> shape;
+    shape = PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE);
 
-    switch (type) {
-        case ShapeType::PLANE:
-            shape = PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE);
-            break;
-        default:
-            throw RunTimeException("Invalid shape type");
-    }
-
-    shape->setType(type);
+    shape->setType(ShapeType::PLANE);
     shape->getPosition().setVector(position.getValue());
+    return shape;
+}
+
+std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position,
+                                                                        const int16_t &radius)
+{
+    std::unique_ptr<AShape> shape;
+    shape = PluginLoader::getInstance().getPlugin<AShape>(SPHERE_SHAPE);
+
+    shape->setType(ShapeType::SPHERE);
+    shape->getPosition().setVector(position.getValue());
+    shape->setRadius(radius);
     return shape;
 }
 
 std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const ShapeType &type,
                                                                         const Vector &position,
-                                                                        int16_t &radius)
+                                                                        const Vector &rotation,
+                                                                        const int16_t &radius)
 {
     std::unique_ptr<AShape> shape;
 
     switch (type) {
-        case ShapeType::SPHERE:
-            shape = PluginLoader::getInstance().getPlugin<AShape>(SPHERE_SHAPE);
-            break;
         case ShapeType::CYLINDER:
             shape = PluginLoader::getInstance().getPlugin<AShape>(CYLINDER_SHAPE);
             break;
@@ -47,6 +49,7 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Sh
 
     shape->setType(type);
     shape->getPosition().setVector(position.getValue());
+    shape->getRotation().setVector(rotation.getValue());
     shape->setRadius(radius);
     return shape;
 }
