@@ -35,6 +35,7 @@ target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/main.cpp
         ${SRC_DIR}/core.cpp
         ${SRC_DIR}/Loader/plugin.cpp
+        ${SRC_DIR}/Parser/utils.cpp
         ${SRC_DIR}/Parser/parser.cpp
         ${SRC_DIR}/Parser/camera.cpp
         ${SRC_DIR}/Parser/light.cpp

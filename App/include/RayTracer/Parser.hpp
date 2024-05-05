@@ -30,24 +30,10 @@ namespace RayTracer {
             static void parseLights(const libconfig::Setting &lightsSetting, Scene &scene);
 
             template <typename T, typename ConversionFunc>
-            static T getVector(const libconfig::Setting &setting, ConversionFunc convert) {
-                {
-                    if (setting.getLength() != 3 || setting.getType() != libconfig::Setting::TypeArray) {
-                        throw ParserException{"Invalid setting type (vector or color)"};
-                    }
-
-                    return T{convert(setting[0]), convert(setting[1]), convert(setting[2])};
-                }
-            }
+            static T getVector(const libconfig::Setting &setting, ConversionFunc convert);
 
             template<typename T>
-            static T convertInt(const libconfig::Setting &setting) {
-                if (setting.getType() == libconfig::Setting::Type::TypeInt) {
-                    int value = setting;
-                    return static_cast<T>(value);
-                }
-                throw ParserException{"Invalid setting type (Integer)"};
-            }
+            static T convertInt(const libconfig::Setting &setting);
 
             class ParserException : public std::exception
             {
