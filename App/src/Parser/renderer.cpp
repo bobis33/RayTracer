@@ -9,8 +9,15 @@
 
 void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
+    if (!renderer.exists("type")) {
+        throw ParserException{"Renderer must have a type"};
+    }
     const std::string &type = renderer["type"];
+    if (!renderer.exists("resolution")) {
+        throw ParserException{"Renderer must have a resolution"};
+    }
     const libconfig::Setting &resolution = renderer["resolution"];
+    Resolution res(convertInt<uint16_t>(resolution[0]), convertInt<uint16_t>(resolution[1]));
     RendererType rendererType = RendererType::NONE;
     if (type == "sfml") {
         rendererType = RendererType::SFML;
@@ -19,10 +26,13 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     } else {
         throw ParserException{"Invalid renderer type"};
     }
-    scene.setRenderer(
-            RendererFactory::createRenderer(
-                    rendererType,
-                    renderer["name"],
-                    Resolution(convertInt<uint16_t>(resolution[0]), convertInt<uint16_t>(resolution[1])),
-                    Color(getVector<Color>(renderer["backgroundColor"], convertInt<uint8_t>))));
+    if (!renderer.exists("name")) {
+        throw ParserException{"Renderer must have a name"};
+    }
+    const std::string &name = renderer["name"];
+    if (!renderer.exists("backgroundColor")) {
+        throw ParserException{"Renderer must have a background color"};
+    }
+    Color color = getVector<Color>(renderer["backgroundColor"], convertInt<uint8_t>);
+    scene.setRenderer(RendererFactory::createRenderer(rendererType, name, res, color));
 }
