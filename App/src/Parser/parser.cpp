@@ -19,7 +19,7 @@ std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string
         parseShapes(root["shapes"], *scene);
         parseLights(root["lights"], *scene);
     } catch (const libconfig::FileIOException &e) {
-        throw ParserException{"Error while reading file"};
+        throw ParserException{"Error while reading file."};
     } catch (const libconfig::ParseException &e) {
         throw ParserException{e.getError()};
     }
@@ -36,7 +36,7 @@ int RayTracer::Parser::parseArgs(const std::string &filePath)
     }
 
     if (!std::filesystem::exists(std::filesystem::path{filePath})) {
-        throw ParserException{"File does not exist"};
+        throw ParserException{"File does not exists."};
     }
     return SUCCESS;
 }
