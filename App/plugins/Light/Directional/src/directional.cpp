@@ -9,25 +9,19 @@
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 
-RayTracer::Directional::Directional(Vector direction, float intensity)
+RayTracer::Color RayTracer::Directional::LightColor(const Vector &normal, RayTracer::Color col)
 {
-    this->m_direction = direction;
-    this->m_intensity = intensity;
-}
-
-RayTracer::Color RayTracer::Directional::LightColor(const Vector &point, const Vector &normal, RayTracer::Color col) const
-{
-    Vector vector = this->m_direction * -1;
+    Vector vector = getDirection() * -1;
     vector.normalize();
-    float dot = vector.dot(normal);
+    int dot = vector.dot(normal);
 
     if (dot < 0) {
         return RayTracer::Color(0, 0, 0);
     }
     col.setColor(
-        col.getRed() * dot * this->m_intensity,
-        col.getGreen() * dot * this->m_intensity,
-        col.getBlue() * dot * this->m_intensity
+        static_cast<uint8_t>(static_cast<int>(col.getValue().r) * dot),
+        static_cast<uint8_t>(static_cast<int>(col.getValue().g) * dot),
+        static_cast<uint8_t>(static_cast<int>(col.getValue().b) * dot)
     );
     return col;
 }

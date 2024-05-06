@@ -18,6 +18,8 @@ namespace RayTracer {
         public:
             ~Ambient() override = default;
 
+            Color LightColor(const Vector &normal, Color col) override;
+
             [[nodiscard]] std::string getPluginName() const override { return AMBIENT_LIGHT; };
 
             [[nodiscard]] Vector& getDirection() override { throw RunTimeException("Ambient light has no direction");};

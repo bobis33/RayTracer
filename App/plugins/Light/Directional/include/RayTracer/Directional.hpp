@@ -19,7 +19,7 @@ namespace RayTracer {
             Directional(Vector direction, float intensity);
             ~Directional() override = default;
 
-            RayTracer::Color LightColor(const Vector &point, const Vector &normal, Raytracer::Color col) const override;
+            Color LightColor(const Vector &normal, Color col);
 
             [[nodiscard]] std::string getPluginName() const override { return DIRECTIONAL_LIGHT; };
 

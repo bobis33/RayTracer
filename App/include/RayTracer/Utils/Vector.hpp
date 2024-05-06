@@ -52,6 +52,13 @@ namespace RayTracer {
                     static_cast<int16_t>(m_position.z - other.getZ())
                 };
             };
+            Vector operator*(int16_t v) const {
+                return Vector(
+                    m_position.x * v,
+                    m_position.y * v,
+                    m_position.z * v
+                );
+            };
 
             [[nodiscard]] double length() const { return sqrt(m_position.x * m_position.x + m_position.y * m_position.y + m_position.z * m_position.z); };
 
@@ -64,7 +71,7 @@ namespace RayTracer {
                 };
             };
 
-            [[nodiscard]] Vector normalize() const {
+            Vector normalize() const {
                 double len = length();
                 return {
                     static_cast<int16_t>(m_position.x / len),
