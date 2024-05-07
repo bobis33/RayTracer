@@ -60,8 +60,8 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
         if (!shapeSetting.exists("position")) {
             throw ParserException{"Shape must have a position setting."};
         }
-        Vector position(getVector<Vector>(shapeSetting["position"], convertInt<int16_t>));
-        short radius = 0;
+        Vector position(getVector<Vector>(shapeSetting["position"], convertInt<double>));
+        double radius = 0;
         if (!shapeSetting.exists("material")) {
             throw ParserException{"Shape must have material setting."};
         }
@@ -77,7 +77,7 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
                 if (!shapeSetting.exists("radius")) {
                     throw ParserException{"Sphere must have a radius setting."};
                 }
-                radius = convertInt<int16_t>(shapeSetting["radius"]);
+                radius = convertInt<double>(shapeSetting["radius"]);
                 shape = ShapeFactory::createShape(position, radius);
                 break;
             case ShapeType::CYLINDER:
@@ -85,11 +85,11 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
                 if (!shapeSetting.exists("radius")) {
                     throw ParserException{"Cylinder and Cone must have a radius setting."};
                 }
-                radius = convertInt<int16_t>(shapeSetting["radius"]);
+                radius = convertInt<double>(shapeSetting["radius"]);
                 if (!shapeSetting.exists("rotation")) {
                     throw ParserException{"Cylinder and Cone must have a rotation setting."};
                 }
-                Vector rotation = getVector<Vector>(shapeSetting["rotation"], convertInt<int16_t>);
+                Vector rotation = getVector<Vector>(shapeSetting["rotation"], convertInt<double>);
                 shape = ShapeFactory::createShape(shapeType,
                                                   position,
                                                   rotation,

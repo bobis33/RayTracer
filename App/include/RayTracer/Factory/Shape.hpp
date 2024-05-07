@@ -20,12 +20,12 @@ namespace RayTracer {
             static std::unique_ptr<AShape> createShape(const Vector &position);
 
             static std::unique_ptr<AShape> createShape(const Vector &position,
-                                                       const int16_t &radius);
+                                                       const double &radius);
 
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
                                                        const Vector &position,
                                                        const Vector &rotation,
-                                                       const int16_t &radius);
+                                                       const double &radius);
     }; // class ShapeFactory
 
 } // namespace RayTracer

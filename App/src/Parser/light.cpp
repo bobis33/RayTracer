@@ -19,7 +19,7 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
         if (!light.exists("position")) {
             throw ParserException{"Lights must have a position setting."};
         }
-        Vector position(getVector<Vector>(light["position"], convertInt<int16_t>));
+        Vector position(getVector<Vector>(light["position"], convertInt<double>));
         if (!light.exists("color")) {
             throw ParserException{"Lights must have a color setting."};
         }
@@ -37,7 +37,7 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
             if (!light.exists("direction")) {
                 throw ParserException{"Directional lights must have a direction setting."};
             }
-            Vector direction(getVector<Vector>(light["direction"], convertInt<int16_t>));
+            Vector direction(getVector<Vector>(light["direction"], convertInt<double>));
             scene.addLight(LightFactory::createLight(position, color, intensity, direction));
         } else {
             throw ParserException{"Invalid light type"};

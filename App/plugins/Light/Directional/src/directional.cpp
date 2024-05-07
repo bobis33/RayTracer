@@ -11,12 +11,12 @@
 
 RayTracer::Color RayTracer::Directional::LightColor(const Vector &normal, RayTracer::Color col)
 {
-    Vector vector = getDirection() * -1;
-    vector.normalize();
-    int dot = vector.dot(normal);
 
+    Vector vector = getDirection() * Vector{-1, -1, -1};
+    // vector.normalize();
+    double dot = vector.dot(normal);
     if (dot < 0) {
-        return RayTracer::Color(0, 0, 0);
+        return {0, 0, 0};
     }
     col.setColor(
         static_cast<uint8_t>(static_cast<int>(col.getValue().r) * dot),

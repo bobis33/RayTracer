@@ -22,7 +22,7 @@ void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &sce
         }
     }
     scene.setCamera(Camera(convertInt<uint16_t>(cameraFov),
-                    Vector(getVector<Vector>(camera["origin"], convertInt<int16_t>)),
-                    Vector(getVector<Vector>(camera["direction"], convertInt<int16_t>)),
-                    Vector(getVector<Vector>(camera["up"], convertInt<int16_t>))));
+                    Vector(getVector<Vector>(camera["origin"], convertInt<double>)),
+                    Vector(getVector<Vector>(camera["direction"], convertInt<double>)),
+                    Vector(getVector<Vector>(camera["up"], convertInt<double>))));
 }

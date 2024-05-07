@@ -20,7 +20,7 @@ T RayTracer::Parser::getVector(const libconfig::Setting &setting, ConversionFunc
     }
     return T{convert(setting[0]), convert(setting[1]), convert(setting[2])};
 }
-template RayTracer::Vector RayTracer::Parser::getVector<RayTracer::Vector, short (*)(libconfig::Setting const&)>(libconfig::Setting const&, short (*)(libconfig::Setting const&));
+template RayTracer::Vector RayTracer::Parser::getVector<RayTracer::Vector, double (*)(libconfig::Setting const&)>(libconfig::Setting const&, double (*)(libconfig::Setting const&));
 template RayTracer::Color RayTracer::Parser::getVector<RayTracer::Color, unsigned char (*)(libconfig::Setting const&)>(libconfig::Setting const&, unsigned char(*)(libconfig::Setting const&));
 
 template<typename T>
@@ -32,6 +32,6 @@ T RayTracer::Parser::convertInt(const libconfig::Setting &setting)
     }
     throw ParserException{"Invalid setting type, expected an integer."};
 }
-template short RayTracer::Parser::convertInt<short>(const libconfig::Setting &setting);
+template double RayTracer::Parser::convertInt<double>(const libconfig::Setting &setting);
 template unsigned short RayTracer::Parser::convertInt<unsigned short>(const libconfig::Setting &setting);
 template unsigned char RayTracer::Parser::convertInt<unsigned char>(const libconfig::Setting &setting);
