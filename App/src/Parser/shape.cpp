@@ -21,20 +21,26 @@ RayTracer::ShapeType RayTracer::Parser::parseShapeType(const std::string &type)
     } if (type == "cone") {
         return ShapeType::CONE;
     }
-    throw ParserException{"Invalid material type"};
+    throw ParserException{"Invalid shape type"};
 }
 
 std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const libconfig::Setting &materialSetting)
 {
     std::unique_ptr<CompositeMaterial> composite = std::make_unique<CompositeMaterial>();
-    Color color(convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2]));
+    if (!materialSetting.exists("color")) {
+        throw ParserException{"Material must have color settings."};
+    }
+    uint8_t r = convertInt<uint8_t>(materialSetting["color"][0]);
+    uint8_t g = convertInt<uint8_t>(materialSetting["color"][1]);
+    uint8_t b = convertInt<uint8_t>(materialSetting["color"][2]);
+    Color color(r, g, b);
     if (!materialSetting.exists("reflectivity")) {
-        throw ParserException{"Material must have reflectivity"};
+        throw ParserException{"Material must have reflectivity setting."};
     }
     float reflection = materialSetting["reflectivity"];
     composite->addMaterial(MaterialFactory::createMaterial(MaterialType::REFLECTIVE, reflection));
     if (!materialSetting.exists("transparency")) {
-        throw ParserException{"Material must have transparency"};
+        throw ParserException{"Material must have transparency setting."};
     }
     float transparency = materialSetting["transparency"];
     composite->addMaterial(MaterialFactory::createMaterial(MaterialType::TRANSPARENT, transparency));
@@ -48,16 +54,16 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
         std::unique_ptr<AShape> shape = nullptr;
         std::unique_ptr<AMaterial> material = nullptr;
         if (!shapeSetting.exists("type")) {
-            throw ParserException{"Shape must have a type"};
+            throw ParserException{"Shape must have a type setting."};
         }
         ShapeType shapeType(parseShapeType(shapeSetting["type"]));
         if (!shapeSetting.exists("position")) {
-            throw ParserException{"Shape must have a position"};
+            throw ParserException{"Shape must have a position setting."};
         }
         Vector position(getVector<Vector>(shapeSetting["position"], convertInt<int16_t>));
         short radius = 0;
         if (!shapeSetting.exists("material")) {
-            throw ParserException{"Shape must have material"};
+            throw ParserException{"Shape must have material setting."};
         }
         libconfig::Setting &materialSetting = shapeSetting["material"];
         material = std::make_unique<CompositeMaterial>();
@@ -69,7 +75,7 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
                 break;
             case ShapeType::SPHERE:
                 if (!shapeSetting.exists("radius")) {
-                    throw ParserException{"Sphere must have a radius"};
+                    throw ParserException{"Sphere must have a radius setting."};
                 }
                 radius = convertInt<int16_t>(shapeSetting["radius"]);
                 shape = ShapeFactory::createShape(position, radius);
@@ -77,11 +83,11 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
             case ShapeType::CYLINDER:
             case ShapeType::CONE: {
                 if (!shapeSetting.exists("radius")) {
-                    throw ParserException{"Cylinder and Cone must have a radius"};
+                    throw ParserException{"Cylinder and Cone must have a radius setting."};
                 }
                 radius = convertInt<int16_t>(shapeSetting["radius"]);
                 if (!shapeSetting.exists("rotation")) {
-                    throw ParserException{"Cylinder and Cone must have a rotation"};
+                    throw ParserException{"Cylinder and Cone must have a rotation setting."};
                 }
                 Vector rotation = getVector<Vector>(shapeSetting["rotation"], convertInt<int16_t>);
                 shape = ShapeFactory::createShape(shapeType,

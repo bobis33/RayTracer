@@ -11,18 +11,34 @@
 void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &scene)
 {
     for (int i = 0; i < lightsSetting.getLength(); i++) {
-        const libconfig::Setting &Light = lightsSetting[i];
-        std::string type = Light["type"];
-        Vector position(getVector<Vector>(Light["position"], convertInt<int16_t>));
-        Color color(getVector<Color>(Light["color"], convertInt<uint8_t>));
-        float intensity = Light["intensity"];
+        const libconfig::Setting &light = lightsSetting[i];
+        if (!light.exists("type")) {
+            throw ParserException{"Lights must have a type setting."};
+        }
+        std::string type = light["type"];
+        if (!light.exists("position")) {
+            throw ParserException{"Lights must have a position setting."};
+        }
+        Vector position(getVector<Vector>(light["position"], convertInt<int16_t>));
+        if (!light.exists("color")) {
+            throw ParserException{"Lights must have a color setting."};
+        }
+        Color color(getVector<Color>(light["color"], convertInt<uint8_t>));
+        if (!light.exists("intensity")) {
+            throw ParserException{"Lights must have an intensity setting."};
+        }
+        float intensity = light["intensity"];
 
         if (type == "point") {
             scene.addLight(LightFactory::createLight(LightType::POINT, position, color, intensity));
         } else if (type == "ambient") {
             scene.addLight(LightFactory::createLight(LightType::AMBIENT, position, color, intensity));
         } else if (type == "directional") {
-            scene.addLight(LightFactory::createLight(position, color, intensity, Vector(getVector<Vector>(Light["direction"], convertInt<int16_t>))));
+            if (!light.exists("direction")) {
+                throw ParserException{"Directional lights must have a direction setting."};
+            }
+            Vector direction(getVector<Vector>(light["direction"], convertInt<int16_t>));
+            scene.addLight(LightFactory::createLight(position, color, intensity, direction));
         } else {
             throw ParserException{"Invalid light type"};
         }
