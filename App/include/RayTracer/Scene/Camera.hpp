@@ -16,21 +16,27 @@ namespace RayTracer {
         public:
             Camera() = default;
             ~Camera() = default;
-            Camera(uint16_t fov, Vector position, Vector direction, Vector up)
-                : m_fov(fov), m_origin(position), m_direction(direction), m_up(up) {};
+            Camera(uint16_t fov, Vector origin, Vector direction)
+                : m_fov(fov), m_origin(origin), m_direction(direction) {};
 
             void setFov(const uint16_t &fov) { m_fov = fov; };
+            void setCameraScreen(const Rectangle3D &cameraScreen) { m_cameraScreen = cameraScreen; };
 
             [[nodiscard]] const uint16_t &getFov() const { return m_fov; };
             [[nodiscard]] const Vector &getOrigin() const { return m_origin; };
             [[nodiscard]] const Vector &getDirection() const { return m_direction; };
-            [[nodiscard]] const Vector &getUp() const { return m_up; };
+            [[nodiscard]] const Rectangle3D &getCameraScreen() const { return m_cameraScreen; };
+
+            [[nodiscard]] std::pair<Vector, Vector> ray(double u, double v) const {
+                Vector point{m_cameraScreen.pointAt(u, v)};
+                return std::make_pair(m_origin, Vector{point.getX() - m_origin.getX(), point.getY() - m_origin.getY(), point.getZ() - m_origin.getZ()} + m_direction);
+            }
 
         private:
             uint16_t m_fov{0};
             Vector m_origin{0, 0, 0};
-            Vector m_direction{0, 0, -1};
-            Vector m_up{0, 1, 0};
+            Vector m_direction{0, 0, 0};
+            Rectangle3D m_cameraScreen{{0, 0, 0},{0, 0, 0},{0, 0, 0}};
 
     }; // class Camera
 

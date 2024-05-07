@@ -59,18 +59,18 @@ namespace RayTracer {
                         static_cast<double>(m_position.z * other.getZ())
                 };
             };
-            Vector operator*(const int16_t &scalar) const {
+            Vector operator*(const double &scalar) const {
                 return {
-                    static_cast<int16_t>(m_position.x * scalar),
-                    static_cast<int16_t>(m_position.y * scalar),
-                    static_cast<int16_t>(m_position.z * scalar)
+                    static_cast<double>(m_position.x * scalar),
+                    static_cast<double>(m_position.y * scalar),
+                    static_cast<double>(m_position.z * scalar)
                 };
             };
-            Vector operator/(const int16_t &scalar) const {
+            Vector operator/(const double &scalar) const {
                 return {
-                    static_cast<int16_t>(m_position.x / scalar),
-                    static_cast<int16_t>(m_position.y / scalar),
-                    static_cast<int16_t>(m_position.z / scalar)
+                    static_cast<double>(m_position.x / scalar),
+                    static_cast<double>(m_position.y / scalar),
+                    static_cast<double>(m_position.z / scalar)
                 };
             };
 
@@ -79,9 +79,9 @@ namespace RayTracer {
             [[nodiscard]] double dot(const Vector &other) const { return m_position.x * other.getX() + m_position.y * other.getY() + m_position.z * other.getZ(); };
 
             [[nodiscard]] Vector cross(const Vector &other) const { return {
-                    (m_position.y * other.getZ() - m_position.z * other.getY()),
-                    (m_position.z * other.getX() - m_position.x * other.getZ()),
-                    (m_position.x * other.getY() - m_position.y * other.getX())
+                    m_position.y * other.getZ() - m_position.z * other.getY(),
+                    m_position.z * other.getX() - m_position.x * other.getZ(),
+                    m_position.x * other.getY() - m_position.y * other.getX()
                 };
             };
 
@@ -106,7 +106,7 @@ namespace RayTracer {
         Rectangle3D(const Vector& origin, const Vector& bottom_side, const Vector& left_side)
             : m_origin(origin), m_bottom_side(bottom_side), m_left_side(left_side) {}
 
-        [[nodiscard]] Vector pointAt(int16_t u, int16_t v) const { return m_origin + m_bottom_side * u + m_left_side * v; };
+        [[nodiscard]] Vector pointAt(double u, double v) const { return m_origin + m_bottom_side * u + m_left_side * v; };
     }; // class Rectangle3D
 
 }; // namespace RayTracer

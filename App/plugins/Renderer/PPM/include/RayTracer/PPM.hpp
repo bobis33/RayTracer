@@ -23,7 +23,9 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return PPM_RENDERER; };
 
-            void render(const std::vector<std::unique_ptr<AShape>>& shapes, const Camera &camera) override;
+            void render(const std::vector<std::unique_ptr<AShape>>& shapes, Camera &camera) override;
+
+            void writePixels(const std::unique_ptr<AShape> &shape, const Camera &camera, unsigned short x, unsigned short y);
 
     }; // class PPM
 

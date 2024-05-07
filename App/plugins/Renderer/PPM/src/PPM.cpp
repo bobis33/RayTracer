@@ -10,73 +10,57 @@
 
 #include "RayTracer/PPM.hpp"
 
-void RayTracer::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const Camera &camera)
+void RayTracer::PPM::writePixels(const std::unique_ptr<AShape> &shape, const Camera &camera, unsigned short x, unsigned short y)
 {
-    uint16_t width = getResolution().getWidth();
-    uint16_t height = getResolution().getHeight();
+    switch (shape->getType()) {
+        case ShapeType::PLANE:
 
-    Vector cameraOrigin(camera.getOrigin());
-    Vector cameraDirection(camera.getDirection());
-    int16_t aspectRatio = static_cast<int16_t>(width / height);
-    Rectangle3D cameraScreen(RayTracer::Vector(-aspectRatio, -1, 0), RayTracer::Vector(2 * aspectRatio, 0, 0), RayTracer::Vector(0, 2, 0));
-
-    Cameraa cam(cameraOrigin, cameraScreen, cameraDirection);
-
-    Color backgroundColor(this->getBackgroundColor().getValue());
-    std::vector<std::vector<RayTracer::Color>> pixels(height, std::vector<RayTracer::Color>(width));
-    for (unsigned long y = 0; y < height; y++) {
-        for (unsigned long x = 0; x < width; x++) {
-            pixels[y][x] = backgroundColor;
-        }
-    }
-    setPixels(pixels);
-
-    for(const auto &shape : shapes) {
-        Vector position(shape->getPosition());
-        //std::cout << +a.getX() << " " << +a.getY() << " " << +a.getZ() << std::endl;
-        switch (shape->getType()) {
-            case ShapeType::SPHERE:
-                Color(shape->getMaterial().getColor());
-                break;
-            default:
-                break;
-        }
-    }
-
-    //RayTracer::Sphere s(point3D, radius);
-
-    //std::vector<std::vector<RayTracer::Color> > pixels(height, std::vector<RayTracer::Color>(width));
-
-    /* for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            double u = static_cast<double>(x) / width;
-            double v = static_cast<double>(y) / height;
-
-            RayTracer::Ray r = cam.ray(u, v);
-
-            if (s.hits(r)) {
-                pixels[y][x] = RayTracer::Color(255, 0, 0);
+            break;
+        case ShapeType::SPHERE:
+            if (shape->hits(camera.ray(static_cast<double>(x) / getResolution().getWidth(),
+                                       static_cast<double>(y) / getResolution().getHeight()))) {
+                getPixels()[y][x].setColor(shape->getMaterial().getColor().getValue());
             } else {
-                pixels[y][x] = RayTracer::Color(0, 0, 0);
+                getPixels()[y][x].setColor(getBackgroundColor().getValue());
+            }
+            break;
+
+        case ShapeType::CONE:
+            break;
+
+        case ShapeType::CYLINDER:
+            break;
+
+        default:
+            break;
+        }
+
+}
+
+void RayTracer::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, Camera &camera)
+{
+    setPixels({getResolution().getHeight(), std::vector<RayTracer::Color>(getResolution().getWidth())});
+
+    for(unsigned short y = 0; y < getResolution().getHeight(); y++) {
+        for (unsigned short x = 0; x < getResolution().getWidth(); x++) {
+            for(const auto &shape : shapes) {
+
+                writePixels(shape, camera, x, y);
             }
         }
-    } */
+    }
 
     std::ofstream file(getName() + ".ppm");
     if (file.is_open()) {
-        file << "P6\n" << width << " " << height << "\n255\n";
+        file << "P6\n" << getResolution().getWidth() << " " << getResolution().getHeight() << "\n255\n";
 
-        for (unsigned long y = 0; y < height; y++) {
-            for (unsigned long x = 0; x < width; x++) {
-                file << static_cast<char>(getPixels()[y][x].getValue().r) << static_cast<char>(getPixels()[y][x].getValue().g) << static_cast<char>(getPixels()[y][x].getValue().b);
-            }
+        for (const auto& row : getPixels()) {
+            file.write(reinterpret_cast<const char*>(row.data()), static_cast<long>(row.size() * sizeof(Color)));
         }
         file.close();
-
     }
 
     std::string command = "open " + getName() + ".ppm";
     system(command.c_str());
     return;
-
 }

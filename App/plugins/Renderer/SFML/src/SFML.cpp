@@ -10,7 +10,7 @@
 
 #include "RayTracer/SFML.hpp"
 
-void RayTracer::SFML::render(const std::vector<std::unique_ptr<AShape>> &shapes, const Camera &camera)
+void RayTracer::SFML::render(const std::vector<std::unique_ptr<AShape>> &shapes, Camera &camera)
 {
     (void) shapes;
     sf::RenderWindow window(sf::VideoMode(getResolution().getWidth(), getResolution().getWidth()), getName());

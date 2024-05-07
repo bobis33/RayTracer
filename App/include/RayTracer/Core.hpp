@@ -20,7 +20,7 @@ namespace RayTracer {
             Core() = default;
             ~Core() = default;
 
-            static void runRayTracer(const Scene &scene);
+            static void runRayTracer(Scene &scene);
 
             class CoreException : public std::exception
             {

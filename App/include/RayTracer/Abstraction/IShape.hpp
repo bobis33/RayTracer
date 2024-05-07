@@ -31,6 +31,8 @@ namespace RayTracer {
             [[nodiscard]] virtual Vector& getRotation() = 0;
             [[nodiscard]] virtual double getRadius() const = 0;
 
+            [[nodiscard]] virtual bool hits(std::pair<Vector, Vector> ray) = 0;
+
     }; // IShape
 
 } // namespace RayTracer
