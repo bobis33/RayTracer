@@ -16,12 +16,15 @@ namespace RayTracer {
     class LightFactory {
 
         public:
-            static std::unique_ptr<ALight> createLight(const LightType &type,
+            static std::unique_ptr<ALight> createLight(const Color &color,
                                                        const float &intensity);
-            static std::unique_ptr<ALight> createLight(const LightType &type,
-                                                       const Color &color,
+            static std::unique_ptr<ALight> createLight(const Color &color,
                                                        const float &intensity,
-                                                       const Vector &direction);
+                                                       const Vector &direction,
+                                                       const Vector &position);
+            static std::unique_ptr<ALight> createLight(const Color &color,
+                                                       const float &intensity,
+                                                       const Vector &position);
 
     }; // class LightFactory
 

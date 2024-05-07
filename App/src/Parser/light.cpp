@@ -12,10 +12,10 @@ RayTracer::LightType RayTracer::Parser::parseLightType(const std::string &type)
 {
     if (type == "ambient") {
         return LightType::AMBIENT;
-    } else if (type == "point") {
-        return LightType::POINT;
     } else if (type == "directional") {
         return LightType::DIRECTIONAL;
+    } else if (type == "point") {
+        return LightType::POINT;
     }
     throw ParserException{"Invalid light type"};
 }
@@ -40,20 +40,25 @@ void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Sce
         float intensity = light["intensity"];
 
         switch (lightType) {
-            case LightType::AMBIENT:
-                scene.addLight(LightFactory::createLight(LightType::AMBIENT, intensity));
+            case LightType::AMBIENT: {
+                scene.addLight(LightFactory::createLight(color, intensity));
                 break;
-            case LightType::POINT:
-            case LightType::DIRECTIONAL: {
+            }
+            case LightType::POINT: {
                 if (!light.exists("position")) {
                     throw ParserException{"Point lights must have a position setting."};
                 }
                 Vector position(getVector<Vector>(light["position"], convertInt<double>));
-                if (!light.exists("direction")) {
-                    throw ParserException{"Directional lights must have a direction setting."};
+                scene.addLight(LightFactory::createLight(color, intensity, position));
+                break;
+            }
+            case LightType::DIRECTIONAL: {
+                if (!light.exists("position") || !light.exists("direction")) {
+                    throw ParserException{"Directional lights must have a position and direction setting."};
                 }
+                Vector position(getVector<Vector>(light["position"], convertInt<double>));
                 Vector direction(getVector<Vector>(light["direction"], convertInt<double>));
-                scene.addLight(LightFactory::createLight(lightType, color, intensity, direction));
+                scene.addLight(LightFactory::createLight(color, intensity, direction, position));
                 break;
             }
             default:

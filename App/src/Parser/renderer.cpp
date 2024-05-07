@@ -18,7 +18,7 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     }
     const libconfig::Setting &resolution = renderer["resolution"];
     Resolution res(convertInt<uint16_t>(resolution[0]), convertInt<uint16_t>(resolution[1]));
-    RendererType rendererType = RendererType::NONE;
+    RendererType rendererType(RendererType::NONE);
     if (type == "sfml") {
         rendererType = RendererType::SFML;
     } else if (type == "ppm") {
@@ -33,6 +33,6 @@ void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene 
     if (!renderer.exists("backgroundColor")) {
         throw ParserException{"Renderer must have a background color setting."};
     }
-    Color color = getVector<Color>(renderer["backgroundColor"], convertInt<uint8_t>);
+    Color color(getVector<Color>(renderer["backgroundColor"], convertInt<uint8_t>));
     scene.setRenderer(RendererFactory::createRenderer(rendererType, name, res, color));
 }

@@ -9,8 +9,7 @@
 
 std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position)
 {
-    std::unique_ptr<AShape> shape;
-    shape = PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE);
+    std::unique_ptr<AShape> shape(PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE));
 
     shape->setType(ShapeType::PLANE);
     shape->getPosition().setVector(position.getValue());
@@ -20,8 +19,7 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Ve
 std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position,
                                                                         const double &radius)
 {
-    std::unique_ptr<AShape> shape;
-    shape = PluginLoader::getInstance().getPlugin<AShape>(SPHERE_SHAPE);
+    std::unique_ptr<AShape> shape(PluginLoader::getInstance().getPlugin<AShape>(SPHERE_SHAPE));
 
     shape->setType(ShapeType::SPHERE);
     shape->getPosition().setVector(position.getValue());
