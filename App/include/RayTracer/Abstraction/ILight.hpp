@@ -22,6 +22,8 @@ namespace RayTracer {
             virtual void setType(const LightType &type) = 0;
             virtual void setIntensity(const float &intensity) = 0;
 
+            virtual Color LightColor(const Vector &normal, Color col) = 0;
+
             [[nodiscard]] virtual const LightType& getType() const = 0;
             [[nodiscard]] virtual Vector& getPosition() = 0;
             [[nodiscard]] virtual Vector& getDirection() = 0;

@@ -15,7 +15,11 @@ namespace RayTracer {
     class Directional : public ALight {
 
         public:
+            Directional() = default;
+            Directional(Vector direction, float intensity);
             ~Directional() override = default;
+
+            Color LightColor(const Vector &normal, Color col);
 
             [[nodiscard]] std::string getPluginName() const override { return DIRECTIONAL_LIGHT; };
 

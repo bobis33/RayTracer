@@ -20,6 +20,8 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return POINT_LIGHT; };
 
+            Color LightColor(const Vector &normal, Color col);
+
             [[nodiscard]] Vector& getDirection() override { throw RunTimeException("Ambient light has no direction");};
 
     }; // class Point
