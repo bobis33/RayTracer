@@ -17,7 +17,6 @@ SET(INCLUDE_DIR
 set(WARNING_FLAGS
         -Wall
         -Wextra
-        -Werror
         -Wdeprecated-copy
         -Wmisleading-indentation
         -Wnull-dereference

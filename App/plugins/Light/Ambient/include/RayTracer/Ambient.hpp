@@ -18,7 +18,7 @@ namespace RayTracer {
         public:
             ~Ambient() override = default;
 
-            Color LightColor(const Vector &normal, Color col) override;
+            Color LightColor(const Vector &normal, Color col) override {return {0, 0, 0};};
 
             [[nodiscard]] std::string getPluginName() const override { return AMBIENT_LIGHT; };
 
