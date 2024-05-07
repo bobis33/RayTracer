@@ -27,6 +27,7 @@ namespace RayTracer {
             static ShapeType parseShapeType(const std::string &type);
             static void parseShapes(const libconfig::Setting &shapesSetting, Scene &scene);
             static std::unique_ptr<AMaterial> parseMaterial(const libconfig::Setting &materialSetting);
+            static LightType parseLightType(const std::string &type);
             static void parseLights(const libconfig::Setting &lightsSetting, Scene &scene);
 
             template <typename T, typename ConversionFunc>
