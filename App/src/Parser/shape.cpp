@@ -21,13 +21,19 @@ RayTracer::ShapeType RayTracer::Parser::parseShapeType(const std::string &type)
     } if (type == "cone") {
         return ShapeType::CONE;
     }
-    throw ParserException{"Invalid material type"};
+    throw ParserException{"Invalid shape type"};
 }
 
 std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const libconfig::Setting &materialSetting)
 {
     std::unique_ptr<CompositeMaterial> composite = std::make_unique<CompositeMaterial>();
-    Color color(convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2]));
+    if (!materialSetting.exists("color")) {
+        throw ParserException{"Material must have color settings."};
+    }
+    uint8_t r = convertInt<uint8_t>(materialSetting["color"][0]);
+    uint8_t g = convertInt<uint8_t>(materialSetting["color"][1]);
+    uint8_t b = convertInt<uint8_t>(materialSetting["color"][2]);
+    Color color(r, g, b);
     if (!materialSetting.exists("reflectivity")) {
         throw ParserException{"Material must have reflectivity setting."};
     }
