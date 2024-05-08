@@ -20,11 +20,13 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return SPHERE_SHAPE; };
 
+            void setHeight(const double &height) override { (void) height; throw RunTimeException("Sphere doesnt have a height"); };
+
             [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Sphere shape does not have a rotation");};
             [[nodiscard]] Vector &getNormal() override { throw RunTimeException("Sphere doesnt have a normal");};
+            [[nodiscard]] const double &getHeight() const override { throw RunTimeException("Plane doesnt have a height"); };
 
-        [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
-
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
 
     }; // class Sphere
 

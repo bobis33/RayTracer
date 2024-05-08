@@ -26,7 +26,8 @@ namespace RayTracer {
             static std::unique_ptr<AShape> createShape(const ShapeType &type,
                                                        const Vector &position,
                                                        const Vector &rotation,
-                                                       const double &radius);
+                                                       const double &radius,
+                                                       const double &height);
     }; // class ShapeFactory
 
 } // namespace RayTracer

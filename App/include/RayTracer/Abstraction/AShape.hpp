@@ -20,6 +20,7 @@ namespace RayTracer {
 
             void setType(const ShapeType &type) override { m_type = type; };
             void setRadius(const double& radius) override { m_radius = radius; };
+            void setHeight(const double& height) override { m_height = height; };
             void setMaterial(std::unique_ptr<AMaterial> material) override { m_material = std::move(material); };
 
             [[nodiscard]] const ShapeType& getType() const override { return m_type; };
@@ -27,7 +28,9 @@ namespace RayTracer {
             [[nodiscard]] Vector& getPosition() override { return m_position; };
             [[nodiscard]] Vector& getNormal() override { return m_normal; };
             [[nodiscard]] Vector& getRotation() override { return m_rotation; };
-            [[nodiscard]] double getRadius() const override { return m_radius; };
+            [[nodiscard]] const double &getRadius() const override { return m_radius; };
+            [[nodiscard]] const double &getHeight() const override { return m_height; };
+
             [[nodiscard]] Vector getDistance(const Vector& point) override { return point - m_position; };
 
         private:
@@ -38,6 +41,7 @@ namespace RayTracer {
             Vector m_normal{0, 0, 0};
             Vector m_rotation{0, 0, 0};
             double m_radius{0};
+            double m_height{0};
 
     }; // class AShape
 

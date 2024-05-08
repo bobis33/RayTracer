@@ -32,7 +32,8 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Ve
 std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const ShapeType &type,
                                                                         const Vector &position,
                                                                         const Vector &rotation,
-                                                                        const double &radius)
+                                                                        const double &radius,
+                                                                        const double &height)
 {
     std::unique_ptr<AShape> shape;
 
@@ -51,5 +52,6 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Sh
     shape->getPosition().setVector(position.getValue());
     shape->getRotation().setVector(rotation.getValue());
     shape->setRadius(radius);
+    shape->setHeight(height);
     return shape;
 }

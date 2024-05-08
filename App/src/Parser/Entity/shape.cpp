@@ -77,11 +77,11 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
                 break;
             case ShapeType::CYLINDER:
             case ShapeType::CONE: {
-                if (!shapeSetting.exists("radius") || !shapeSetting.exists("rotation")) {
-                    throw ParserException{"Cylinder and Cone must have a radius and rotation setting."};
+                if (!shapeSetting.exists("radius") || !shapeSetting.exists("rotation") || !shapeSetting.exists("height")) {
+                    throw ParserException{"Cylinder and Cone must have a radius, a rotation and a height setting."};
                 }
                 rotation.setVector(getVector<Vector>(shapeSetting["rotation"], convertInt<double>).getValue());
-                shape = ShapeFactory::createShape(shapeType, position, rotation, convertInt<double>(shapeSetting["radius"]));
+                shape = ShapeFactory::createShape(shapeType, position, rotation, convertInt<double>(shapeSetting["radius"]), convertInt<double>(shapeSetting["height"]));
                 break;
             }
             default:
