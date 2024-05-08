@@ -21,11 +21,12 @@ namespace RayTracer {
             [[nodiscard]] std::string getPluginName() const override { return SPHERE_SHAPE; };
 
             [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Sphere shape does not have a rotation");};
+            [[nodiscard]] Vector &getNormal() override { throw RunTimeException("Sphere doesnt have a normal");};
 
-            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
+        [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
 
 
-    }; // class SphereShape
+    }; // class Sphere
 
 } // namespace RayTracer
 

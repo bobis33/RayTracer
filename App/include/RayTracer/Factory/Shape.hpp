@@ -17,7 +17,8 @@ namespace RayTracer {
 
         public:
 
-            static std::unique_ptr<AShape> createShape(const Vector &position);
+            static std::unique_ptr<AShape> createShape(const Vector &position,
+                                                       const Vector &normal);
 
             static std::unique_ptr<AShape> createShape(const Vector &position,
                                                        const double &radius);

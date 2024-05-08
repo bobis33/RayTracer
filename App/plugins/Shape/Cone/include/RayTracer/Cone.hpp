@@ -9,6 +9,7 @@
 #define RAYTRACER_CONE_SHAPE_HPP
 
 #include "RayTracer/Abstraction/AShape.hpp"
+#include "RayTracer/Exception/RunTime.hpp"
 
 namespace RayTracer {
 
@@ -18,6 +19,7 @@ namespace RayTracer {
             ~Cone() override = default;
 
             [[nodiscard]] std::string getPluginName() const override { return CONE_SHAPE; };
+            [[nodiscard]] Vector &getNormal() override { throw RunTimeException("Cone doesnt have a normal"); };
 
             [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override { return false; };
 

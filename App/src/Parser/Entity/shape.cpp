@@ -30,7 +30,7 @@ std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const lib
     if (!materialSetting.exists("color")) {
         throw ParserException{"Material must have color settings."};
     }
-    Color color(convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2]));
+    Color color{convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2])};
     if (!materialSetting.exists("reflectivity")) {
         throw ParserException{"Material must have reflectivity setting."};
     }
@@ -49,45 +49,39 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
 {
     for (const auto& shapeSetting : shapesSetting) {
         std::unique_ptr<AShape> shape = nullptr;
-        std::unique_ptr<AMaterial> material = nullptr;
-        if (!shapeSetting.exists("type")) {
-            throw ParserException{"Shape must have a type setting."};
+        std::unique_ptr<AMaterial> material = std::make_unique<CompositeMaterial>();
+        Vector normal;
+        Vector rotation;
+
+        if (!shapeSetting.exists("type") || !shapeSetting.exists("position") || !shapeSetting.exists("material")) {
+            throw ParserException{"Shape must have a type, position and material setting."};
         }
         ShapeType shapeType(parseShapeType(shapeSetting["type"]));
-        if (!shapeSetting.exists("position")) {
-            throw ParserException{"Shape must have a position setting."};
-        }
-        Vector position(getVector<Vector>(shapeSetting["position"], convertInt<double>));
-        double radius = 0;
-        if (!shapeSetting.exists("material")) {
-            throw ParserException{"Shape must have material setting."};
-        }
+        Vector position{getVector<Vector>(shapeSetting["position"], convertInt<double>)};
         libconfig::Setting &materialSetting = shapeSetting["material"];
-        material = std::make_unique<CompositeMaterial>();
         material = parseMaterial(materialSetting);
 
         switch (shapeType) {
             case ShapeType::PLANE:
-                shape = ShapeFactory::createShape(position);
+                if (!shapeSetting.exists("normal")) {
+                    throw ParserException{"Plane must have a normal setting."};
+                }
+                normal.setVector(getVector<Vector>(shapeSetting["normal"], convertInt<double>).getValue());
+                shape = ShapeFactory::createShape(position, normal);
                 break;
             case ShapeType::SPHERE:
                 if (!shapeSetting.exists("radius")) {
                     throw ParserException{"Sphere must have a radius setting."};
                 }
-                radius = convertInt<double>(shapeSetting["radius"]);
-                shape = ShapeFactory::createShape(position, radius);
+                shape = ShapeFactory::createShape(position, convertInt<double>(shapeSetting["radius"]));
                 break;
             case ShapeType::CYLINDER:
             case ShapeType::CONE: {
-                if (!shapeSetting.exists("radius")) {
-                    throw ParserException{"Cylinder and Cone must have a radius setting."};
+                if (!shapeSetting.exists("radius") || !shapeSetting.exists("rotation")) {
+                    throw ParserException{"Cylinder and Cone must have a radius and rotation setting."};
                 }
-                radius = convertInt<double>(shapeSetting["radius"]);
-                if (!shapeSetting.exists("rotation")) {
-                    throw ParserException{"Cylinder and Cone must have a rotation setting."};
-                }
-                Vector rotation(getVector<Vector>(shapeSetting["rotation"], convertInt<double>));
-                shape = ShapeFactory::createShape(shapeType, position, rotation, radius);
+                rotation.setVector(getVector<Vector>(shapeSetting["rotation"], convertInt<double>).getValue());
+                shape = ShapeFactory::createShape(shapeType, position, rotation, convertInt<double>(shapeSetting["radius"]));
                 break;
             }
             default:

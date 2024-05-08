@@ -27,6 +27,7 @@ namespace RayTracer {
             [[nodiscard]] virtual const ShapeType& getType() const = 0;
             [[nodiscard]] virtual AMaterial& getMaterial() = 0;
             [[nodiscard]] virtual Vector& getPosition() = 0;
+            [[nodiscard]] virtual Vector& getNormal() = 0;
             [[nodiscard]] virtual Vector& getRotation() = 0;
             [[nodiscard]] virtual double getRadius() const = 0;
 

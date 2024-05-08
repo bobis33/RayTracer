@@ -9,6 +9,7 @@
 #define RAYTRACER_CYLINDER_SHAPE_HPP
 
 #include "RayTracer/Abstraction/AShape.hpp"
+#include "RayTracer/Exception/RunTime.hpp"
 
 namespace RayTracer {
 
@@ -18,6 +19,7 @@ namespace RayTracer {
             ~Cylinder() override = default;
 
             [[nodiscard]] std::string getPluginName() const override { return CYLINDER_SHAPE; };
+            [[nodiscard]] Vector &getNormal() override { throw RunTimeException("Cylinder doesnt have a normal");};
 
             [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override { return false; };
 

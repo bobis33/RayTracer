@@ -7,12 +7,14 @@
 
 #include "RayTracer/Factory/Shape.hpp"
 
-std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position)
+std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position,
+                                                                        const Vector &normal)
 {
     std::unique_ptr<AShape> shape(PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE));
 
     shape->setType(ShapeType::PLANE);
     shape->getPosition().setVector(position.getValue());
+    shape->getNormal().setVector(normal.getValue());
     return shape;
 }
 
