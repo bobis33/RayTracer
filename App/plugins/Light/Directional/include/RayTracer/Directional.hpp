@@ -16,7 +16,6 @@ namespace RayTracer {
 
         public:
             Directional() = default;
-            Directional(Vector direction, float intensity);
             ~Directional() override = default;
 
             Color LightColor(const Vector &normal, Color col);

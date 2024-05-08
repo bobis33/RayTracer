@@ -34,21 +34,15 @@ void RayTracer::PPM::writePixels(bool hit, const color_t &color, std::size_t wid
     }
 }
 
-std::string RayTracer::PPM::getHeader(const std::string &width, const std::string &height)
-{
-    return "P6\n" + width + " " + height + "\n255\n";
-}
-
 void RayTracer::PPM::render(const std::vector<AShape*> &shapes, const Camera &camera)
 {
-    color_t backgroundColor = getBackgroundColor().getValue();
     const auto& width = getResolution().getWidth();
     const auto& height = getResolution().getHeight();
     setPixels({height, std::vector<RayTracer::Color>(width)});
 
     for (auto &row : getPixels()) {
         for (auto &pixel : row) {
-            pixel.setColor(backgroundColor);
+            pixel.setColor(getBackgroundColor().getValue());
         }
     }
 

@@ -23,7 +23,7 @@ namespace RayTracer {
 
             void render(const std::vector<AShape*> &shapes, const Camera &camera) override;
 
-            [[nodiscard]] static std::string getHeader(const std::string &width, const std::string &height);
+            [[nodiscard]] static std::string getHeader(const std::string &width, const std::string &height) { return "P6\n" + width + " " + height + "\n255\n"; };
 
             void writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height);
             void writeToFile(const std::string &width, const std::string &height);
