@@ -9,6 +9,7 @@
 #define RAYTRACER_CAMERA_HPP
 
 #include "RayTracer/Utils/Vector.hpp"
+#include "RayTracer/Utils/Rectangle3D.hpp"
 
 namespace RayTracer {
 
@@ -17,7 +18,7 @@ namespace RayTracer {
             Camera() = default;
             ~Camera() = default;
             Camera(uint16_t fov, Vector origin, Vector direction)
-                : m_fov(fov), m_origin(origin), m_direction(direction) {};
+                : m_fov{fov}, m_origin{origin}, m_direction{direction} {};
 
             void setFov(const uint16_t &fov) { m_fov = fov; };
             void setCameraScreen(const Rectangle3D &cameraScreen) { m_cameraScreen = cameraScreen; };

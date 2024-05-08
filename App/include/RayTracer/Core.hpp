@@ -8,8 +8,6 @@
 #ifndef RAYTRACER_CORE_HPP
 #define RAYTRACER_CORE_HPP
 
-#include <memory>
-
 #include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/Scene/Scene.hpp"
 

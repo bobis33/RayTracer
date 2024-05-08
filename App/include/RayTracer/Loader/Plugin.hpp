@@ -20,6 +20,7 @@ namespace RayTracer {
     class PluginLoader {
 
         public:
+
             using PluginCreator = std::unique_ptr<IPlugin> (*)();
 
             ~PluginLoader() = default;
@@ -30,6 +31,7 @@ namespace RayTracer {
             std::unique_ptr<T> getPlugin(const std::string &pluginName);
 
         private:
+
             PluginLoader() { loadPlugins(); };
 
             void loadPlugins();

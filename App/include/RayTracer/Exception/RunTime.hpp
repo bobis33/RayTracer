@@ -8,13 +8,14 @@
 #ifndef RAYTRACER_RUNTIME_EXCEPTION_HPP
 #define RAYTRACER_RUNTIME_EXCEPTION_HPP
 
-#include <iostream>
+#include <string>
 
 namespace RayTracer {
 
     class RunTimeException : public std::exception
     {
         public:
+
             explicit RunTimeException(std::string msg) : m_msg{std::move(msg)} {}
             ~RunTimeException() override = default;
 
@@ -26,6 +27,7 @@ namespace RayTracer {
             [[nodiscard]] const char *what() const noexcept override { return m_msg.c_str(); };
 
         private:
+
             std::string m_msg{0};
 
     }; // class RunTimeException

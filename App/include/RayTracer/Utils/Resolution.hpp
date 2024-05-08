@@ -22,7 +22,7 @@ namespace RayTracer {
         public:
             Resolution() : m_resolution{1920, 1080} {};
             Resolution(const uint16_t &width, const uint16_t &height) : m_resolution{width, height} {};
-            explicit Resolution(const resolution_t &resolution) : m_resolution(resolution) {};
+            explicit Resolution(const resolution_t &resolution) : m_resolution{resolution} {};
             ~Resolution() = default;
 
             void setWidth(const uint16_t &width) { m_resolution.width = width; };
@@ -35,8 +35,8 @@ namespace RayTracer {
             [[nodiscard]] resolution_t getValue() const { return m_resolution; };
 
         private:
-            resolution_t m_resolution{0, 0};
 
+            resolution_t m_resolution{0, 0};
 
     }; // class Resolution
 

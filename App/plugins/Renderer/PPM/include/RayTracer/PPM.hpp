@@ -8,8 +8,6 @@
 #ifndef RAYTRACER_PPM_RENDERER_HPP
 #define RAYTRACER_PPM_RENDERER_HPP
 
-#include <vector>
-
 #include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/Scene/Camera.hpp"
@@ -23,9 +21,12 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return PPM_RENDERER; };
 
-            void render(const std::vector<std::unique_ptr<AShape>>& shapes, Camera &camera) override;
+            void render(const std::vector<AShape*> &shapes, const Camera &camera) override;
 
-            void writePixels(const std::unique_ptr<AShape> &shape, const Camera &camera, unsigned short x, unsigned short y);
+            [[nodiscard]] static std::string getHeader(const std::string &width, const std::string &height);
+
+            void writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height);
+            void writeToFile(const std::string &width, const std::string &height);
 
     }; // class PPM
 

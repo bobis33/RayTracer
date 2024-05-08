@@ -15,6 +15,7 @@ namespace RayTracer {
     class ARenderer : public IRenderer {
 
         public:
+
             ~ARenderer() override = default;
 
             void setType(const RendererType &rendererType) override { m_type = rendererType; };
@@ -28,6 +29,7 @@ namespace RayTracer {
             void setPixels(const std::vector<std::vector<RayTracer::Color>>& pixels) override { m_pixels = pixels; };
 
         private:
+
             RendererType m_type{RendererType::NONE};
             Resolution m_resolution{1920, 1080};
             std::string m_name{"Default Renderer Name"};

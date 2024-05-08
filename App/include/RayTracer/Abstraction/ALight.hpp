@@ -15,6 +15,7 @@ namespace RayTracer {
     class ALight : public ILight {
 
         public:
+
             ~ALight() override = default;
 
             void setType(const LightType &type) override { m_type = type; };
@@ -27,6 +28,7 @@ namespace RayTracer {
             [[nodiscard]] float& getIntensity() override { return m_intensity; };
 
         private:
+
             LightType m_type{LightType::NONE};
             Vector m_position{0, 0, 0};
             Vector m_direction{0, 0, 0};
