@@ -25,28 +25,17 @@ namespace RayTracer {
             [[nodiscard]] double getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
             [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Plane shape does not have a rotation");};
 
-        [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override {
-
-            // MARCHE PAS JE CROIS
-            
-            Vector normal = getPosition().cross(Vector(0, 1, 0)).normalize();
-            double dotProduct = normal.dot(ray.second);
-
-            if (dotProduct == 0) {
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override {
+                Vector position = getPosition();
+                Vector normal = Vector(0, 1, 0);
+                double denom = getPosition().dot(ray.second);
+                if (denom > 1e-6) {
+                    Vector p0l0 = getPosition() - ray.first;
+                    double t = p0l0.dot(normal) / denom;
+                    return t >= 0;
+                }
                 return false;
             }
-
-            double distance = normal.dot(getPosition() - ray.first) / dotProduct;
-
-            if (distance < 0) {
-                return false;
-            }
-
-            return true;
-        }
-
-
-
     }; // class Plane
 
 } // namespace RayTracer

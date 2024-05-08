@@ -9,6 +9,7 @@
 #define RAYTRACER_CONE_SHAPE_HPP
 
 #include "RayTracer/Abstraction/AShape.hpp"
+#include "RayTracer/Exception/RunTime.hpp"
 
 namespace RayTracer {
 

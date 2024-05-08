@@ -23,7 +23,7 @@ namespace RayTracer {
 
         public:
             Vector() : m_position{0, 0, 0} {};
-            Vector(const double &x, const double &y, const double &z) : m_position(x, y, z) {};
+            Vector(const double &x, const double &y, const double &z) : m_position{x, y, z} {};
             explicit Vector(const vector_t &position) : m_position(position) {};
             ~Vector() = default;
 
