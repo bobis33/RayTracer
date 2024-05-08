@@ -30,10 +30,7 @@ std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const lib
     if (!materialSetting.exists("color")) {
         throw ParserException{"Material must have color settings."};
     }
-    uint8_t r = convertInt<uint8_t>(materialSetting["color"][0]);
-    uint8_t g = convertInt<uint8_t>(materialSetting["color"][1]);
-    uint8_t b = convertInt<uint8_t>(materialSetting["color"][2]);
-    Color color(r, g, b);
+    Color color(convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2]));
     if (!materialSetting.exists("reflectivity")) {
         throw ParserException{"Material must have reflectivity setting."};
     }
@@ -89,11 +86,8 @@ void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Sce
                 if (!shapeSetting.exists("rotation")) {
                     throw ParserException{"Cylinder and Cone must have a rotation setting."};
                 }
-                Vector rotation = getVector<Vector>(shapeSetting["rotation"], convertInt<double>);
-                shape = ShapeFactory::createShape(shapeType,
-                                                  position,
-                                                  rotation,
-                                                  radius);
+                Vector rotation(getVector<Vector>(shapeSetting["rotation"], convertInt<double>));
+                shape = ShapeFactory::createShape(shapeType, position, rotation, radius);
                 break;
             }
             default:
