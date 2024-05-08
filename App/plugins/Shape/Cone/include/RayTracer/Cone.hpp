@@ -19,6 +19,8 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return CONE_SHAPE; };
 
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override { return false; };
+
     }; // class Cone
 
 } // namespace RayTracer

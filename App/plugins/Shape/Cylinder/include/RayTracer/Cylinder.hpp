@@ -19,6 +19,8 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return CYLINDER_SHAPE; };
 
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override { return false; };
+
     }; // class Cylinder
 
 } // namespace RayTracer

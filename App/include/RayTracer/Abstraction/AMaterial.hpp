@@ -28,6 +28,7 @@ namespace RayTracer {
             [[nodiscard]] const float& getTransparency() const override { return m_transparency; };
 
         private:
+
             MaterialType m_type{MaterialType::NONE};
             Color m_color{Color::getBlack()};
             float m_reflectivity{0.0F};

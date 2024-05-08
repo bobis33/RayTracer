@@ -33,6 +33,7 @@ namespace RayTracer {
             }
 
         private:
+
             std::vector<std::unique_ptr<AMaterial>> m_materials;
 
     }; // class CompositeMaterial

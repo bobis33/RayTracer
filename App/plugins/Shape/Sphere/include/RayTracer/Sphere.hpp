@@ -20,7 +20,9 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return SPHERE_SHAPE; };
 
-        [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Sphere shape does not have a rotation");};
+            [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Sphere shape does not have a rotation");};
+
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
 
 
     }; // class SphereShape

@@ -28,7 +28,7 @@ namespace RayTracer {
             void addShape(std::unique_ptr<AShape> shape) { m_shapes.emplace_back(std::move(shape)); };
             void addLight(std::unique_ptr<ALight> light) { m_lights.emplace_back(std::move(light)); };
 
-            [[nodiscard]] const Camera& getCamera() const { return m_camera; };
+            [[nodiscard]] Camera& getCamera() { return m_camera; };
             [[nodiscard]] const std::unique_ptr<ARenderer>& getRenderer() const { return m_renderer; };
             [[nodiscard]] const std::vector<std::unique_ptr<AShape>>& getShapes() const { return m_shapes; };
             [[nodiscard]] const std::vector<std::unique_ptr<ALight>>& getLights() const { return m_lights; };

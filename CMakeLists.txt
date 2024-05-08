@@ -35,12 +35,12 @@ target_sources(${PROJECT_NAME} PRIVATE
         ${SRC_DIR}/main.cpp
         ${SRC_DIR}/core.cpp
         ${SRC_DIR}/Loader/plugin.cpp
-        ${SRC_DIR}/Parser/utils.cpp
         ${SRC_DIR}/Parser/parser.cpp
-        ${SRC_DIR}/Parser/camera.cpp
-        ${SRC_DIR}/Parser/light.cpp
-        ${SRC_DIR}/Parser/renderer.cpp
-        ${SRC_DIR}/Parser/shape.cpp
+        ${SRC_DIR}/Parser/utils.cpp
+        ${SRC_DIR}/Parser/Entity/camera.cpp
+        ${SRC_DIR}/Parser/Entity/light.cpp
+        ${SRC_DIR}/Parser/Entity/renderer.cpp
+        ${SRC_DIR}/Parser/Entity/shape.cpp
         ${SRC_DIR}/Factory/light.cpp
         ${SRC_DIR}/Factory/material.cpp
         ${SRC_DIR}/Factory/renderer.cpp

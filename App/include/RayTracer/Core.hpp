@@ -8,8 +8,6 @@
 #ifndef RAYTRACER_CORE_HPP
 #define RAYTRACER_CORE_HPP
 
-#include <memory>
-
 #include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/Scene/Scene.hpp"
 
@@ -20,7 +18,7 @@ namespace RayTracer {
             Core() = default;
             ~Core() = default;
 
-            static void runRayTracer(const Scene &scene);
+            static void runRayTracer(Scene &scene);
 
             class CoreException : public std::exception
             {

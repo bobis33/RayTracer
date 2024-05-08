@@ -8,8 +8,6 @@
 #ifndef RAYTRACER_IMATERIAL_HPP
 #define RAYTRACER_IMATERIAL_HPP
 
-#include <string>
-
 #include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Constants.hpp"

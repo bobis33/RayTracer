@@ -8,7 +8,9 @@
 #ifndef RAYTRACER_SFML_RENDERER_HPP
 #define RAYTRACER_SFML_RENDERER_HPP
 
+#include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Abstraction/ARenderer.hpp"
+#include "RayTracer/Scene/Camera.hpp"
 
 namespace RayTracer {
 
@@ -20,7 +22,7 @@ namespace RayTracer {
 
             [[nodiscard]] std::string getPluginName() const override { return SFML_RENDERER; };
 
-            void render() override;
+            void render(const std::vector<AShape*> &shapes, const Camera &camera) override;
 
     }; // class SFML
 

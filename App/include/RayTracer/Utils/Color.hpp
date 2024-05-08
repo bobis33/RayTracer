@@ -15,7 +15,7 @@ static constexpr int RGB_HALF = 128;
 
 namespace RayTracer {
 
-    using color_t = struct Color_s {
+    using color_t = struct color_s {
         uint8_t r{0};
         uint8_t g{0};
         uint8_t b{0};
@@ -25,9 +25,9 @@ namespace RayTracer {
 
         public:
 
-            Color() : m_color(0, 0, 0) {};
-            Color(const uint8_t &r, const uint8_t &g, const uint8_t &b) : m_color(r, g, b) {};
-            explicit Color(const color_t &color) : m_color(color) {};
+            Color() : m_color{0, 0, 0} {};
+            Color(const uint8_t &r, const uint8_t &g, const uint8_t &b) : m_color{r, g, b} {};
+            explicit Color(const color_t &color) : m_color{color} {};
             ~Color() = default;
 
             void setColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) { m_color = {r, g, b}; };
@@ -61,6 +61,7 @@ namespace RayTracer {
             static constexpr color_t getDarkYellow() { return color_t{139, 139, 0}; };
 
         private:
+
             color_t m_color{0, 0, 0};
 
     }; // class RGBColor

@@ -23,8 +23,8 @@ namespace RayTracer {
 
         public:
             Vector() : m_position{0, 0, 0} {};
-            Vector(const double &x, const double &y, const double &z) : m_position(x, y, z) {};
-            explicit Vector(const vector_t &position) : m_position(position) {};
+            Vector(const double &x, const double &y, const double &z) : m_position{x, y, z} {};
+            explicit Vector(const vector_t &position) : m_position{position} {};
             ~Vector() = default;
 
             void setX(const double &x) { m_position.x = x; };
@@ -40,23 +40,37 @@ namespace RayTracer {
 
             Vector operator+(const Vector &other) const {
                 return {
-                    static_cast<double>(m_position.x + other.getX()),
-                    static_cast<double>(m_position.y + other.getY()),
-                    static_cast<double>(m_position.z + other.getZ())
+                    m_position.x + other.getX(),
+                    m_position.y + other.getY(),
+                    m_position.z + other.getZ()
                 };
             };
             Vector operator-(const Vector &other) const {
                 return {
-                    static_cast<double>(m_position.x - other.getX()),
-                    static_cast<double>(m_position.y - other.getY()),
-                    static_cast<double>(m_position.z - other.getZ())
+                    m_position.x - other.getX(),
+                    m_position.y - other.getY(),
+                    m_position.z - other.getZ()
                 };
             };
             Vector operator*(const Vector &other) const {
                 return {
-                        static_cast<double>(m_position.x * other.getX()),
-                        static_cast<double>(m_position.y * other.getY()),
-                        static_cast<double>(m_position.z * other.getZ())
+                        m_position.x * other.getX(),
+                        m_position.y * other.getY(),
+                        m_position.z * other.getZ()
+                };
+            };
+            Vector operator*(const double &scalar) const {
+                return {
+                    m_position.x * scalar,
+                    m_position.y * scalar,
+                    m_position.z * scalar
+                };
+            };
+            Vector operator/(const double &scalar) const {
+                return {
+                    m_position.x / scalar,
+                    m_position.y / scalar,
+                    m_position.z / scalar
                 };
             };
 
@@ -65,22 +79,23 @@ namespace RayTracer {
             [[nodiscard]] double dot(const Vector &other) const { return m_position.x * other.getX() + m_position.y * other.getY() + m_position.z * other.getZ(); };
 
             [[nodiscard]] Vector cross(const Vector &other) const { return {
-                    (m_position.y * other.getZ() - m_position.z * other.getY()),
-                    (m_position.z * other.getX() - m_position.x * other.getZ()),
-                    (m_position.x * other.getY() - m_position.y * other.getX())
+                    m_position.y * other.getZ() - m_position.z * other.getY(),
+                    m_position.z * other.getX() - m_position.x * other.getZ(),
+                    m_position.x * other.getY() - m_position.y * other.getX()
                 };
             };
 
             [[nodiscard]] Vector normalize() const {
                 double len = length();
                 return {
-                    static_cast<double>(m_position.x / len),
-                    static_cast<double>(m_position.y / len),
-                    static_cast<double>(m_position.z / len)
+                    m_position.x / len,
+                    m_position.y / len,
+                    m_position.z / len
                 };
             };
 
         private:
+
             vector_t m_position{0, 0, 0};
 
     }; // class Vector

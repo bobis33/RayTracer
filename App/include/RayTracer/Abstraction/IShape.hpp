@@ -10,7 +10,6 @@
 
 #include <memory>
 
-#include "RayTracer/Abstraction/IPlugin.hpp"
 #include "RayTracer/Abstraction/AMaterial.hpp"
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Utils/Vector.hpp"
@@ -26,10 +25,13 @@ namespace RayTracer {
             virtual void setMaterial(std::unique_ptr<AMaterial> material) = 0;
 
             [[nodiscard]] virtual const ShapeType& getType() const = 0;
-            [[nodiscard]] virtual const AMaterial& getMaterial() const = 0;
+            [[nodiscard]] virtual AMaterial& getMaterial() = 0;
             [[nodiscard]] virtual Vector& getPosition() = 0;
             [[nodiscard]] virtual Vector& getRotation() = 0;
             [[nodiscard]] virtual double getRadius() const = 0;
+
+            [[nodiscard]] virtual bool hits(std::pair<Vector, Vector> ray) = 0;
+            [[nodiscard]] virtual Vector getDistance(const Vector& point) = 0;
 
     }; // IShape
 

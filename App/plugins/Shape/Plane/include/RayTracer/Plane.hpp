@@ -25,6 +25,8 @@ namespace RayTracer {
             [[nodiscard]] double getRadius() const override { throw RunTimeException("Plane shape does not have a radius");};
             [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Plane shape does not have a rotation");};
 
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
+
     }; // class Plane
 
 } // namespace RayTracer
