@@ -21,7 +21,7 @@ namespace rtr {
             [[nodiscard]] std::string getPluginName() const override { return CYLINDER_SHAPE; };
             [[nodiscard]] Vector &getNormal() override { throw RunTimeException("Cylinder doesnt have a normal");};
 
-            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override { return false; };
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray, RayHit &hit) override { return false; };
 
     }; // class Cylinder
 

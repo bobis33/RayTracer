@@ -19,9 +19,5 @@ void rtr::Core::runRayTracer(Scene &scene)
     for(const auto &shape : scene.getShapes()) {
         sortedShapes.push_back(shape.get());
     }
-    std::sort(sortedShapes.begin(), sortedShapes.end(), [&scene](AShape* a, AShape* b) {
-        return a->getDistance(scene.getCamera().getOrigin()).length() < b->getDistance(scene.getCamera().getOrigin()).length();
-    });
-
-    renderer.render(sortedShapes, scene.getCamera());
+    renderer.render(sortedShapes, scene.getLights(), scene.getCamera());
 }

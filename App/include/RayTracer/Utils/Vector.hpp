@@ -45,6 +45,13 @@ namespace rtr {
                     m_position.z + other.getZ()
                 };
             };
+            Vector operator+(const double &scalar) const {
+                return {
+                    m_position.x + scalar,
+                    m_position.y + scalar,
+                    m_position.z + scalar
+                };
+            };
             Vector operator-(const Vector &other) const {
                 return {
                     m_position.x - other.getX(),

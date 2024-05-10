@@ -27,7 +27,7 @@ namespace rtr {
             [[nodiscard]] Vector& getRotation() override { throw RunTimeException("Plane shape does not have a rotation");};
             [[nodiscard]] const double &getHeight() const override { throw RunTimeException("Plane doesnt have a height"); };
 
-        [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray, RayHit &hit) override;
 
     }; // class Plane
 

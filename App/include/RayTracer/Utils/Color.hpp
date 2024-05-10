@@ -60,6 +60,44 @@ namespace rtr {
             static constexpr color_t getDarkBlue() { return color_t{0, 0, 139}; };
             static constexpr color_t getDarkYellow() { return color_t{139, 139, 0}; };
 
+            Color operator+(const Color &other) const {
+                return {
+                    static_cast<uint8_t>(m_color.r + other.getValue().r),
+                    static_cast<uint8_t>(m_color.g + other.getValue().g),
+                    static_cast<uint8_t>(m_color.b + other.getValue().b)
+                };
+            };
+            Color operator*(const double &scalar) const {
+                return {
+                    static_cast<uint8_t>(m_color.r * scalar),
+                    static_cast<uint8_t>(m_color.g * scalar),
+                    static_cast<uint8_t>(m_color.b * scalar)
+                };
+            };
+            Color operator*(const Color &other) const {
+                return {
+                    static_cast<uint8_t>(m_color.r * other.getValue().r),
+                    static_cast<uint8_t>(m_color.g * other.getValue().g),
+                    static_cast<uint8_t>(m_color.b * other.getValue().b)
+                };
+            };
+            Color operator+=(const Color &other) {
+                m_color = {
+                    static_cast<uint8_t>(m_color.r + other.getValue().r),
+                    static_cast<uint8_t>(m_color.g + other.getValue().g),
+                    static_cast<uint8_t>(m_color.b + other.getValue().b)
+                };
+                return *this;
+            };
+            Color operator*=(const double &scalar) {
+                m_color = {
+                    static_cast<uint8_t>(m_color.r * scalar),
+                    static_cast<uint8_t>(m_color.g * scalar),
+                    static_cast<uint8_t>(m_color.b * scalar)
+                };
+                return *this;
+            };
+
         private:
 
             color_t m_color{0, 0, 0};

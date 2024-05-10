@@ -27,32 +27,32 @@ void rtr::PPM::writeToFile(const std::string &width, const std::string &height)
     }
 }
 
-void rtr::PPM::writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height)
+void rtr::PPM::render(const std::vector<AShape*> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera)
 {
-    if (hit) {
-        getPixels()[height][width].setColor(color);
-    }
-}
-
-void rtr::PPM::render(const std::vector<AShape*> &shapes, const Camera &camera)
-{
-    const auto& width = getResolution().getWidth();
-    const auto& height = getResolution().getHeight();
+    const uint16_t& width = getResolution().getWidth();
+    const uint16_t& height = getResolution().getHeight();
     setPixels({height, std::vector<rtr::Color>(width)});
 
-    for (auto &row : getPixels()) {
-        for (auto &pixel : row) {
+    for (std::vector<rtr::Color> &row : getPixels()) {
+        for (rtr::Color &pixel : row) {
             pixel.setColor(getBackgroundColor().getValue());
         }
     }
 
     for(std::size_t index_height = 0; index_height < height; index_height++) {
         for (unsigned short index_width = 0; index_width < width; index_width++) {
+            RayHit hit;
             for(const auto &shape : shapes) {
-                writePixels(shape->hits(camera.ray(static_cast<double>(index_width) / width, static_cast<double>(index_height) / height)),
-                            shape->getMaterial().getColor().getValue(),
-                            index_width,
-                            index_height);
+                if (shape->hits(camera.ray(static_cast<double>(index_width) / width,
+                                           static_cast<double>(index_height) / height),
+                                hit)) {
+                    Color color = shape->getMaterial().getColor();
+                    for (const auto &light : lights) {
+                        if (light->getType() == LightType::DIRECTIONAL)
+                            color += light->LightColor(hit.getRayHit().normal.normalize(), hit.getRayHit().point , color, shapes);
+                    }
+                    writePixels(true, color.getValue(), index_width, index_height);
+                }
             }
         }
     }

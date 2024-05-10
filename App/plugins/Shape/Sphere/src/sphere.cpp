@@ -7,7 +7,7 @@
 
 #include "RayTracer/Sphere.hpp"
 
-bool rtr::Sphere::hits(std::pair<Vector, Vector> ray)
+bool rtr::Sphere::hits(std::pair<Vector, Vector> ray, RayHit &hit)
 {
     Vector vec = ray.first - getPosition();
     double a = ray.second.dot(ray.second);

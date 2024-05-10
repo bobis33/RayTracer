@@ -15,14 +15,10 @@ namespace rtr {
     class Reflective : public AMaterial {
 
         public:
+
             ~Reflective() override = default;
 
-            void applyMaterial(Color* color) override {
-                (void) color;
-                // reflected_color = object_color * reflectivity + environment_color * (1 - reflectivity);
-                // final_color = object_color * (1 - reflectivity) + reflected_color * reflectivity;
-                // color->setColor(final_color);
-            };
+            void applyMaterial(Color* color) override { (void) color; };
 
             [[nodiscard]] std::string getPluginName() const override { return REFLECTIVE_MATERIAL; };
 

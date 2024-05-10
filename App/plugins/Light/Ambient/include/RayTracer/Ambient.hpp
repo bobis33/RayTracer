@@ -18,7 +18,7 @@ namespace rtr {
         public:
             ~Ambient() override = default;
 
-            Color LightColor(const Vector &normal, Color col) override {return {0, 0, 0};};
+            Color LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<AShape*> &shapes) override {return col;};
 
             [[nodiscard]] std::string getPluginName() const override { return AMBIENT_LIGHT; };
 

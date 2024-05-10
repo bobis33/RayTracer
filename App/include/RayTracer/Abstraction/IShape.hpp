@@ -13,6 +13,7 @@
 #include "RayTracer/Abstraction/AMaterial.hpp"
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Utils/Vector.hpp"
+#include "RayTracer/Utils/RayHit.hpp"
 
 namespace rtr {
 
@@ -33,7 +34,7 @@ namespace rtr {
             [[nodiscard]] virtual const double &getRadius() const = 0;
             [[nodiscard]] virtual const double &getHeight() const = 0;
 
-            [[nodiscard]] virtual bool hits(std::pair<Vector, Vector> ray) = 0;
+            [[nodiscard]] virtual bool hits(std::pair<Vector, Vector> ray, RayHit &hit) = 0;
             [[nodiscard]] virtual Vector getDistance(const Vector& point) = 0;
 
     }; // IShape

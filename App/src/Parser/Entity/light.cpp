@@ -12,9 +12,9 @@ rtr::LightType rtr::Parser::parseLightType(const std::string &type)
 {
     if (type == "ambient") {
         return LightType::AMBIENT;
-    } else if (type == "directional") {
+    } if (type == "directional") {
         return LightType::DIRECTIONAL;
-    } else if (type == "point") {
+    } if (type == "point") {
         return LightType::POINT;
     }
     throw ParserException{"Invalid light type"};
@@ -44,17 +44,14 @@ void rtr::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &sc
                 if (!light.exists("position")) {
                     throw ParserException{"Point lights must have a position setting."};
                 }
-                Vector position(getVector<Vector>(light["position"], convertInt<double>));
-                scene.addLight(LightFactory::createLight(color, intensity, position));
+                scene.addLight(LightFactory::createLight(LightType::POINT, color, intensity, getVector<Vector>(light["position"], convertInt<double>)));
                 break;
             }
             case LightType::DIRECTIONAL: {
-                if (!light.exists("position") || !light.exists("direction")) {
-                    throw ParserException{"Directional lights must have a position and direction setting."};
+                if (!light.exists("direction")) {
+                    throw ParserException{"Directional lights must have a direction setting."};
                 }
-                Vector position(getVector<Vector>(light["position"], convertInt<double>));
-                Vector direction(getVector<Vector>(light["direction"], convertInt<double>));
-                scene.addLight(LightFactory::createLight(color, intensity, direction, position));
+                scene.addLight(LightFactory::createLight(LightType::DIRECTIONAL, color, intensity, getVector<Vector>(light["direction"], convertInt<double>)));
                 break;
             }
             default:

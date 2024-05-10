@@ -9,19 +9,22 @@
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 
-rtr::Color rtr::Directional::LightColor(const Vector &normal, rtr::Color col)
+rtr::Color rtr::Directional::LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<AShape*> &shapes)
 {
-
-    Vector vector = getDirection() * Vector{-1, -1, -1};
-    // vector.normalize();
-    double dot = vector.dot(normal);
-    if (dot < 0) {
+    Vector lightDirection = getDirection() * -1;
+    lightDirection = lightDirection.normalize();
+    double dotProduct = normal.normalize().dot(lightDirection);
+    if (dotProduct <= 0) {
         return {0, 0, 0};
     }
-    col.setColor(
-        static_cast<uint8_t>(static_cast<int>(col.getValue().r) * dot),
-        static_cast<uint8_t>(static_cast<int>(col.getValue().g) * dot),
-        static_cast<uint8_t>(static_cast<int>(col.getValue().b) * dot)
-    );
-    return col;
+
+    for (const auto &shape : shapes) {
+        RayHit hit;
+        if (shape->hits({point, lightDirection}, hit) && hit.getRayHit().distance < 1e-6) {
+            return {0, 0, 0};
+        }
+    }
+
+    return (col * getColor()) * getIntensity() * dotProduct;
 }
+
