@@ -10,7 +10,7 @@
 
 #include "RayTracer/Abstraction/IMaterial.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class AMaterial : public IMaterial {
 

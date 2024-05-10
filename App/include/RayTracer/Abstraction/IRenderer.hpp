@@ -15,7 +15,7 @@
 #include "RayTracer/Utils/Resolution.hpp"
 #include "RayTracer/Constants.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class IRenderer : public IPlugin {
 
@@ -25,13 +25,13 @@ namespace RayTracer {
 
             virtual void setType(const RendererType &rendererType) = 0;
             virtual void setName(const std::string &name) = 0;
-            virtual void setPixels(const std::vector<std::vector<RayTracer::Color>>& pixels) = 0;
+            virtual void setPixels(const std::vector<std::vector<rtr::Color>>& pixels) = 0;
 
             [[nodiscard]] virtual const RendererType& getType() const = 0;
             [[nodiscard]] virtual const std::string& getName() const = 0;
             [[nodiscard]] virtual Resolution& getResolution() = 0;
             [[nodiscard]] virtual Color& getBackgroundColor() = 0;
-            [[nodiscard]] virtual std::vector<std::vector<RayTracer::Color>>& getPixels() = 0;
+            [[nodiscard]] virtual std::vector<std::vector<rtr::Color>>& getPixels() = 0;
 
     }; // IRenderer
 

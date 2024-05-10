@@ -11,7 +11,7 @@
 #include "RayTracer/Utils/Vector.hpp"
 #include "RayTracer/Utils/Rectangle3D.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Camera {
         public:

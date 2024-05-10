@@ -7,8 +7,8 @@
 
 #include "RayTracer/Factory/Material.hpp"
 
-std::unique_ptr<RayTracer::AMaterial> RayTracer::MaterialFactory::createMaterial(const MaterialType &type,
-                                                                                 const float &floatValue)
+std::unique_ptr<rtr::AMaterial> rtr::MaterialFactory::createMaterial(const MaterialType &type,
+                                                                     const float &floatValue)
 {
     std::unique_ptr<AMaterial> material;
     switch (type) {

@@ -13,14 +13,14 @@
 
 #include "RayTracer/Scene/Scene.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Parser {
 
         public:
 
             static int parseArgs(const std::string &filePath);
-            static std::unique_ptr<RayTracer::Scene> parseFile(const std::string &filePath);
+            static std::unique_ptr<rtr::Scene> parseFile(const std::string &filePath);
 
             static void parseRenderer(const libconfig::Setting &renderer, Scene &scene);
             static void parseCamera(const libconfig::Setting &camera, Scene &scene);

@@ -7,7 +7,7 @@
 
 #include "RayTracer/Parser.hpp"
 
-std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string &filePath)
+std::unique_ptr<rtr::Scene> rtr::Parser::parseFile(const std::string &filePath)
 {
     libconfig::Config cfg;
     std::unique_ptr<Scene> scene = std::make_unique<Scene>();
@@ -27,7 +27,7 @@ std::unique_ptr<RayTracer::Scene> RayTracer::Parser::parseFile(const std::string
     return scene;
 }
 
-int RayTracer::Parser::parseArgs(const std::string &filePath)
+int rtr::Parser::parseArgs(const std::string &filePath)
 {
     if (filePath == "--help") {
         std::cout << "USAGE:  ./raytracer <SCENE_FILE>\n"

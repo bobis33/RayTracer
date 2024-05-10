@@ -10,7 +10,7 @@
 
 #include "RayTracer/Abstraction/ILight.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class ALight : public ILight {
 

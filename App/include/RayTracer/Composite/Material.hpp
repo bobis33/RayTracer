@@ -13,7 +13,7 @@
 
 #include "RayTracer/Abstraction/AMaterial.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class CompositeMaterial : public AMaterial {
 

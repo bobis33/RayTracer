@@ -12,7 +12,7 @@
 #include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/Scene/Camera.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class SFML : public ARenderer {
 

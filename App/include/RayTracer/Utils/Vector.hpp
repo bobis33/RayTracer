@@ -11,7 +11,7 @@
 #include <cstdint>
 #include <cmath>
 
-namespace RayTracer {
+namespace rtr {
 
     using vector_t = struct vector_s {
         double x;

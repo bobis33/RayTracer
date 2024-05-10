@@ -10,7 +10,7 @@
 
 #include "RayTracer/Abstraction/ALight.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Directional : public ALight {
 

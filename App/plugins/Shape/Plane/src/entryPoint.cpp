@@ -11,8 +11,8 @@
 
 extern "C"
 {
-    std::unique_ptr<RayTracer::AShape> entryPoint()
+    std::unique_ptr<rtr::AShape> entryPoint()
     {
-        return std::make_unique<RayTracer::Plane>();
+        return std::make_unique<rtr::Plane>();
     }
 }

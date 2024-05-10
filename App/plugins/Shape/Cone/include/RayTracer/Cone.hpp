@@ -11,7 +11,7 @@
 #include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Exception/RunTime.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Cone : public AShape {
 

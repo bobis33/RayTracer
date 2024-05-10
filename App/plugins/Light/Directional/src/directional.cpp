@@ -9,7 +9,7 @@
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 
-RayTracer::Color RayTracer::Directional::LightColor(const Vector &normal, RayTracer::Color col)
+rtr::Color rtr::Directional::LightColor(const Vector &normal, rtr::Color col)
 {
 
     Vector vector = getDirection() * Vector{-1, -1, -1};

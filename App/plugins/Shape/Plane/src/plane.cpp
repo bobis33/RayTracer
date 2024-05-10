@@ -7,7 +7,7 @@
 
 #include "RayTracer/Plane.hpp"
 
-bool RayTracer::Plane::hits(std::pair<Vector, Vector> ray)
+bool rtr::Plane::hits(std::pair<Vector, Vector> ray)
 {
     Vector position = getPosition();
     double denominator = position.dot(ray.second);

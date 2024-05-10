@@ -13,7 +13,7 @@
 static constexpr int RGB_MAX = 255;
 static constexpr int RGB_HALF = 128;
 
-namespace RayTracer {
+namespace rtr {
 
     using color_t = struct color_s {
         uint8_t r{0};

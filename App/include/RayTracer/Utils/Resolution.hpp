@@ -10,7 +10,7 @@
 
 #include <cstdint>
 
-namespace RayTracer {
+namespace rtr {
 
     using resolution_t = struct resolution_s {
         uint16_t width;

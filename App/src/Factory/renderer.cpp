@@ -7,10 +7,10 @@
 
 #include "RayTracer/Factory/Renderer.hpp"
 
-std::unique_ptr<RayTracer::ARenderer> RayTracer::RendererFactory::createRenderer(const RendererType &type,
-                                                                                 const std::string &name,
-                                                                                 const Resolution &resolution,
-                                                                                 const Color &backgroundColor)
+std::unique_ptr<rtr::ARenderer> rtr::RendererFactory::createRenderer(const RendererType &type,
+                                                                     const std::string &name,
+                                                                     const Resolution &resolution,
+                                                                     const Color &backgroundColor)
 {
     std::unique_ptr<ARenderer> renderer;
     switch (type) {

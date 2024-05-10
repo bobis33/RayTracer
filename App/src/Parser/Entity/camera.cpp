@@ -7,7 +7,7 @@
 
 #include "RayTracer/Parser.hpp"
 
-void RayTracer::Parser::parseCamera(const libconfig::Setting &camera, Scene &scene)
+void rtr::Parser::parseCamera(const libconfig::Setting &camera, Scene &scene)
 {
     if (!camera.exists("fov")){
         throw ParserException{"Camera must have a fov setting."};

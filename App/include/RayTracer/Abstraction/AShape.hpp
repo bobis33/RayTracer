@@ -10,7 +10,7 @@
 
 #include "RayTracer/Abstraction/IShape.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class AShape : public IShape {
 

@@ -14,7 +14,7 @@
 #include "RayTracer/Constants.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class IShape : public IPlugin {
 

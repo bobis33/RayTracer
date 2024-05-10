@@ -15,7 +15,7 @@
 #include "RayTracer/Abstraction/IRenderer.hpp"
 #include "RayTracer/Exception/RunTime.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class PluginLoader {
 

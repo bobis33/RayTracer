@@ -28,7 +28,7 @@ static constexpr const char * PLANE_SHAPE = "plane";
 static constexpr const char * CYLINDER_SHAPE = "cylinder";
 static constexpr const char * CONE_SHAPE = "cone";
 
-namespace RayTracer {
+namespace rtr {
 
     enum class RendererType {
         PPM,

@@ -8,7 +8,7 @@
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Factory/Light.hpp"
 
-RayTracer::LightType RayTracer::Parser::parseLightType(const std::string &type)
+rtr::LightType rtr::Parser::parseLightType(const std::string &type)
 {
     if (type == "ambient") {
         return LightType::AMBIENT;
@@ -20,7 +20,7 @@ RayTracer::LightType RayTracer::Parser::parseLightType(const std::string &type)
     throw ParserException{"Invalid light type"};
 }
 
-void RayTracer::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &scene)
+void rtr::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &scene)
 {
     for (int i = 0; i < lightsSetting.getLength(); i++) {
         const libconfig::Setting &light = lightsSetting[i];

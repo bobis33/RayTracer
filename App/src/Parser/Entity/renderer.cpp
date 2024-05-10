@@ -7,7 +7,7 @@
 
 #include "RayTracer/Parser.hpp"
 
-void RayTracer::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
+void rtr::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
     if (!renderer.exists("type")) {
         throw ParserException{"Renderer must have a type setting."};

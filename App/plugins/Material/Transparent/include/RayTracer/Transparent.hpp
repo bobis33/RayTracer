@@ -10,7 +10,7 @@
 
 #include "RayTracer/Abstraction/AMaterial.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Transparent : public AMaterial {
 

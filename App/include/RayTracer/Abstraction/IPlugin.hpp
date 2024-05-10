@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace RayTracer {
+namespace rtr {
 
     class IPlugin {
 

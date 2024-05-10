@@ -10,7 +10,7 @@
 
 #include "RayTracer/Utils/Vector.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Rectangle3D {
 

@@ -11,7 +11,7 @@
 #include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/Loader/Plugin.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class RendererFactory {
 

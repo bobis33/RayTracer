@@ -10,7 +10,7 @@
 #include "RayTracer/Factory/Material.hpp"
 #include "RayTracer/Composite/Material.hpp"
 
-RayTracer::ShapeType RayTracer::Parser::parseShapeType(const std::string &type)
+rtr::ShapeType rtr::Parser::parseShapeType(const std::string &type)
 {
     if (type == "plane") {
         return ShapeType::PLANE;
@@ -24,7 +24,7 @@ RayTracer::ShapeType RayTracer::Parser::parseShapeType(const std::string &type)
     throw ParserException{"Invalid shape type"};
 }
 
-std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const libconfig::Setting &materialSetting)
+std::unique_ptr<rtr::AMaterial> rtr::Parser::parseMaterial(const libconfig::Setting &materialSetting)
 {
     std::unique_ptr<CompositeMaterial> composite = std::make_unique<CompositeMaterial>();
     if (!materialSetting.exists("color")) {
@@ -45,7 +45,7 @@ std::unique_ptr<RayTracer::AMaterial> RayTracer::Parser::parseMaterial(const lib
     return composite;
 }
 
-void RayTracer::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
+void rtr::Parser::parseShapes(const libconfig::Setting &shapesSetting, Scene &scene)
 {
     for (const auto& shapeSetting : shapesSetting) {
         std::unique_ptr<AShape> shape = nullptr;

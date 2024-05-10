@@ -7,8 +7,8 @@
 
 #include "RayTracer/Factory/Shape.hpp"
 
-std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position,
-                                                                        const Vector &normal)
+std::unique_ptr<rtr::AShape> rtr::ShapeFactory::createShape(const Vector &position,
+                                                            const Vector &normal)
 {
     std::unique_ptr<AShape> shape(PluginLoader::getInstance().getPlugin<AShape>(PLANE_SHAPE));
 
@@ -18,8 +18,8 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Ve
     return shape;
 }
 
-std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Vector &position,
-                                                                        const double &radius)
+std::unique_ptr<rtr::AShape> rtr::ShapeFactory::createShape(const Vector &position,
+                                                            const double &radius)
 {
     std::unique_ptr<AShape> shape(PluginLoader::getInstance().getPlugin<AShape>(SPHERE_SHAPE));
 
@@ -29,11 +29,11 @@ std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const Ve
     return shape;
 }
 
-std::unique_ptr<RayTracer::AShape> RayTracer::ShapeFactory::createShape(const ShapeType &type,
-                                                                        const Vector &position,
-                                                                        const Vector &rotation,
-                                                                        const double &radius,
-                                                                        const double &height)
+std::unique_ptr<rtr::AShape> rtr::ShapeFactory::createShape(const ShapeType &type,
+                                                            const Vector &position,
+                                                            const Vector &rotation,
+                                                            const double &radius,
+                                                            const double &height)
 {
     std::unique_ptr<AShape> shape;
 

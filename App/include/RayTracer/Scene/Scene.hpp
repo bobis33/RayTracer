@@ -15,7 +15,7 @@
 #include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Factory/Renderer.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Scene {
         public:

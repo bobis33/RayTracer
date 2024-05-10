@@ -10,7 +10,7 @@
 
 #include "RayTracer/PPM.hpp"
 
-void RayTracer::PPM::writeToFile(const std::string &width, const std::string &height)
+void rtr::PPM::writeToFile(const std::string &width, const std::string &height)
 {
     const std::string header = getHeader(width, height);
     std::filesystem::path filePath(getName());
@@ -27,18 +27,18 @@ void RayTracer::PPM::writeToFile(const std::string &width, const std::string &he
     }
 }
 
-void RayTracer::PPM::writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height)
+void rtr::PPM::writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height)
 {
     if (hit) {
         getPixels()[height][width].setColor(color);
     }
 }
 
-void RayTracer::PPM::render(const std::vector<AShape*> &shapes, const Camera &camera)
+void rtr::PPM::render(const std::vector<AShape*> &shapes, const Camera &camera)
 {
     const auto& width = getResolution().getWidth();
     const auto& height = getResolution().getHeight();
-    setPixels({height, std::vector<RayTracer::Color>(width)});
+    setPixels({height, std::vector<rtr::Color>(width)});
 
     for (auto &row : getPixels()) {
         for (auto &pixel : row) {

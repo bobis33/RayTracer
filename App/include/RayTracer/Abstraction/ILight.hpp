@@ -13,7 +13,7 @@
 #include "RayTracer/Utils/Vector.hpp"
 #include "RayTracer/Utils/Color.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class ILight : public IPlugin {
 

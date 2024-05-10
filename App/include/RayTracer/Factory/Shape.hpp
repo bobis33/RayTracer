@@ -11,7 +11,7 @@
 #include "RayTracer/Abstraction/AShape.hpp"
 #include "RayTracer/Loader/Plugin.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class ShapeFactory {
 

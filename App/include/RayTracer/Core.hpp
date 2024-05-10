@@ -11,7 +11,7 @@
 #include "RayTracer/Abstraction/ARenderer.hpp"
 #include "RayTracer/Scene/Scene.hpp"
 
-namespace RayTracer {
+namespace rtr {
 
     class Core {
         public:

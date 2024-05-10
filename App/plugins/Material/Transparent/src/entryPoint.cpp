@@ -11,8 +11,8 @@
 
 extern "C"
 {
-    std::unique_ptr<RayTracer::AMaterial> entryPoint()
+    std::unique_ptr<rtr::AMaterial> entryPoint()
     {
-        return std::make_unique<RayTracer::Transparent>();
+        return std::make_unique<rtr::Transparent>();
     }
 }

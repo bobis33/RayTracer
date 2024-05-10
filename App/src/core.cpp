@@ -9,7 +9,7 @@
 
 #include "RayTracer/Core.hpp"
 
-void RayTracer::Core::runRayTracer(Scene &scene)
+void rtr::Core::runRayTracer(Scene &scene)
 {
     ARenderer& renderer = *scene.getRenderer();
     double aspectRatio = (static_cast<double>(renderer.getResolution().getWidth()) / static_cast<double>(renderer.getResolution().getHeight()));

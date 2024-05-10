@@ -12,7 +12,7 @@
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Constants.hpp"
 
-namespace RayTracer{
+namespace rtr{
 
     class IMaterial : public IPlugin {
 

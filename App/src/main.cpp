@@ -9,7 +9,7 @@
 #include "RayTracer/Parser.hpp"
 #include "RayTracer/Exception/RunTime.hpp"
 
-using namespace RayTracer;
+using namespace rtr;
 
 int main(int argc, const char * argv[])
 {
