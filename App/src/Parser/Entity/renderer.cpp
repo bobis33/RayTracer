@@ -9,16 +9,11 @@
 
 void rtr::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene)
 {
-    if (!renderer.exists("type")) {
-        throw ParserException{"Renderer must have a type setting."};
+    if (!renderer.exists("type") || !renderer.exists("resolution") || !renderer.exists("name") || !renderer.exists("backgroundColor")) {
+        throw ParserException{"Renderer must have a type, a resolution, a name and a background color setting."};
     }
     const std::string &type = renderer["type"];
-    if (!renderer.exists("resolution")) {
-        throw ParserException{"Renderer must have a resolution setting."};
-    }
-    const libconfig::Setting &resolution = renderer["resolution"];
-    Resolution res(convertInt<uint16_t>(resolution[0]), convertInt<uint16_t>(resolution[1]));
-    RendererType rendererType(RendererType::NONE);
+    RendererType rendererType = RendererType::NONE;
     if (type == "sfml") {
         rendererType = RendererType::SFML;
     } else if (type == "ppm") {
@@ -26,13 +21,9 @@ void rtr::Parser::parseRenderer(const libconfig::Setting &renderer, Scene &scene
     } else {
         throw ParserException{"Invalid renderer type"};
     }
-    if (!renderer.exists("name")) {
-        throw ParserException{"Renderer must have a name setting."};
-    }
-    const std::string &name = renderer["name"];
-    if (!renderer.exists("backgroundColor")) {
-        throw ParserException{"Renderer must have a background color setting."};
-    }
-    Color color(getVector<Color>(renderer["backgroundColor"], convertInt<uint8_t>));
-    scene.setRenderer(RendererFactory::createRenderer(rendererType, name, res, color));
+    scene.setRenderer(RendererFactory::createRenderer(
+            rendererType,
+            renderer["name"],
+            Resolution{convertInt<uint16_t>(renderer["resolution"][0]), convertInt<uint16_t>(renderer["resolution"][1])},
+            getVector<Color>(renderer["backgroundColor"], convertInt<uint8_t>)));
 }

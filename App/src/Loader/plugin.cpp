@@ -12,9 +12,11 @@
 #include "RayTracer/Abstraction/AShape.hpp"
 
 void rtr::PluginLoader::loadPlugins() {
+    void *handle = nullptr;
+
     for (const auto& entry : std::filesystem::directory_iterator("./plugins")) {
         if (entry.path().extension() == ".so") {
-            void* handle = dlopen(entry.path().c_str(), RTLD_LAZY);
+            handle = dlopen(entry.path().c_str(), RTLD_LAZY);
             if (handle == nullptr) {
                 throw RunTimeException(dlerror());
             }
@@ -27,12 +29,6 @@ void rtr::PluginLoader::loadPlugins() {
         }
     }
 }
-
-rtr::PluginLoader &rtr::PluginLoader::getInstance() {
-    static PluginLoader instance;
-    return instance;
-}
-
 
 template <typename T>
 std::unique_ptr<T> rtr::PluginLoader::getPlugin(const std::string &pluginName) {

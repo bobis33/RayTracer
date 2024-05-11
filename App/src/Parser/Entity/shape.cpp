@@ -27,20 +27,12 @@ rtr::ShapeType rtr::Parser::parseShapeType(const std::string &type)
 std::unique_ptr<rtr::AMaterial> rtr::Parser::parseMaterial(const libconfig::Setting &materialSetting)
 {
     std::unique_ptr<CompositeMaterial> composite = std::make_unique<CompositeMaterial>();
-    if (!materialSetting.exists("color")) {
-        throw ParserException{"Material must have color settings."};
+    if (!materialSetting.exists("color") || !materialSetting.exists("reflectivity") || !materialSetting.exists("transparency")) {
+        throw ParserException{"Material must have a color, reflectivity and transparency setting."};
     }
     Color color{convertInt<uint8_t>(materialSetting["color"][0]), convertInt<uint8_t>(materialSetting["color"][1]), convertInt<uint8_t>(materialSetting["color"][2])};
-    if (!materialSetting.exists("reflectivity")) {
-        throw ParserException{"Material must have reflectivity setting."};
-    }
-    float reflection = materialSetting["reflectivity"];
-    composite->addMaterial(MaterialFactory::createMaterial(MaterialType::REFLECTIVE, reflection));
-    if (!materialSetting.exists("transparency")) {
-        throw ParserException{"Material must have transparency setting."};
-    }
-    float transparency = materialSetting["transparency"];
-    composite->addMaterial(MaterialFactory::createMaterial(MaterialType::TRANSPARENT, transparency));
+    composite->addMaterial(MaterialFactory::createMaterial(MaterialType::REFLECTIVE, materialSetting["reflectivity"]));
+    composite->addMaterial(MaterialFactory::createMaterial(MaterialType::TRANSPARENT, materialSetting["transparency"]));
     composite->applyMaterial(&color);
     return composite;
 }

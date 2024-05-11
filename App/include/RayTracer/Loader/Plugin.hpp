@@ -25,7 +25,10 @@ namespace rtr {
 
             ~PluginLoader() = default;
 
-            static PluginLoader& getInstance();
+            static PluginLoader &getInstance() {
+                static PluginLoader instance;
+                return instance;
+            }
 
             template <typename T>
             std::unique_ptr<T> getPlugin(const std::string &pluginName);
@@ -36,7 +39,7 @@ namespace rtr {
 
             void loadPlugins();
 
-            std::unordered_map<std::string, PluginCreator> m_plugins;
+            std::unordered_map<std::string, PluginCreator> m_plugins{};
 
     }; // class PluginLoader
 

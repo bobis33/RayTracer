@@ -22,22 +22,18 @@ rtr::LightType rtr::Parser::parseLightType(const std::string &type)
 
 void rtr::Parser::parseLights(const libconfig::Setting &lightsSetting, Scene &scene)
 {
+    Color color = Color{};
+    LightType lightType = LightType::NONE;
+    float intensity = 0;
+
     for (int i = 0; i < lightsSetting.getLength(); i++) {
         const libconfig::Setting &light = lightsSetting[i];
-        if (!light.exists("type")) {
-            throw ParserException{"Lights must have a type setting."};
+        if (!light.exists("type") || !light.exists("color") || !light.exists("intensity")){
+            throw ParserException{"Lights must have a type, a color and an intensity setting."};
         }
-        LightType lightType(parseLightType(light["type"]));
-
-        if (!light.exists("color")) {
-            throw ParserException{"Lights must have a color setting."};
-        }
-        Color color(getVector<Color>(light["color"], convertInt<uint8_t>));
-
-        if (!light.exists("intensity")) {
-            throw ParserException{"Lights must have an intensity setting."};
-        }
-        float intensity = light["intensity"];
+        lightType = parseLightType(light["type"]);
+        color = getVector<Color>(light["color"], convertInt<uint8_t>);
+        intensity = light["intensity"];
 
         switch (lightType) {
             case LightType::AMBIENT: {
