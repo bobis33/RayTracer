@@ -25,7 +25,7 @@ namespace rtr {
 
             [[nodiscard]] static std::string getHeader(const std::string &width, const std::string &height) { return "P6\n" + width + " " + height + "\n255\n"; };
 
-            void writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height) { if (hit) { getPixels()[height][width].setColor(color); } };
+            void writePixels(const Color color, const std::size_t width, const std::size_t height) { getPixels()[height][width].setColor(color.getValue()); };
             void writeToFile(const std::string &width, const std::string &height);
 
         rtr::Color getColor(double u, double v, const Camera &camera, const std::vector<std::unique_ptr<AShape>> &shapes, const std::vector<std::unique_ptr<ALight>> &lights)

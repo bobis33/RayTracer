@@ -13,7 +13,6 @@ rtr::Camera::Camera(uint16_t fov, const Vector &origin, const Vector &direction)
     const double viewportWidth = m_aspectRatio * viewportHeight;
 
     m_w = (origin - m_direction).normalize();
-    m_u = {1, 0, 0};
     if (std::abs(getUp().dot(m_w)) == 1.0) {
         m_u = {1, 0, 0};
     } else {

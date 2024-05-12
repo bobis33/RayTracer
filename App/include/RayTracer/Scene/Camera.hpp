@@ -9,7 +9,6 @@
 #define RAYTRACER_CAMERA_HPP
 
 #include "RayTracer/Utils/Vector.hpp"
-#include "RayTracer/Utils/Rectangle3D.hpp"
 
 namespace rtr {
 

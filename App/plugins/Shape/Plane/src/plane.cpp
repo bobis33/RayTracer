@@ -9,14 +9,18 @@
 
 bool rtr::Plane::hits(std::pair<Vector, Vector> ray, RayHit &hit)
 {
-    const double denominator = getPosition().dot(ray.second);
-    const double distance = (getPosition() - ray.first).dot(getNormal().normalize()) / denominator;
-
-    if (denominator < 1e-6 || distance <= 0 ) {
+    const Vector normal{getNormal()};
+    const double d = normal.dot(getPosition());
+    const double denominator = normal.dot(ray.second);
+    if (denominator <= 0) {
+        return false;
+    }
+    const double distance = (d - normal.dot(ray.first)) / denominator;
+    if (distance < 1e-6) {
         return false;
     }
     hit.setDistance(distance);
     hit.setPoint(ray.first + ray.second * distance);
-    hit.setNormal(getNormal().normalize());
+    hit.setNormal(normal);
     return true;
 }

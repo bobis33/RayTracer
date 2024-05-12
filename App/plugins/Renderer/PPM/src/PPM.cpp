@@ -29,8 +29,8 @@ void rtr::PPM::writeToFile(const std::string &width, const std::string &height)
 
 void rtr::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera)
 {
-    const uint16_t& width = getResolution().getWidth();
-    const uint16_t& height = getResolution().getHeight();
+    const uint16_t width = getResolution().getWidth();
+    const uint16_t height = getResolution().getHeight();
     setPixels({height, std::vector<rtr::Color>(width)});
 
     for (std::vector<rtr::Color> &row : getPixels()) {
@@ -40,7 +40,7 @@ void rtr::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const 
     }
 
     for(std::size_t index_height = 0; index_height < height; index_height++) {
-        for (unsigned short index_width = 0; index_width < width; index_width++) {
+        for (std::size_t index_width = 0; index_width < width; index_width++) {
             RayHit hit;
             for(const std::unique_ptr<AShape> &shape : shapes) {
                 if (shape->hits(camera.ray(static_cast<double>(index_width) / width,
@@ -48,11 +48,9 @@ void rtr::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const 
                                 hit)) {
                     Color color = shape->getMaterial().getColor();
                     for (const std::unique_ptr<ALight> &light : lights) {
-                        if (light->getType() == LightType::DIRECTIONAL) {
-                            color += light->LightColor(hit.getRayHit().normal.normalize(), hit.getRayHit().point , color, shapes);
-                        }
+                        color += light->LightColor(hit.getRayHit().normal.normalize(), hit.getRayHit().point , color, shapes);
                     }
-                    writePixels(true, color.getValue(), index_width, index_height);
+                    writePixels(color, index_width, index_height);
                 }
             }
         }

@@ -6,14 +6,12 @@
 */
 
 #include "RayTracer/Directional.hpp"
-#include "RayTracer/Utils/Color.hpp"
-#include "RayTracer/Utils/Vector.hpp"
 
 rtr::Color rtr::Directional::LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes)
 {
-    Vector lightDirection = getDirection() * -1;
+    Vector lightDirection{getDirection() * -1};
     lightDirection = lightDirection.normalize();
-    double dotProduct = normal.normalize().dot(lightDirection);
+    const double dotProduct = normal.normalize().dot(lightDirection);
     if (dotProduct <= 0) {
         return {0, 0, 0};
     }
@@ -27,4 +25,3 @@ rtr::Color rtr::Directional::LightColor(const Vector &normal, const Vector &poin
 
     return (col * getColor()) * getIntensity() * dotProduct;
 }
-
