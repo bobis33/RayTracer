@@ -34,6 +34,12 @@ namespace rtr {
             void setColor(const color_t &color) { m_color = color; };
             [[nodiscard]] color_t getValue() const { return m_color; };
 
+            void clamp() {
+                m_color.r = m_color.r > RGB_MAX ? RGB_MAX : m_color.r;
+                m_color.g = m_color.g > RGB_MAX ? RGB_MAX : m_color.g;
+                m_color.b = m_color.b > RGB_MAX ? RGB_MAX : m_color.b;
+            };
+
             static color_t customColor(const uint8_t &r, const uint8_t &g, const uint8_t &b) { return color_t{r, g, b}; };
 
             static constexpr color_t getRed() { return color_t{RGB_MAX, 0, 0}; };

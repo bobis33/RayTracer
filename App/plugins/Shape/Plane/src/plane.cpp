@@ -15,10 +15,8 @@ bool rtr::Plane::hits(std::pair<Vector, Vector> ray, RayHit &hit)
     if (denominator < 1e-6 || distance <= 0 ) {
         return false;
     }
-
-    Vector point = ray.first + ray.second * distance;
     hit.setDistance(distance);
-    hit.setPoint(point);
+    hit.setPoint(ray.first + ray.second * distance);
     hit.setNormal(getNormal().normalize());
     return true;
 }

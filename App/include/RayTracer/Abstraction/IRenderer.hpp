@@ -22,7 +22,7 @@ namespace rtr {
 
         public:
 
-            virtual void render(const std::vector<AShape*> &shapes, const std::vector<std::unique_ptr<ALight>> &light, const Camera &camera) = 0;
+            virtual void render(const std::vector<std::unique_ptr<AShape>> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera) = 0;
 
             virtual void setType(const RendererType &rendererType) = 0;
             virtual void setName(const std::string &name) = 0;

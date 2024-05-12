@@ -25,7 +25,7 @@ namespace rtr {
             virtual void setType(const LightType &type) = 0;
             virtual void setIntensity(const float &intensity) = 0;
 
-            virtual Color LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<AShape*> &shapes) = 0;
+            virtual Color LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes) = 0;
 
             [[nodiscard]] virtual const LightType& getType() const = 0;
             [[nodiscard]] virtual Vector& getPosition() = 0;

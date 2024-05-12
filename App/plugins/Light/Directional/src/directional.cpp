@@ -9,7 +9,7 @@
 #include "RayTracer/Utils/Color.hpp"
 #include "RayTracer/Utils/Vector.hpp"
 
-rtr::Color rtr::Directional::LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<AShape*> &shapes)
+rtr::Color rtr::Directional::LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes)
 {
     Vector lightDirection = getDirection() * -1;
     lightDirection = lightDirection.normalize();

@@ -20,14 +20,14 @@ void rtr::PPM::writeToFile(const std::string &width, const std::string &height)
         file.write(header.data(),
                    static_cast<long>(header.size() * sizeof(char)));
 
-        for (const auto& row : getPixels()) {
+        for (std::vector<Color> const &row : getPixels()) {
             file.write(reinterpret_cast<const char*>(row.data()), static_cast<long>(row.size() * sizeof(Color)));
         }
         file.close();
     }
 }
 
-void rtr::PPM::render(const std::vector<AShape*> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera)
+void rtr::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera)
 {
     const uint16_t& width = getResolution().getWidth();
     const uint16_t& height = getResolution().getHeight();
@@ -42,14 +42,15 @@ void rtr::PPM::render(const std::vector<AShape*> &shapes, const std::vector<std:
     for(std::size_t index_height = 0; index_height < height; index_height++) {
         for (unsigned short index_width = 0; index_width < width; index_width++) {
             RayHit hit;
-            for(const auto &shape : shapes) {
+            for(const std::unique_ptr<AShape> &shape : shapes) {
                 if (shape->hits(camera.ray(static_cast<double>(index_width) / width,
                                            static_cast<double>(index_height) / height),
                                 hit)) {
                     Color color = shape->getMaterial().getColor();
-                    for (const auto &light : lights) {
-                        if (light->getType() == LightType::DIRECTIONAL)
+                    for (const std::unique_ptr<ALight> &light : lights) {
+                        if (light->getType() == LightType::DIRECTIONAL) {
                             color += light->LightColor(hit.getRayHit().normal.normalize(), hit.getRayHit().point , color, shapes);
+                        }
                     }
                     writePixels(true, color.getValue(), index_width, index_height);
                 }
