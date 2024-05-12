@@ -20,7 +20,7 @@ namespace rtr {
 
             [[nodiscard]] std::string getPluginName() const override { return POINT_LIGHT; };
 
-            Color LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes) override { return col; };
+            Color LightColor(const Vector &normal, const Color &col) override { return col; };
 
             [[nodiscard]] Vector& getDirection() override { throw RunTimeException("Point light has no direction");};
 

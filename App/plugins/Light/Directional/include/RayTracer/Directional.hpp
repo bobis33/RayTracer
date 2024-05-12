@@ -18,7 +18,7 @@ namespace rtr {
             Directional() = default;
             ~Directional() override = default;
 
-            Color LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes) override;
+            Color LightColor(const Vector &normal, const Color &col) override;
 
             [[nodiscard]] std::string getPluginName() const override { return DIRECTIONAL_LIGHT; };
 

@@ -12,6 +12,8 @@ static constexpr int EPITECH_ERROR = 84;
 static constexpr int SUCCESS = 0;
 static constexpr int ERROR = 1;
 
+static constexpr double EPSILON = 1e-6;
+
 static constexpr const char * AMBIENT_LIGHT = "ambient";
 static constexpr const char * DIRECTIONAL_LIGHT = "directional";
 static constexpr const char * POINT_LIGHT = "point";

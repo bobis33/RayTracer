@@ -7,20 +7,13 @@
 
 #include "RayTracer/Directional.hpp"
 
-rtr::Color rtr::Directional::LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes)
+rtr::Color rtr::Directional::LightColor(const Vector &normal, const Color &col)
 {
-    Vector lightDirection{getDirection() * -1};
-    lightDirection = lightDirection.normalize();
+    const Vector lightDirection = (getDirection() * -1).normalize();
     const double dotProduct = normal.normalize().dot(lightDirection);
-    if (dotProduct <= 0) {
-        return {0, 0, 0};
-    }
 
-    for (const auto &shape : shapes) {
-        RayHit hit;
-        if (shape->hits({point, lightDirection}, hit) && hit.getRayHit().distance < 1e-6) {
-            return {0, 0, 0};
-        }
+    if (dotProduct <= EPSILON) {
+        return {0, 0, 0};
     }
 
     return (col * getColor()) * getIntensity() * dotProduct;

@@ -18,10 +18,9 @@ namespace rtr {
         public:
             ~Ambient() override = default;
 
-            Color LightColor(const Vector &normal, const Vector &point, const Color &col, const std::vector<std::unique_ptr<AShape>> &shapes) override;
+            Color LightColor(const Vector &normal, const Color &col) override;
 
             [[nodiscard]] std::string getPluginName() const override { return AMBIENT_LIGHT; };
-
             [[nodiscard]] Vector& getDirection() override { throw RunTimeException("Ambient light has no direction");};
 
     }; // class Ambient

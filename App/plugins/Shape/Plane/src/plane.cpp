@@ -16,7 +16,7 @@ bool rtr::Plane::hits(std::pair<Vector, Vector> ray, RayHit &hit)
         return false;
     }
     const double distance = (d - normal.dot(ray.first)) / denominator;
-    if (distance < 1e-6) {
+    if (distance < EPSILON) {
         return false;
     }
     hit.setDistance(distance);

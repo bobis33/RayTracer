@@ -22,7 +22,7 @@ bool rtr::Sphere::hits(std::pair<Vector, Vector> ray, RayHit &hit)
     const double t2 = (-b + sqrt(discriminant)) / (2 * a);
     const double distance = (t1 < t2) ? t1 : t2;
 
-    if (distance < 1e-6) {
+    if (distance < EPSILON) {
         return false;
     }
     hit.setDistance(distance);
