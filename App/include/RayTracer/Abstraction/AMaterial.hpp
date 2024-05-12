@@ -5,6 +5,7 @@
 ** AMaterial.hpp
 */
 
+/// @file AMaterial.hpp
 #ifndef RAYTRACER_AMATERIAL_HPP
 #define RAYTRACER_AMATERIAL_HPP
 
@@ -12,6 +13,8 @@
 
 namespace rtr {
 
+    /// @class AMaterial
+    /// @brief An abstract class for materials, based on the interface IMaterials.
     class AMaterial : public IMaterial {
 
         public:
@@ -29,9 +32,16 @@ namespace rtr {
 
         private:
 
+            /// @brief The type of the material.
             MaterialType m_type{MaterialType::NONE};
+
+            /// @brief The color of the material.
             Color m_color{Color::getBlack()};
+
+            /// @brief The reflectivity of the material.
             float m_reflectivity{0.0F};
+
+            /// @brief The transparency of the material.
             float m_transparency{0.0F};
 
     }; // class AMaterial

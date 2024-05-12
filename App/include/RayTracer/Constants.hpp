@@ -5,6 +5,7 @@
 ** Constants.hpp
 */
 
+/// @file Constants.hpp
 #ifndef RAYTRACER_CONSTANTS_HPP
 #define RAYTRACER_CONSTANTS_HPP
 
@@ -32,12 +33,14 @@ static constexpr const char * CONE_SHAPE = "cone";
 
 namespace rtr {
 
+    /// @enum RendererType
     enum class RendererType {
         PPM,
         SFML,
         NONE
     };
 
+    /// @enum ShapeType
     enum class ShapeType {
         SPHERE,
         PLANE,
@@ -46,6 +49,7 @@ namespace rtr {
         NONE
     };
 
+    /// @enum LightType
     enum class LightType {
         AMBIENT,
         DIRECTIONAL,
@@ -53,6 +57,7 @@ namespace rtr {
         NONE
     };
 
+    /// @enum MaterialType
     enum class MaterialType {
         TRANSPARENT,
         REFLECTIVE,

@@ -5,6 +5,7 @@
 ** ALight.cpp
 */
 
+/// @file ALight.hpp
 #ifndef RAYTRACER_ALIGHT_HPP
 #define RAYTRACER_ALIGHT_HPP
 
@@ -12,6 +13,8 @@
 
 namespace rtr {
 
+    /// @class ALight
+    /// @brief An abstract class for lights.
     class ALight : public ILight {
 
         public:
@@ -29,10 +32,19 @@ namespace rtr {
 
         private:
 
+            /// @brief The type of the light.
             LightType m_type{LightType::NONE};
+
+            /// @brief The position of the light.
             Vector m_position{0, 0, 0};
+
+            /// @brief The direction of the light.
             Vector m_direction{0, 0, 0};
+
+            /// @brief The color of the light.
             Color m_color{0, 0, 0};
+
+            /// @brief The intensity of the light.
             float m_intensity{0};
 
     }; // class ALight
