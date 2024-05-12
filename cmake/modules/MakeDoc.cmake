@@ -6,7 +6,17 @@ if (DOXYGEN_FOUND)
     set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/.doxygen)
     doxygen_add_docs(doc
             App/include
-            App/plugins/Renderer/include
+            App/plugins/Light/Ambient/include
+            App/plugins/Light/Directional/include
+            App/plugins/Light/Point/include
+            App/plugins/Material/Reflective/include
+            App/plugins/Material/Transparent/include
+            App/plugins/Renderer/PPM/include
+            App/plugins/Renderer/SFML/include
+            App/plugins/Shapes/Cone/include
+            App/plugins/Shapes/Cylinder/include
+            App/plugins/Shapes/Plane/include
+            App/plugins/Shapes/Sphere/include
             ALL
     )
     add_custom_command(TARGET doc
