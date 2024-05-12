@@ -23,14 +23,14 @@ namespace rtr {
 
         public:
             Vector() : m_position{0, 0, 0} {};
-            Vector(const double &x, const double &y, const double &z) : m_position{x, y, z} {};
-            explicit Vector(const vector_t &position) : m_position{position} {};
+            Vector(const double x, const double y, const double z) : m_position{x, y, z} {};
+            explicit Vector(const vector_t position) : m_position{position} {};
             ~Vector() = default;
 
-            void setX(const double &x) { m_position.x = x; };
-            void setY(const double &y) { m_position.y = y; };
-            void setZ(const double &z) { m_position.z = z; };
-            void setVector(const double &x, const double &y, const double &z) { m_position = {x, y, z}; };
+            void setX(const double x) { m_position.x = x; };
+            void setY(const double y) { m_position.y = y; };
+            void setZ(const double z) { m_position.z = z; };
+            void setVector(const double x, const double y, const double z) { m_position = {x, y, z}; };
             void setVector(const vector_t &position) { m_position = position; };
 
             [[nodiscard]] double getX() const { return m_position.x; };
@@ -43,6 +43,13 @@ namespace rtr {
                     m_position.x + other.getX(),
                     m_position.y + other.getY(),
                     m_position.z + other.getZ()
+                };
+            };
+            Vector operator+(const double scalar) const {
+                return {
+                    m_position.x + scalar,
+                    m_position.y + scalar,
+                    m_position.z + scalar
                 };
             };
             Vector operator-(const Vector &other) const {
@@ -59,14 +66,14 @@ namespace rtr {
                         m_position.z * other.getZ()
                 };
             };
-            Vector operator*(const double &scalar) const {
+            Vector operator*(const double scalar) const {
                 return {
                     m_position.x * scalar,
                     m_position.y * scalar,
                     m_position.z * scalar
                 };
             };
-            Vector operator/(const double &scalar) const {
+            Vector operator/(const double scalar) const {
                 return {
                     m_position.x / scalar,
                     m_position.y / scalar,
@@ -86,7 +93,7 @@ namespace rtr {
             };
 
             [[nodiscard]] Vector normalize() const {
-                double len = length();
+                const double len = length();
                 return {
                     m_position.x / len,
                     m_position.y / len,

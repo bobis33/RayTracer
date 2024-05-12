@@ -16,7 +16,7 @@ namespace rtr {
     {
         public:
 
-            explicit RunTimeException(std::string msg) : m_msg{std::move(msg)} {}
+            explicit RunTimeException(std::string msg) : m_msg{std::move(msg)} {};
             ~RunTimeException() override = default;
 
             RunTimeException(const RunTimeException &) = delete;

@@ -18,12 +18,11 @@ namespace rtr {
             ~Transparent() override = default;
 
             void applyMaterial(Color* color) override {
-                float r = color->getValue().r * (1 - this->getTransparency());
-                float g = color->getValue().g * (1 - this->getTransparency());
-                float b = color->getValue().b * (1 - this->getTransparency());
+                uint8_t r = static_cast<uint8_t>(color->getValue().r * (1 - this->getTransparency()));
+                uint8_t g = static_cast<uint8_t>(color->getValue().g * (1 - this->getTransparency()));
+                uint8_t b = static_cast<uint8_t>(color->getValue().b * (1 - this->getTransparency()));
 
-
-                color->setColor(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b));
+                color->setColor(r, g, b);
 
                 /*   ALPHA BLENDING
                  *

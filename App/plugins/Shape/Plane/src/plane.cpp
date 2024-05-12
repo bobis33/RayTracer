@@ -7,13 +7,20 @@
 
 #include "RayTracer/Plane.hpp"
 
-bool rtr::Plane::hits(std::pair<Vector, Vector> ray)
+bool rtr::Plane::hits(std::pair<Vector, Vector> ray, RayHit &hit)
 {
-    Vector position = getPosition();
-    double denominator = position.dot(ray.second);
-    if (denominator > 1e-6) {
-        Vector p0l0 = position - ray.first;
-        return p0l0.dot(getNormal().normalize()) / denominator >= 0;
+    const Vector normal{getNormal()};
+    const double d = normal.dot(getPosition());
+    const double denominator = normal.dot(ray.second);
+    if (denominator <= 0) {
+        return false;
     }
-    return false;
+    const double distance = (d - normal.dot(ray.first)) / denominator;
+    if (distance < EPSILON) {
+        return false;
+    }
+    hit.setDistance(distance);
+    hit.setPoint(ray.first + ray.second * distance);
+    hit.setNormal(normal);
+    return true;
 }

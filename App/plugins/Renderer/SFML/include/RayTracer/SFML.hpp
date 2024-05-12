@@ -22,7 +22,7 @@ namespace rtr {
 
             [[nodiscard]] std::string getPluginName() const override { return SFML_RENDERER; };
 
-            void render(const std::vector<AShape*> &shapes, const Camera &camera) override;
+            void render(const std::vector<std::unique_ptr<AShape>> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera) override;
 
     }; // class SFML
 

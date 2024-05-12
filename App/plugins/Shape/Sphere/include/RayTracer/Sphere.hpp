@@ -26,7 +26,7 @@ namespace rtr {
             [[nodiscard]] Vector &getNormal() override { throw RunTimeException("Sphere doesnt have a normal");};
             [[nodiscard]] const double &getHeight() const override { throw RunTimeException("Plane doesnt have a height"); };
 
-            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray) override;
+            [[nodiscard]] bool hits(std::pair<Vector, Vector> ray, RayHit &hit) override;
 
     }; // class Sphere
 

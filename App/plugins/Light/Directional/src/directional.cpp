@@ -6,22 +6,22 @@
 */
 
 #include "RayTracer/Directional.hpp"
-#include "RayTracer/Utils/Color.hpp"
-#include "RayTracer/Utils/Vector.hpp"
 
-rtr::Color rtr::Directional::LightColor(const Vector &normal, rtr::Color col)
+rtr::Color rtr::Directional::LightColor(const Vector &normal, const Color &col)
 {
+    const double dotProduct = normal.normalize().dot((getDirection() * -1).normalize());
 
-    Vector vector = getDirection() * Vector{-1, -1, -1};
-    // vector.normalize();
-    double dot = vector.dot(normal);
-    if (dot < 0) {
+    if (dotProduct <= EPSILON) {
         return {0, 0, 0};
     }
-    col.setColor(
-        static_cast<uint8_t>(static_cast<int>(col.getValue().r) * dot),
-        static_cast<uint8_t>(static_cast<int>(col.getValue().g) * dot),
-        static_cast<uint8_t>(static_cast<int>(col.getValue().b) * dot)
-    );
-    return col;
+
+    Color finalColor = col;
+    if (finalColor.getR() <= 0) {
+        finalColor.setR(static_cast<uint8_t>(getIntensity() * 50));
+    } if (finalColor.getG() <= 0) {
+        finalColor.setG(static_cast<const uint8_t>(getIntensity() * 50));
+    } if (finalColor.getB() <= 0) {
+        finalColor.setB(static_cast<const uint8_t>(getIntensity() * 50));
+    }
+    return (finalColor * getColor()) * getIntensity() * dotProduct;
 }

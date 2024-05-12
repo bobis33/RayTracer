@@ -10,6 +10,17 @@
 
 #include "RayTracer/PPM.hpp"
 
+bool rtr::PPM::isShadowed(const Vector &lightDir, const Vector &point, const std::vector<std::unique_ptr<AShape>> &shapes)
+{
+    RayHit hit;
+    for (const std::unique_ptr<AShape> &shape : shapes) {
+        if (shape->hits({point, lightDir}, hit)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void rtr::PPM::writeToFile(const std::string &width, const std::string &height)
 {
     const std::string header = getHeader(width, height);
@@ -20,39 +31,45 @@ void rtr::PPM::writeToFile(const std::string &width, const std::string &height)
         file.write(header.data(),
                    static_cast<long>(header.size() * sizeof(char)));
 
-        for (const auto& row : getPixels()) {
+        for (std::vector<Color> const &row : getPixels()) {
             file.write(reinterpret_cast<const char*>(row.data()), static_cast<long>(row.size() * sizeof(Color)));
         }
         file.close();
     }
 }
 
-void rtr::PPM::writePixels(bool hit, const color_t &color, std::size_t width, std::size_t height)
+void rtr::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const std::vector<std::unique_ptr<ALight>> &lights, const Camera &camera)
 {
-    if (hit) {
-        getPixels()[height][width].setColor(color);
-    }
-}
+    const uint16_t width = getResolution().getWidth();
+    const uint16_t height = getResolution().getHeight();
+    RayHit hit;
+    Color finalColor;
 
-void rtr::PPM::render(const std::vector<AShape*> &shapes, const Camera &camera)
-{
-    const auto& width = getResolution().getWidth();
-    const auto& height = getResolution().getHeight();
     setPixels({height, std::vector<rtr::Color>(width)});
 
-    for (auto &row : getPixels()) {
-        for (auto &pixel : row) {
+    for (std::vector<rtr::Color> &row : getPixels()) {
+        for (rtr::Color &pixel : row) {
             pixel.setColor(getBackgroundColor().getValue());
         }
     }
 
     for(std::size_t index_height = 0; index_height < height; index_height++) {
-        for (unsigned short index_width = 0; index_width < width; index_width++) {
-            for(const auto &shape : shapes) {
-                writePixels(shape->hits(camera.ray(static_cast<double>(index_width) / width, static_cast<double>(index_height) / height)),
-                            shape->getMaterial().getColor().getValue(),
-                            index_width,
-                            index_height);
+        for (std::size_t index_width = 0; index_width < width; index_width++) {
+            for(const std::unique_ptr<AShape> &shape : shapes) {
+                if (shape->hits(camera.ray(static_cast<double>(index_width) / width,
+                                           static_cast<double>(index_height) / height),
+                                hit)) {
+                    finalColor = shape->getMaterial().getColor();
+                    for (const std::unique_ptr<ALight> &light : lights) {
+                        if (light->getType() == LightType::DIRECTIONAL && !isShadowed(light->getDirection(), hit.getRayHit().point, shapes)) {
+                            finalColor += light->LightColor(hit.getRayHit().point.normalize(),
+                                                            finalColor);
+                        } else if (light->getType() == LightType::AMBIENT) {
+                            finalColor += light->LightColor(hit.getRayHit().point.normalize(), finalColor);
+                        }
+                    }
+                    writePixels(finalColor, index_width, index_height);
+                }
             }
         }
     }
