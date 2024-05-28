@@ -23,6 +23,7 @@ int main(int argc, const char * argv[])
             return SUCCESS;
         }
         Core::runRayTracer(*Parser::parseFile(argv[1]));
+        PluginLoader::getInstance().closePlugins();
     } catch (const Parser::ParserException &e) {
         std::cerr <<"Parser exception: "<< e.what() << '\n';
         return EPITECH_ERROR;

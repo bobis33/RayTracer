@@ -75,9 +75,4 @@ void rtr::PPM::render(const std::vector<std::unique_ptr<AShape>> &shapes, const 
     }
 
     writeToFile(std::to_string(width), std::to_string(height));
-
-    // to remove
-    std::string command = "open " + getName() + ".ppm";
-    system(command.c_str());
-    return;
 }

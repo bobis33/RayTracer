@@ -26,6 +26,7 @@ void rtr::PluginLoader::loadPlugins() {
                 throw RunTimeException(dlerror());
             }
             m_plugins.emplace(creator()->getPluginName(), creator);
+            m_handles.push_back(handle);
         }
     }
 }

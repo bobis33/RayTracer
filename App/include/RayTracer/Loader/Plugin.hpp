@@ -40,6 +40,12 @@ namespace rtr {
             template <typename T>
             std::unique_ptr<T> getPlugin(const std::string &pluginName);
 
+            void closePlugins() {
+                for (void* handle : m_handles) {
+                        dlclose(handle);
+                }
+            }
+
         private:
 
             PluginLoader() { loadPlugins(); };
@@ -49,6 +55,7 @@ namespace rtr {
 
             /// @brief Gets the plugin creator based on the name in an unordered map because it is not necessary to have an index.
             std::unordered_map<std::string, PluginCreator> m_plugins{};
+            std::vector<void *> m_handles{};
 
     }; // class PluginLoader
 
